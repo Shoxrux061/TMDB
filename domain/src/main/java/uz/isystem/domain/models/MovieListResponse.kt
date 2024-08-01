@@ -1,4 +1,4 @@
-package uz.isystem.domain.data
+package uz.isystem.domain.models
 
 data class MovieListResponse(
     val dates: Dates,

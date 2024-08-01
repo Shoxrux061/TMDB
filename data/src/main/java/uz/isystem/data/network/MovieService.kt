@@ -3,7 +3,7 @@ package uz.isystem.data.network
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
-import uz.isystem.domain.data.MovieListResponse
+import uz.isystem.domain.models.MovieListResponse
 
 interface MovieService {
 

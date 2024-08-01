@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
-import uz.isystem.domain.data.MovieListResponse
+import uz.isystem.domain.models.MovieListResponse
 import uz.isystem.domain.repository.MovieListRepository
 import uz.isystem.utills.Constants
 import uz.isystem.utills.ResultWrapper

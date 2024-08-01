@@ -18,7 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.isystem.data.network.MovieService
 import uz.isystem.data.repository.MovieListRepositoryImpl
-import uz.isystem.domain.data.MovieListResponse
+import uz.isystem.domain.models.MovieListResponse
 import uz.isystem.domain.repository.MovieListRepository
 import uz.isystem.utills.Constants
 import javax.inject.Singleton
