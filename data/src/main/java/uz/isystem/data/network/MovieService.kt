@@ -7,8 +7,30 @@ import uz.isystem.domain.data.MovieListResponse
 
 interface MovieService {
 
-    @GET("3/movie/now_playing")
+    @GET("3/movie/top_rated")
     suspend fun getTopRated(
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String,
+        @Query("page") page: Int
+    ): Response<MovieListResponse?>
+
+
+    @GET("3/movie/now_playing")
+    suspend fun getNowPlaying(
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String,
+        @Query("page") page: Int
+    ): Response<MovieListResponse?>
+
+    @GET("3/movie/popular")
+    suspend fun getPopular(
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String,
+        @Query("page") page: Int
+    ): Response<MovieListResponse?>
+
+    @GET("3/movie/upcoming")
+    suspend fun getUpcoming(
         @Query("api_key") apiKey: String,
         @Query("language") lang: String,
         @Query("page") page: Int

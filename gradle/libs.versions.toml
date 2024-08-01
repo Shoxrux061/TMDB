@@ -20,6 +20,7 @@ jetbrainsKotlinJvm = "1.9.0"
 navigationSafeArgsGradlePlugin = "2.7.7"
 retrofit = "2.11.0"
 shimmer = "0.5.0"
+smoothbottombar = "1.7.9"
 viewbindingpropertydelegateFull = "1.5.9"
 
 [libraries]
@@ -47,6 +48,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+smoothbottombar = { module = "com.github.ibrahimsn98:SmoothBottomBar", version.ref = "smoothbottombar" }
 viewbindingpropertydelegate-full = { module = "com.github.kirich1409:viewbindingpropertydelegate-full", version.ref = "viewbindingpropertydelegateFull" }
 
 [plugins]

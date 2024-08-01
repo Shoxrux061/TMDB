@@ -21,4 +21,35 @@ class MovieListRepositoryImpl @Inject constructor(private val service: MovieServ
             service.getTopRated(lang = lang, page = page, apiKey = apiKey)
         }
     }
+
+    override suspend fun getNowPlayingList(
+        lang: String,
+        page: Int,
+        apiKey: String
+    ): ResultWrapper<MovieListResponse?, Any?> {
+        return parseResponse(Dispatchers.IO) {
+            service.getNowPlaying(lang = lang, page = page, apiKey = apiKey)
+        }
+    }
+
+    override suspend fun getPopularList(
+        lang: String,
+        page: Int,
+        apiKey: String
+    ): ResultWrapper<MovieListResponse?, Any?> {
+        return parseResponse(Dispatchers.IO) {
+            service.getPopular(lang = lang, page = page, apiKey = apiKey)
+        }
+
+    }
+
+    override suspend fun getUpcomingList(
+        lang: String,
+        page: Int,
+        apiKey: String
+    ): ResultWrapper<MovieListResponse?, Any?> {
+        return parseResponse(Dispatchers.IO){
+            service.getUpcoming(lang = lang, page = page, apiKey = apiKey)
+        }
+    }
 }

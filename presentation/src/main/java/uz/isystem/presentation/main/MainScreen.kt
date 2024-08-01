@@ -1,39 +1,38 @@
 package uz.isystem.presentation.main
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.activity.OnBackPressedCallback
+import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.presentation.R
 import uz.isystem.presentation.base.BaseFragment
-import uz.isystem.presentation.main.home.HomeViewModel
+import uz.isystem.presentation.databinding.ScreenMainBinding
 
 class MainScreen : BaseFragment(R.layout.screen_main) {
 
-    private val viewModel: HomeViewModel by viewModels()
+    private val binding by viewBinding(ScreenMainBinding::bind)
 
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        sendRequest()
-        observe()
+        setPager()
+
     }
 
-    private fun observe() {
-        viewModel.successResponse.observe(viewLifecycleOwner) {
+    private fun setPager() {
+        val adapter = MainAdapter(childFragmentManager, lifecycle)
+        binding.viewPager.adapter = adapter
+        binding.viewPager.isUserInputEnabled = false
 
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+        binding.bottomNavigation.onItemSelected = { item ->
 
+            when (item) {
+                0 -> binding.viewPager.currentItem = 0
+                1 -> binding.viewPager.currentItem = 1
+                2 -> binding.viewPager.currentItem = 2
+                3 -> binding.viewPager.currentItem = 3
+            }
         }
-
-        viewModel.errorResponse.observe(viewLifecycleOwner) {
-
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-
-        }
     }
-
-    private fun sendRequest() {
-        viewModel.getTopRatedList("ru")
-    }
-
 }

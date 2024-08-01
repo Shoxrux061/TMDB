@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         minSdk 24
-
+        viewBinding.enable true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -67,6 +67,9 @@ dependencies {
 
     //Shimmer
     implementation libs.shimmer
+
+    //Smooth Bar
+    implementation libs.smoothbottombar
 
 }
 
