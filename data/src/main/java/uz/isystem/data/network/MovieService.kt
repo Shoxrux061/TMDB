@@ -9,7 +9,8 @@ interface MovieService {
 
     @GET("3/movie/now_playing")
     suspend fun getTopRated(
-        @Query("language")lang:String,
-        @Query("page")page:Int
-    ):Response<MovieListResponse?>
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String,
+        @Query("page") page: Int
+    ): Response<MovieListResponse?>
 }

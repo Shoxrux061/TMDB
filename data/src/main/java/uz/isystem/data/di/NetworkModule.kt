@@ -11,7 +11,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.isystem.data.network.MovieService
@@ -72,5 +74,20 @@ object NetworkModule {
     @[Provides Singleton]
     fun provideGson(): Gson {
         return GsonBuilder().setLenient().create()
+    }
+
+    @[Provides Singleton]
+    fun provideInterception(): Interceptor {
+        return Interceptor { chain: Interceptor.Chain ->
+            val request = chain.request()
+            val builder: Request.Builder = request.newBuilder()
+            builder
+                .header("Connection", "close")
+                .addHeader("Content-type", "application/json")
+                .addHeader("Authorization", Constants.TOKEN)
+                .addHeader("api_key", Constants.API_KEY)
+            val response = chain.proceed(builder.build())
+            response
+        }
     }
 }

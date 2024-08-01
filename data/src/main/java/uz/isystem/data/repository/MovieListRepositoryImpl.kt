@@ -14,10 +14,11 @@ class MovieListRepositoryImpl @Inject constructor(private val service: MovieServ
 
     override suspend fun getTopRatedList(
         lang: String,
-        page: Int
+        page: Int,
+        apiKey:String
     ): ResultWrapper<MovieListResponse?, Any?> {
         return parseResponse(Dispatchers.IO) {
-            service.getTopRated(lang, page)
+            service.getTopRated(lang = lang, page = page, apiKey = apiKey)
         }
     }
 }

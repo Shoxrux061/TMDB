@@ -7,10 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import uz.isystem.domain.data.MovieListResponse
 import uz.isystem.domain.repository.MovieListRepository
+import uz.isystem.utills.Constants
 import uz.isystem.utills.ResultWrapper
 import javax.inject.Inject
 
@@ -37,8 +37,8 @@ class HomeViewModel @Inject constructor(
             when (val result = repository.getTopRatedList(
                 lang = lang,
                 page = 1,
-
-                )) {
+                apiKey = Constants.API_KEY
+            )) {
                 is ResultWrapper.Success -> {
                     successData.postValue(result.data)
                 }
@@ -52,7 +52,5 @@ class HomeViewModel @Inject constructor(
                 }
             }
         }
-
     }
-
 }
