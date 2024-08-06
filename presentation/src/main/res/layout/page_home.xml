@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
     tools:context=".main.home.HomePage">
 
@@ -38,7 +38,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <FrameLayout
@@ -64,58 +64,79 @@
 
         </FrameLayout>
 
-
-        <FrameLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:background="@drawable/frame_back"
-            android:layout_marginHorizontal="20dp"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="270dp">
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="Now Playing"
-                    android:id="@+id/text_sort"
-                    android:layout_marginStart="20dp"
-                    android:textSize="16sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:fontFamily="@font/font_black"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toTopOf="@id/view_pager"
-                    android:layout_height="wrap_content"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:layout_width="60dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    app:layout_constraintBottom_toTopOf="@id/view_pager"
-                    android:textAllCaps="false"
-                    app:layout_constraintRight_toRightOf="parent"
-                    android:gravity="center"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:fontFamily="@font/font_regular"
-                    android:layout_marginEnd="20dp"
-                    android:text="See All"
-                    android:background="@drawable/btn_see_all"
-                    android:layout_height="25dp"/>
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/view_pager"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
-                    app:layout_constraintTop_toBottomOf="@id/text_sort"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:orientation="horizontal" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:background="@drawable/frame_back">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp">
+
+                        <TextView
+                            android:id="@+id/text_sort"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/font_black"
+                            android:text="Now Playing"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toTopOf="@id/view_pager"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:layout_width="60dp"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="@drawable/btn_see_all"
+                            android:fontFamily="@font/font_regular"
+                            android:gravity="center"
+                            android:text="See All"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="11sp"
+                            app:layout_constraintBottom_toTopOf="@id/view_pager"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/view_pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="220dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/text_sort" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </FrameLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </FrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_parent" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
 
     </LinearLayout>
 

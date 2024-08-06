@@ -1,4 +1,4 @@
-package uz.isystem.presentation.main.home
+package uz.isystem.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import uz.isystem.domain.models.Result
 import uz.isystem.presentation.databinding.ItemTopHomeBinding
 import uz.isystem.utills.Constants
 
-class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
 
     private val data = ArrayList<Result>()
 
