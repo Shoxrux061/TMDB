@@ -3,8 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
     tools:context=".main.home.HomePage">
+
 
     <ImageView
         android:id="@+id/background_poster"
@@ -13,10 +15,26 @@
         android:scaleType="centerCrop"
         android:src="@drawable/sample_poster" />
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/home_background" />
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/black" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:src="@drawable/home_background" />
+
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,13 +67,54 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp">
+            android:background="@drawable/frame_back"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content">
 
-            <androidx.viewpager2.widget.ViewPager2
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:id="@+id/view_pager"
-                android:orientation="horizontal"
-                android:layout_height="match_parent" />
+                android:layout_height="270dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Now Playing"
+                    android:id="@+id/text_sort"
+                    android:layout_marginStart="20dp"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:fontFamily="@font/font_black"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toTopOf="@id/view_pager"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="60dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="11sp"
+                    app:layout_constraintBottom_toTopOf="@id/view_pager"
+                    android:textAllCaps="false"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:fontFamily="@font/font_regular"
+                    android:layout_marginEnd="20dp"
+                    android:text="See All"
+                    android:background="@drawable/btn_see_all"
+                    android:layout_height="25dp"/>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    app:layout_constraintTop_toBottomOf="@id/text_sort"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:orientation="horizontal" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
 
     </LinearLayout>

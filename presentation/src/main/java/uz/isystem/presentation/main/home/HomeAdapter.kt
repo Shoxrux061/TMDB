@@ -18,6 +18,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
+    fun getImage(position: Int): String {
+        return data[position].poster_path
+    }
+
 
     inner class ViewHolder(private val binding: ItemTopHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
