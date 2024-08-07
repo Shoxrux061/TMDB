@@ -26,10 +26,8 @@ class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemTopHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: Result) {
-            binding.poster.load(Constants.IMAGE_URL.plus(data.poster_path))
-            binding.backPoster.load(Constants.IMAGE_URL.plus(data.backdrop_path))
+            binding.poster.load(Constants.IMAGE_URL.plus(data.backdrop_path))
             binding.title.text = data.title
-            binding.description.text = data.overview
         }
     }
 

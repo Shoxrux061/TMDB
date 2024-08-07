@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="backgroundColor">#fff</color>
-    <color name="themeColor">#009688</color>
-    <color name="textColor">#000</color>
+    <color name="backgroundColor">#181A25</color>
+    <color name="themeColor">#003751</color>
     <color name="black">#000</color>
     <color name="white">#fff</color>
+    <color name="textColor">#fff</color>
 
 </resources>

@@ -39,6 +39,7 @@ dependencies {
     implementation libs.retrofit
     implementation libs.converter.gson
     implementation libs.adapter.rxjava3
+    implementation libs.androidx.recyclerview
 
 
     //Chucker

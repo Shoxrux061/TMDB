@@ -13,13 +13,19 @@
         android:id="@+id/viewPager"
         android:layout_weight="1"/>
 
+    <View
+        android:layout_width="match_parent"
+        android:background="#209F9F9F"
+        android:layout_height="0.5dp"/>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
+        app:backgroundTint="@color/backgroundColor"
         android:layout_height="70dp">
 
         <me.ibrahimsn.lib.SmoothBottomBar
             android:layout_width="match_parent"
-            app:backgroundColor="#878787"
+            app:backgroundColor="@color/backgroundColor"
             android:id="@+id/bottom_navigation"
             app:menu="@menu/main_menu"
             app:iconSize="24sp"
