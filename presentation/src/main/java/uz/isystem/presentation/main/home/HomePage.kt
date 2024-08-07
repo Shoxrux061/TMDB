@@ -51,12 +51,13 @@ class HomePage : BaseFragment(R.layout.page_home) {
         })
     }
 
-    private fun setupCarousel(){
+    private fun setupCarousel() {
 
         binding.viewPager.offscreenPageLimit = 1
 
         val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)
-        val currentItemHorizontalMarginPx = resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
+        val currentItemHorizontalMarginPx =
+            resources.getDimension(R.dimen.viewpager_current_item_horizontal_margin)
         val pageTranslationX = nextItemVisiblePx + currentItemHorizontalMarginPx
         val pageTransformer = ViewPager2.PageTransformer { page: View, position: Float ->
             page.translationX = -pageTranslationX * position
@@ -74,6 +75,7 @@ class HomePage : BaseFragment(R.layout.page_home) {
     private fun setAdapter() {
         binding.viewPager.adapter = adapter
         binding.multiRecycler.layoutManager = LinearLayoutManager(context)
+        binding.multiRecycler.isNestedScrollingEnabled = false
         binding.multiRecycler.adapter = multiAdapter
     }
 
@@ -89,17 +91,17 @@ class HomePage : BaseFragment(R.layout.page_home) {
         viewModel.successNowPLaying.observe(viewLifecycleOwner) {
             adapter.setData(it!!.results)
         }
-        viewModel.successPopular.observe(viewLifecycleOwner){
+        viewModel.successPopular.observe(viewLifecycleOwner) {
             multiData.add(it!!)
             dataCount++
             checkIsFull()
         }
-        viewModel.successTopRated.observe(viewLifecycleOwner){
+        viewModel.successTopRated.observe(viewLifecycleOwner) {
             multiData.add(it!!)
             dataCount++
             checkIsFull()
         }
-        viewModel.successUpcoming.observe(viewLifecycleOwner){
+        viewModel.successUpcoming.observe(viewLifecycleOwner) {
             multiData.add(it!!)
             dataCount++
             checkIsFull()
@@ -108,7 +110,7 @@ class HomePage : BaseFragment(R.layout.page_home) {
     }
 
     private fun checkIsFull() {
-        if(dataCount >= 3){
+        if (dataCount >= 3) {
             Log.d("AdapterCheck", "checkIsFull")
             multiAdapter.setData(multiData)
         }
