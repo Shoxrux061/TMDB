@@ -63,13 +63,16 @@ dependencies {
     implementation libs.viewbindingpropertydelegate.full
 
     //Coil
-    implementation(libs.coil)
+    implementation libs.coil
 
     //Shimmer
     implementation libs.shimmer
 
     //Smooth Bar
     implementation libs.smoothbottombar
+
+    //ViewPagerIndicator
+    implementation libs.dotsindicator
 
 }
 

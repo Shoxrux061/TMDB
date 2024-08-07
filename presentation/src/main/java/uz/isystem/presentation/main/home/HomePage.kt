@@ -21,7 +21,7 @@ class HomePage : BaseFragment(R.layout.page_home) {
 
     private val viewModel: HomeViewModel by viewModels()
     private val adapter by lazy { HomeTopAdapter() }
-    private val multiAdapter by lazy { ParentAdapter() }
+    private val multiAdapter by lazy { ParentAdapter(requireContext()) }
     private val multiData = ArrayList<MovieListResponse>()
     private val binding by viewBinding(PageHomeBinding::bind)
     private var dataCount = 0
@@ -77,32 +77,37 @@ class HomePage : BaseFragment(R.layout.page_home) {
         binding.multiRecycler.layoutManager = LinearLayoutManager(context)
         binding.multiRecycler.isNestedScrollingEnabled = false
         binding.multiRecycler.adapter = multiAdapter
+        binding.dotsIndicator.attachTo(binding.viewPager)
     }
 
     private fun sendRequest() {
-        viewModel.getNowPlaying("eng")
-        viewModel.getTopRatedList("eng")
-        viewModel.getPopular("eng")
-        viewModel.getUpcoming("eng")
+        viewModel.getNowPlaying("ru")
+        viewModel.getTopRatedList("ru")
+        viewModel.getPopular("ru")
+        viewModel.getUpcoming("ru")
     }
 
     private fun observe() {
 
         viewModel.successNowPLaying.observe(viewLifecycleOwner) {
-            adapter.setData(it!!.results)
+            it!!.sortType = 0
+            adapter.setData(it.results)
         }
         viewModel.successPopular.observe(viewLifecycleOwner) {
-            multiData.add(it!!)
+            it!!.sortType = 1
+            multiData.add(it)
             dataCount++
             checkIsFull()
         }
         viewModel.successTopRated.observe(viewLifecycleOwner) {
-            multiData.add(it!!)
+            it!!.sortType = 2
+            multiData.add(it)
             dataCount++
             checkIsFull()
         }
         viewModel.successUpcoming.observe(viewLifecycleOwner) {
-            multiData.add(it!!)
+            it!!.sortType = 3
+            multiData.add(it)
             dataCount++
             checkIsFull()
         }

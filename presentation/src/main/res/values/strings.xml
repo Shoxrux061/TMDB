@@ -4,4 +4,10 @@
     <string name="series">Series</string>
     <string name="crew">Crew</string>
     <string name="profile">Profile</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="popular">Popular</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="see_all">See All</string>
+
 </resources>

@@ -35,6 +35,7 @@
 
         </FrameLayout>
 
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -44,10 +45,41 @@
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
 
-            <FrameLayout
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/font_black"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:layout_gravity="center|start"
+                        android:text="@string/now_playing"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="60dp"
+                        android:layout_gravity="end"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="11sp"
+                        android:textAllCaps="false"
+                        android:background="@drawable/btn_see_all"
+                        android:fontFamily="@font/font_regular"
+                        android:text="@string/see_all"
+                        android:layout_height="25dp"/>
+
+                </FrameLayout>
+
+
+                <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
                 android:layout_marginTop="20dp">
+
 
                 <ImageView
                     android:id="@+id/background_poster"
@@ -55,19 +87,29 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop" />
 
-
-
                 <ImageView
                     android:layout_width="match_parent"
                     android:src="@drawable/home_background"
                     android:layout_height="match_parent" />
-
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:layout_gravity="center" />
+
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:layout_width="wrap_content"
+                    app:selectedDotColor="#00BCD4"
+                    app:dotsSize="8dp"
+                    android:layerType="none"
+                    android:id="@+id/dots_indicator"
+                    app:dotsColor="#6F7A7A7A"
+                    app:dotsSpacing="4dp"
+                    android:layout_gravity="bottom|center"
+                    app:dotsClickable="false"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="12dp"/>
 
             </FrameLayout>
 

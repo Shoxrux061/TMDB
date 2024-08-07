@@ -24,7 +24,7 @@
             android:layout_width="40dp"
             android:layout_margin="5dp"
             app:cardCornerRadius="5dp"
-            app:cardBackgroundColor="#79272727"
+            app:cardBackgroundColor="#A3272727"
             android:layout_height="20dp">
             
             <LinearLayout
@@ -43,6 +43,7 @@
                     android:textSize="11sp"
                     android:fontFamily="@font/font_medium"
                     android:id="@+id/rating"
+                    android:maxLength="3"
                     android:textColor="#FFC107"
                     android:text="7.9"
                     android:layout_height="wrap_content"/>

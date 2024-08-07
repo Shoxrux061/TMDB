@@ -22,7 +22,7 @@ class ChildAdapter : RecyclerView.Adapter<ChildAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ItemChildBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: Result) {
-           binding.poster.load(Constants.IMAGE_URL.plus(data.poster_path))
+            binding.poster.load(Constants.IMAGE_URL.plus(data.poster_path))
             binding.title.text = data.title
             binding.rating.text = data.vote_average.toString()
         }

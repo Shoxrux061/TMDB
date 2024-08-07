@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:id="@+id/sort_type"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/font_black"
@@ -29,11 +29,11 @@
             android:layout_height="25dp"
             android:layout_gravity="end"
             android:id="@+id/btn_see_all"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/btn_see_all"
             android:fontFamily="@font/font_regular"
             android:gravity="center"
-            android:text="See All"
+            android:text="@string/see_all"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="11sp" />
