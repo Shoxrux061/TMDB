@@ -12,6 +12,7 @@ import uz.isystem.utills.Constants
 class ChildAdapter : RecyclerView.Adapter<ChildAdapter.ViewHolder>() {
 
     private val data = ArrayList<Result>()
+    lateinit var onClickItem: (Int) -> Unit
 
     fun setData(data: List<Result>) {
         this.data.clear()
@@ -25,6 +26,9 @@ class ChildAdapter : RecyclerView.Adapter<ChildAdapter.ViewHolder>() {
             binding.poster.load(Constants.IMAGE_URL.plus(data.poster_path))
             binding.title.text = data.title
             binding.rating.text = data.vote_average.toString()
+            binding.root.setOnClickListener {
+                onClickItem.invoke(data.id)
+            }
         }
     }
 

@@ -16,6 +16,11 @@ class ParentAdapter(private val context: Context) : RecyclerView.Adapter<ParentA
 
     private val data = ArrayList<MovieListResponse>()
 
+    lateinit var onClickItem: (Int) -> Unit
+
+    lateinit var onClickChildItem: (Int) -> Unit
+
+
     fun setData(data: List<MovieListResponse>) {
         this.data.clear()
         this.data.addAll(data)
@@ -38,6 +43,12 @@ class ParentAdapter(private val context: Context) : RecyclerView.Adapter<ParentA
                 1 -> binding.sortType.text = context.getString(R.string.popular)
                 2 -> binding.sortType.text = context.getString(R.string.top_rated)
                 3 -> binding.sortType.text = context.getString(R.string.upcoming)
+            }
+            binding.btnSeeAll.setOnClickListener {
+                onClickItem.invoke(data.sortType)
+            }
+            adapter.onClickItem = {
+                onClickChildItem.invoke(it)
             }
         }
     }

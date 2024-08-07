@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,6 +18,8 @@ import uz.isystem.presentation.adapter.ParentAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.base.HorizontalMarginItemDecoration
 import uz.isystem.presentation.databinding.PageHomeBinding
+import uz.isystem.presentation.main.MainScreen
+import uz.isystem.presentation.main.MainScreenDirections
 import uz.isystem.utills.Constants
 
 class HomePage : BaseFragment(R.layout.page_home) {
@@ -22,14 +27,18 @@ class HomePage : BaseFragment(R.layout.page_home) {
     private val viewModel: HomeViewModel by viewModels()
     private val adapter by lazy { HomeTopAdapter() }
     private val multiAdapter by lazy { ParentAdapter(requireContext()) }
+    private var isFirst = false
     private val multiData = ArrayList<MovieListResponse>()
     private val binding by viewBinding(PageHomeBinding::bind)
     private var dataCount = 0
 
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
+        if(!isFirst){
+            sendRequest()
+            isFirst = true
+        }
         setAdapter()
         setupCarousel()
-        sendRequest()
         observe()
         listenActions()
 
@@ -49,6 +58,17 @@ class HomePage : BaseFragment(R.layout.page_home) {
 
             }
         })
+
+        adapter.onClickItem = {
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen())
+        }
+        multiAdapter.onClickItem = {
+
+        }
+        multiAdapter.onClickChildItem = {
+
+        }
+
     }
 
     private fun setupCarousel() {
@@ -116,9 +136,18 @@ class HomePage : BaseFragment(R.layout.page_home) {
 
     private fun checkIsFull() {
         if (dataCount >= 3) {
-            Log.d("AdapterCheck", "checkIsFull")
             multiAdapter.setData(multiData)
         }
+    }
+
+    private fun changeScreen(navDirections: NavDirections) {
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.alpha_in)
+            .setExitAnim(R.anim.alpha_out)
+            .setPopEnterAnim(R.anim.alpha_pop_in)
+            .setPopExitAnim(R.anim.alpha_pop_out)
+            .build()
+        findNavController().navigate(navDirections, navOptions)
     }
 
 }

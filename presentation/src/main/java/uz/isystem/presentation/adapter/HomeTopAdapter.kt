@@ -12,6 +12,8 @@ class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
 
     private val data = ArrayList<Result>()
 
+    lateinit var onClickItem: (Int) -> Unit
+
     fun setData(data: List<Result>) {
         this.data.clear()
         this.data.addAll(data)
@@ -28,6 +30,9 @@ class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
         fun bindData(data: Result) {
             binding.poster.load(Constants.IMAGE_URL.plus(data.backdrop_path))
             binding.title.text = data.title
+            binding.root.setOnClickListener{
+                onClickItem.invoke(data.id)
+            }
         }
     }
 

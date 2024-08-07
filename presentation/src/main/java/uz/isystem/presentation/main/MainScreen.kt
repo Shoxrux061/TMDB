@@ -1,12 +1,10 @@
 package uz.isystem.presentation.main
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.presentation.R
+import uz.isystem.presentation.adapter.MainAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.ScreenMainBinding
 
