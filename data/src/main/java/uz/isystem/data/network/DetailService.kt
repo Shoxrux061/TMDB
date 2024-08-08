@@ -6,6 +6,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie_detail.TrailerResponse
+import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
 
 interface DetailService {
 
@@ -22,5 +23,12 @@ interface DetailService {
         @Query("api_key") apiKey: String,
         @Query("language") lang: String
     ) : Response<TrailerResponse?>
+
+    @GET("3/movie/{id}/credits")
+    suspend fun getMovieCrew(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String
+    ) : Response<PeopleDetailResponse?>
 
 }
