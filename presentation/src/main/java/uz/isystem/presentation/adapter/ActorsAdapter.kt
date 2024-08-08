@@ -3,16 +3,20 @@ package uz.isystem.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import uz.isystem.domain.models.movie_detail.Genre
-import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
+import uz.isystem.domain.models.movie_detail.crew_details.Cast
+import uz.isystem.domain.models.movie_list.Result
+import uz.isystem.presentation.databinding.ItemChildBinding
 import uz.isystem.presentation.databinding.ItemCrewBinding
 import uz.isystem.presentation.databinding.ItemGenreBinding
+import uz.isystem.utills.Constants
 
-class CrewAdapter : RecyclerView.Adapter<CrewAdapter.ViewHolder>() {
+class ActorsAdapter : RecyclerView.Adapter<ActorsAdapter.ViewHolder>() {
 
-    private val data = ArrayList<PeopleDetailResponse>()
+    private val data = ArrayList<Cast>()
 
-    fun setData(data: List<PeopleDetailResponse>) {
+    fun setData(data: List<Cast>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
@@ -20,8 +24,10 @@ class CrewAdapter : RecyclerView.Adapter<CrewAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemCrewBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(data: PeopleDetailResponse) {
-
+        fun bindData(data: Cast) {
+            binding.profession.text = data.character
+            binding.realName.text = data.name
+            binding.poster.load(Constants.IMAGE_URL.plus(data.profile_path))
         }
     }
 

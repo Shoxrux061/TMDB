@@ -2,15 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:orientation="vertical"
+    android:layout_marginStart="10dp"
     android:layout_height="wrap_content">
 
     <FrameLayout
-        android:layout_width="120dp"
-        android:layout_height="160dp">
+        android:layout_width="80dp"
+        android:layout_height="120dp">
 
     <ImageView
         android:layout_width="match_parent"
-        android:scaleType="center"
+        android:scaleType="centerCrop"
+        android:id="@+id/poster"
         android:layout_height="match_parent"/>
 
 
@@ -23,15 +25,19 @@
 
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_gravity="center"
         android:textColor="@color/white"
         android:textSize="13sp"
+        android:id="@+id/real_name"
+        android:gravity="center"
         android:fontFamily="@font/font_regular"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="5dp"
         android:layout_height="wrap_content"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
+        android:id="@+id/profession"
+        android:gravity="center"
         android:layout_gravity="center"
         android:textColor="@color/themeColor"
         android:textSize="13sp"

@@ -1,15 +1,14 @@
 package uz.isystem.presentation.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.presentation.R
+import uz.isystem.presentation.adapter.ActorsAdapter
 import uz.isystem.presentation.adapter.GenreAdapter
 import uz.isystem.presentation.adapter.TrailerAdapter
 import uz.isystem.presentation.base.BaseFragment
@@ -24,6 +23,7 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
     private val adapterTrailer by lazy { TrailerAdapter() }
     private val args: DetailScreenArgs by navArgs()
     private var isFirst = false
+    private val adapterCast by lazy { ActorsAdapter() }
 
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -37,6 +37,7 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
     private fun setAdapter() {
         binding.genreRecycler.adapter = adapterGenre
         binding.trailerRecycler.adapter = adapterTrailer
+        binding.actorsRecycler.adapter = adapterCast
     }
 
     private fun observe() {
@@ -45,6 +46,9 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
         }
         viewModel.successTrailer.observe(viewLifecycleOwner) {
             adapterTrailer.setData(it!!.results)
+        }
+        viewModel.successPeople.observe(viewLifecycleOwner){
+            adapterCast.setData(it!!.cast)
         }
     }
 
@@ -58,11 +62,11 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
         binding.overview1.text = data.tagline
         binding.overview2.text = data.overview
         adapterGenre.setData(data.genres)
-
     }
 
     private fun sendRequest() {
         viewModel.getMovie(args.id)
         viewModel.getTrailer(args.id)
+        viewModel.getMovieCast(args.id)
     }
 }

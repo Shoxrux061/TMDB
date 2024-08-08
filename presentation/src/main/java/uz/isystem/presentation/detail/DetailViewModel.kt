@@ -10,6 +10,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie_detail.TrailerResponse
+import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
 import uz.isystem.domain.repository.DetailRepository
 import uz.isystem.presentation.R
 import uz.isystem.utills.Constants
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: DetailRepository<DetailResponse, TrailerResponse>,
+    private val repository: DetailRepository<DetailResponse, TrailerResponse, PeopleDetailResponse?>,
     @ApplicationContext
     val context: Context
 ) : ViewModel() {
@@ -92,4 +93,40 @@ class DetailViewModel @Inject constructor(
             }
         }
     }
+
+    private val successDataPeople: MutableLiveData<PeopleDetailResponse?> =
+        MutableLiveData<PeopleDetailResponse?>()
+    val successPeople: LiveData<PeopleDetailResponse?>
+        get() = successDataPeople
+
+    private val errorDataPeople: MutableLiveData<String?> = MutableLiveData<String?>()
+    val errorPeople: LiveData<String?>
+        get() = errorDataPeople
+
+    fun getMovieCast(id: Int){
+        viewModelScope.launch {
+
+            when (val result = repository.getMovieCrew(
+                id = id,
+                apiKey = Constants.API_KEY,
+                lang = context.getString(R.string.lang)
+            )) {
+
+                is ResultWrapper.Success -> {
+                    successDataPeople.postValue(result.data)
+                }
+
+                is ResultWrapper.Error -> {
+                    errorDataPeople.postValue(result.message.toString())
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    errorDataPeople.postValue(result.message.toString())
+                }
+            }
+
+        }
+    }
+
+
 }
