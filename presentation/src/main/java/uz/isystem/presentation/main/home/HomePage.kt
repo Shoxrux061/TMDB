@@ -1,7 +1,6 @@
 package uz.isystem.presentation.main.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
@@ -11,14 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
-import uz.isystem.domain.models.MovieListResponse
+import uz.isystem.domain.models.movie_list.MovieListResponse
 import uz.isystem.presentation.R
 import uz.isystem.presentation.adapter.HomeTopAdapter
 import uz.isystem.presentation.adapter.ParentAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.base.HorizontalMarginItemDecoration
 import uz.isystem.presentation.databinding.PageHomeBinding
-import uz.isystem.presentation.main.MainScreen
 import uz.isystem.presentation.main.MainScreenDirections
 import uz.isystem.utills.Constants
 
@@ -33,13 +31,13 @@ class HomePage : BaseFragment(R.layout.page_home) {
     private var dataCount = 0
 
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
-        if(!isFirst){
+        if (!isFirst) {
             sendRequest()
+            observe()
             isFirst = true
         }
         setAdapter()
         setupCarousel()
-        observe()
         listenActions()
 
     }
@@ -60,7 +58,7 @@ class HomePage : BaseFragment(R.layout.page_home) {
         })
 
         adapter.onClickItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen())
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(it))
         }
         multiAdapter.onClickItem = {
 

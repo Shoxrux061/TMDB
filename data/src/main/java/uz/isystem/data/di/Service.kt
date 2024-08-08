@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import uz.isystem.data.network.DetailService
 import uz.isystem.data.network.MovieService
 import javax.inject.Singleton
 
@@ -15,5 +16,9 @@ object Service {
     @[Provides Singleton]
     fun provideHomeService(retrofit: Retrofit):MovieService {
         return retrofit.create(MovieService::class.java)
+    }
+    @[Provides Singleton]
+    fun provideDetailService(retrofit: Retrofit):DetailService {
+        return retrofit.create(DetailService::class.java)
     }
 }

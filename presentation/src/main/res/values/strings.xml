@@ -12,5 +12,8 @@
     <string name="status">Status</string>
     <string name="original_title">Original Title</string>
     <string name="overview">Overview</string>
+    <string name="lang">eng</string>
+    <string name="trailers_and_videos">Trailers and Videos</string>
+    <string name="actors">Actors</string>
 
 </resources>

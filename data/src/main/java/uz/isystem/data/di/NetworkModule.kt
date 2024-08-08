@@ -16,9 +16,14 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.isystem.data.network.DetailService
 import uz.isystem.data.network.MovieService
+import uz.isystem.data.repository.DetailRepositoryImpl
 import uz.isystem.data.repository.MovieListRepositoryImpl
-import uz.isystem.domain.models.MovieListResponse
+import uz.isystem.domain.models.movie_detail.DetailResponse
+import uz.isystem.domain.models.movie_detail.TrailerResponse
+import uz.isystem.domain.models.movie_list.MovieListResponse
+import uz.isystem.domain.repository.DetailRepository
 import uz.isystem.domain.repository.MovieListRepository
 import uz.isystem.utills.Constants
 import javax.inject.Singleton
@@ -30,6 +35,11 @@ object NetworkModule {
     @[Provides Singleton]
     fun provideOfferRepository(service: MovieService): MovieListRepository<MovieListResponse?> {
         return MovieListRepositoryImpl(service)
+    }
+
+    @[Provides Singleton]
+    fun provideDetailRepository(service: DetailService): DetailRepository<DetailResponse?, TrailerResponse?> {
+        return DetailRepositoryImpl(service)
     }
 
     @[Provides Singleton]

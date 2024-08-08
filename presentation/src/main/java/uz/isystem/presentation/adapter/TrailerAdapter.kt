@@ -1,18 +1,17 @@
 package uz.isystem.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.movie_list.Result
-import uz.isystem.presentation.databinding.ItemTopHomeBinding
+import uz.isystem.domain.models.movie_detail.Result
+import uz.isystem.presentation.databinding.ItemYoutubeBinding
 import uz.isystem.utills.Constants
 
-class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
+class TrailerAdapter : RecyclerView.Adapter<TrailerAdapter.ViewHolder>() {
 
     private val data = ArrayList<Result>()
-
-    lateinit var onClickItem: (Int) -> Unit
 
     fun setData(data: List<Result>) {
         this.data.clear()
@@ -20,25 +19,17 @@ class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun getImage(position: Int): String {
-        return data[position].poster_path
-    }
-
-
-    inner class ViewHolder(private val binding: ItemTopHomeBinding) :
+    inner class ViewHolder(private val binding: ItemYoutubeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: Result) {
-            binding.poster.load(Constants.IMAGE_URL.plus(data.backdrop_path))
-            binding.title.text = data.title
-            binding.root.setOnClickListener{
-                onClickItem.invoke(data.id)
-            }
+            Log.d("YouTube", "bindData: ${data.key}")
+            binding.poster.load(Constants.YOUTUBE_IMAGE_URL.plus(data.key).plus(Constants.QUALITY))
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemTopHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemYoutubeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

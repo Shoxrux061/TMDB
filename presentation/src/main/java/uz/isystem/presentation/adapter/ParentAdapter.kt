@@ -4,13 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import dagger.hilt.android.qualifiers.ApplicationContext
-import uz.isystem.domain.models.MovieListResponse
+import uz.isystem.domain.models.movie_list.MovieListResponse
 import uz.isystem.presentation.R
 import uz.isystem.presentation.databinding.ItemParentBinding
-import uz.isystem.presentation.databinding.ItemTopHomeBinding
-import uz.isystem.utills.Constants
 
 class ParentAdapter(private val context: Context) : RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
 
