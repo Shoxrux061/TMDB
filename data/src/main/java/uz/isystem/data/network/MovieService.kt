@@ -14,7 +14,6 @@ interface MovieService {
         @Query("page") page: Int
     ): Response<MovieListResponse?>
 
-
     @GET("3/movie/now_playing")
     suspend fun getNowPlaying(
         @Query("api_key") apiKey: String,

@@ -7,7 +7,7 @@ import uz.isystem.presentation.R
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.ScreenDetailBinding
 
-class DetailScreen : BaseFragment(R.layout.screen_detail){
+class DetailScreen : BaseFragment(R.layout.screen_detail) {
 
     private val binding by viewBinding(ScreenDetailBinding::bind)
 

@@ -9,5 +9,8 @@
     <string name="now_playing">Now Playing</string>
     <string name="upcoming">Upcoming</string>
     <string name="see_all">See All</string>
+    <string name="status">Status</string>
+    <string name="original_title">Original Title</string>
+    <string name="overview">Overview</string>
 
 </resources>

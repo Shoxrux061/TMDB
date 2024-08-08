@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingVertical="3dp"
+    android:id="@+id/text"
+    android:paddingHorizontal="15dp"
+    android:textColor="@color/white"
+    android:fontFamily="@font/font_medium"
+    android:background="@drawable/genre_back"
+    android:layout_marginStart="20dp"
+    android:gravity="center"
+    android:text="Dramma"
+    android:textSize="13sp" />
