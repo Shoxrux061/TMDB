@@ -1,5 +1,6 @@
 package uz.isystem.presentation.detail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,6 +11,8 @@ import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.presentation.R
 import uz.isystem.presentation.adapter.ActorsAdapter
 import uz.isystem.presentation.adapter.GenreAdapter
+import uz.isystem.presentation.adapter.RecommAdapter
+import uz.isystem.presentation.adapter.SimilarAdapter
 import uz.isystem.presentation.adapter.TrailerAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.ScreenDetailBinding
@@ -23,7 +26,9 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
     private val adapterTrailer by lazy { TrailerAdapter() }
     private val args: DetailScreenArgs by navArgs()
     private var isFirst = false
+    private val adapterSimilar by lazy { SimilarAdapter() }
     private val adapterCast by lazy { ActorsAdapter() }
+    private val adapterRecomm by lazy { RecommAdapter() }
 
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -38,6 +43,8 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
         binding.genreRecycler.adapter = adapterGenre
         binding.trailerRecycler.adapter = adapterTrailer
         binding.actorsRecycler.adapter = adapterCast
+        binding.similarRecycler.adapter = adapterSimilar
+        binding.recommRecycler.adapter = adapterRecomm
     }
 
     private fun observe() {
@@ -47,8 +54,14 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
         viewModel.successTrailer.observe(viewLifecycleOwner) {
             adapterTrailer.setData(it!!.results)
         }
-        viewModel.successPeople.observe(viewLifecycleOwner){
+        viewModel.successPeople.observe(viewLifecycleOwner) {
             adapterCast.setData(it!!.cast)
+        }
+        viewModel.successSimilar.observe(viewLifecycleOwner) {
+            adapterSimilar.setData(it!!.results)
+        }
+        viewModel.successRecomm.observe(viewLifecycleOwner) {
+            adapterRecomm.setData(it!!.results)
         }
     }
 
@@ -62,11 +75,25 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
         binding.overview1.text = data.tagline
         binding.overview2.text = data.overview
         adapterGenre.setData(data.genres)
+        val hours = data.runtime / 60
+        val minutes = data.runtime % 60
+        val filmDuration = "$hours${getString(R.string.hours)} $minutes${getString(R.string.minutes)}"
+        binding.durationText.text = filmDuration
+        binding.dateText.text = data.release_date
+        if(data.status == "Released"){
+            binding.statusText.setTextColor(Color.GREEN)
+            binding.statusText.text = getString(R.string.released)
+        }else {
+            binding.statusText.setTextColor(Color.RED)
+            binding.statusText.text = getString(R.string.notRealised)
+        }
     }
 
     private fun sendRequest() {
         viewModel.getMovie(args.id)
         viewModel.getTrailer(args.id)
         viewModel.getMovieCast(args.id)
+        viewModel.getSimilar(args.id)
+        viewModel.getRecomm(args.id)
     }
 }

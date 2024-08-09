@@ -5,13 +5,17 @@ import uz.isystem.data.network.DetailService
 import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie_detail.TrailerResponse
 import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
+import uz.isystem.domain.models.movie_detail.rec.RecommResponse
+import uz.isystem.domain.models.movie_detail.similar.SimilarResponse
 import uz.isystem.domain.repository.DetailRepository
 import uz.isystem.utills.ResultWrapper
 import uz.isystem.utills.parseResponse
 import javax.inject.Inject
 
 class DetailRepositoryImpl @Inject constructor(private val service: DetailService) :
-    DetailRepository<DetailResponse?, TrailerResponse?, PeopleDetailResponse?> {
+    DetailRepository<DetailResponse?, TrailerResponse?, PeopleDetailResponse?, RecommResponse?, SimilarResponse?> {
+
+
     override suspend fun getMovie(
         lang: String,
         apiKey: String,
@@ -39,6 +43,27 @@ class DetailRepositoryImpl @Inject constructor(private val service: DetailServic
     ): ResultWrapper<PeopleDetailResponse?, Any> {
         return parseResponse(Dispatchers.IO) {
             service.getMovieCrew(id = id, apiKey = apiKey, lang = lang)
+        }
+    }
+
+    override suspend fun getRecomm(
+        lang: String,
+        apiKey: String,
+        id: Int
+    ): ResultWrapper<RecommResponse?, Any?> {
+        return parseResponse(Dispatchers.IO){
+            service.getMovieRecommendations(id = id, apiKey = apiKey, lang = lang)
+        }
+    }
+
+    override suspend fun getSimilar(
+        id: Int,
+        apiKey: String,
+        lang: String
+    ): ResultWrapper<SimilarResponse?, Any> {
+
+        return parseResponse(Dispatchers.IO){
+            service.getMovieSimilar(id = id, apiKey = apiKey, lang = lang)
         }
     }
 }

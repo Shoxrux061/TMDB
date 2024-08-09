@@ -7,6 +7,8 @@ import retrofit2.http.Query
 import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie_detail.TrailerResponse
 import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
+import uz.isystem.domain.models.movie_detail.rec.RecommResponse
+import uz.isystem.domain.models.movie_detail.similar.SimilarResponse
 
 interface DetailService {
 
@@ -30,5 +32,20 @@ interface DetailService {
         @Query("api_key") apiKey: String,
         @Query("language") lang: String
     ) : Response<PeopleDetailResponse?>
+
+    @GET("3/movie/{id}/recommendations")
+    suspend fun getMovieRecommendations(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String
+    ) : Response<RecommResponse?>
+
+
+    @GET("3/movie/{id}/similar")
+    suspend fun getMovieSimilar(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String
+    ) : Response<SimilarResponse?>
 
 }

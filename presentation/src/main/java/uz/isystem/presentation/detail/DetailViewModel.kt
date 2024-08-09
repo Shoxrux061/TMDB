@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie_detail.TrailerResponse
 import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
+import uz.isystem.domain.models.movie_detail.rec.RecommResponse
+import uz.isystem.domain.models.movie_detail.similar.SimilarResponse
 import uz.isystem.domain.repository.DetailRepository
 import uz.isystem.presentation.R
 import uz.isystem.utills.Constants
@@ -20,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: DetailRepository<DetailResponse, TrailerResponse, PeopleDetailResponse?>,
+    private val repository: DetailRepository<DetailResponse, TrailerResponse, PeopleDetailResponse?, RecommResponse, SimilarResponse?>,
     @ApplicationContext
     val context: Context
 ) : ViewModel() {
@@ -70,7 +72,7 @@ class DetailViewModel @Inject constructor(
         get() = errorDataTrailer
 
 
-    fun getTrailer(id: Int){
+    fun getTrailer(id: Int) {
         viewModelScope.launch {
 
             when (val result = repository.getVideo(
@@ -103,7 +105,7 @@ class DetailViewModel @Inject constructor(
     val errorPeople: LiveData<String?>
         get() = errorDataPeople
 
-    fun getMovieCast(id: Int){
+    fun getMovieCast(id: Int) {
         viewModelScope.launch {
 
             when (val result = repository.getMovieCrew(
@@ -128,5 +130,78 @@ class DetailViewModel @Inject constructor(
         }
     }
 
+
+    private val successDataSimilar: MutableLiveData<SimilarResponse?> =
+        MutableLiveData<SimilarResponse?>()
+    val successSimilar: LiveData<SimilarResponse?>
+        get() = successDataSimilar
+
+    private val errorDataSimilar: MutableLiveData<String?> = MutableLiveData<String?>()
+    val errorSimilar: LiveData<String?>
+        get() = errorDataSimilar
+
+    fun getSimilar(id: Int) {
+
+        viewModelScope.launch {
+
+            when (val result = repository.getSimilar(
+                id = id,
+                apiKey = Constants.API_KEY,
+                lang = context.getString(R.string.lang)
+            )) {
+
+                is ResultWrapper.Success -> {
+                    successDataSimilar.postValue(result.data)
+                }
+
+                is ResultWrapper.Error -> {
+                    errorDataSimilar.postValue(result.message.toString())
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    errorDataSimilar.postValue(result.message.toString())
+                }
+            }
+
+        }
+
+    }
+
+    private val successDataRecomm: MutableLiveData<RecommResponse?> =
+        MutableLiveData<RecommResponse?>()
+    val successRecomm: LiveData<RecommResponse?>
+        get() = successDataRecomm
+
+    private val errorDataRecomm: MutableLiveData<String?> = MutableLiveData<String?>()
+    val errorRecomm: LiveData<String?>
+        get() = errorDataRecomm
+
+
+    fun getRecomm(id: Int){
+
+        viewModelScope.launch {
+
+            when (val result = repository.getRecomm(
+                id = id,
+                apiKey = Constants.API_KEY,
+                lang = context.getString(R.string.lang)
+            )) {
+
+                is ResultWrapper.Success -> {
+                    successDataRecomm.postValue(result.data)
+                }
+
+                is ResultWrapper.Error -> {
+                    errorDataRecomm.postValue(result.message.toString())
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    errorDataRecomm.postValue(result.message.toString())
+                }
+            }
+
+        }
+
+    }
 
 }

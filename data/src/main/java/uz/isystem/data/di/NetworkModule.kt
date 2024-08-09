@@ -23,6 +23,8 @@ import uz.isystem.data.repository.MovieListRepositoryImpl
 import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie_detail.TrailerResponse
 import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
+import uz.isystem.domain.models.movie_detail.rec.RecommResponse
+import uz.isystem.domain.models.movie_detail.similar.SimilarResponse
 import uz.isystem.domain.models.movie_list.MovieListResponse
 import uz.isystem.domain.repository.DetailRepository
 import uz.isystem.domain.repository.MovieListRepository
@@ -39,8 +41,9 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
-    fun provideDetailRepository(service: DetailService): DetailRepository<DetailResponse?, TrailerResponse?, PeopleDetailResponse?> {
+    fun provideDetailRepository(service: DetailService): DetailRepository<DetailResponse?, TrailerResponse?, PeopleDetailResponse?, RecommResponse?, SimilarResponse?> {
         return DetailRepositoryImpl(service)
+
     }
 
     @[Provides Singleton]

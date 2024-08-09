@@ -15,5 +15,11 @@
     <string name="lang">eng</string>
     <string name="trailers_and_videos">Trailers and Videos</string>
     <string name="command_crew">Command Crew</string>
+    <string name="similar_movies">Similar Movies</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="hours">h</string>
+    <string name="minutes">m</string>
+    <string name="released">Released</string>
+    <string name="notRealised">Not Released</string>
 
 </resources>
