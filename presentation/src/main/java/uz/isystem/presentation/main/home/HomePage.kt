@@ -61,12 +61,12 @@ class HomePage : BaseFragment(R.layout.page_home) {
             changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(it))
         }
         multiAdapter.onClickItem = {
-
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(it))
         }
         multiAdapter.onClickChildItem = {
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(it))
 
         }
-
     }
 
     private fun setupCarousel() {

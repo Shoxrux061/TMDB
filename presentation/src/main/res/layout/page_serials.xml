@@ -73,6 +73,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/multiRecycler"
                     android:layout_width="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     tools:listitem="@layout/item_parent" />

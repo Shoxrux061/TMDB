@@ -9,7 +9,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import uz.isystem.domain.models.movie_list.MovieListResponse
-import uz.isystem.domain.models.movie_list.trending.TrendingResponse
 import uz.isystem.domain.repository.MovieListRepository
 import uz.isystem.presentation.R
 import uz.isystem.utills.Constants

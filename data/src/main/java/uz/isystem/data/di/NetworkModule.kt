@@ -28,7 +28,6 @@ import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
 import uz.isystem.domain.models.movie_detail.rec.RecommResponse
 import uz.isystem.domain.models.movie_detail.similar.SimilarResponse
 import uz.isystem.domain.models.movie_list.MovieListResponse
-import uz.isystem.domain.models.movie_list.trending.TrendingResponse
 import uz.isystem.domain.models.tv_series_list.SeriesResponse
 import uz.isystem.domain.repository.DetailRepository
 import uz.isystem.domain.repository.MovieListRepository
@@ -44,6 +43,7 @@ object NetworkModule {
     fun provideOfferRepository(service: MovieService): MovieListRepository<MovieListResponse?> {
         return MovieListRepositoryImpl(service)
     }
+
     @[Provides Singleton]
     fun provideRepository(service: SeriesService): SeriesRepository<SeriesResponse?> {
         return SeriesRepositoryImpl(service)

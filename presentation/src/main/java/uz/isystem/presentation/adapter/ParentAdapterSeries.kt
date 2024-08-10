@@ -34,13 +34,13 @@ class ParentAdapterSeries(private val context: Context) :
             binding.recylerView.adapter = adapter
         }
 
-        fun bindData(data:SeriesResponse ) {
+        fun bindData(data: SeriesResponse) {
             adapter.setData(data.results)
             when (data.sortType) {
-                0 -> binding.sortType.text = context.getString(R.string.now_playing)
+                0 -> binding.sortType.text = context.getString(R.string.airing_today)
                 1 -> binding.sortType.text = context.getString(R.string.popular)
                 2 -> binding.sortType.text = context.getString(R.string.top_rated)
-                3 -> binding.sortType.text = context.getString(R.string.upcoming)
+                3 -> binding.sortType.text = context.getString(R.string.on_thr_air)
             }
             binding.btnSeeAll.setOnClickListener {
                 onClickItem.invoke(data.sortType)
