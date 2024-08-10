@@ -12,4 +12,6 @@ interface MovieListRepository<T> {
 
     suspend fun getUpcomingList(lang: String, page: Int, apiKey: String): ResultWrapper<T?, Any?>
 
+    suspend fun getTrendingList(lang: String, apiKey: String): ResultWrapper<T?, Any?>
+
 }

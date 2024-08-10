@@ -4,11 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.movie_list.Result
+import uz.isystem.domain.models.tv_series_list.Result
 import uz.isystem.presentation.databinding.ItemTopHomeBinding
 import uz.isystem.utills.Constants
 
-class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
+class SeriesTopAdapter : RecyclerView.Adapter<SeriesTopAdapter.ViewHolder>() {
 
     private val data = ArrayList<Result>()
 
@@ -29,7 +29,7 @@ class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: Result) {
             binding.poster.load(Constants.IMAGE_URL.plus(data.backdrop_path))
-            binding.title.text = data.title
+            binding.title.text = data.name
             binding.root.setOnClickListener {
                 onClickItem.invoke(data.id)
             }

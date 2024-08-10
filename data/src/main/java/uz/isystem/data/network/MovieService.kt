@@ -4,6 +4,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 import uz.isystem.domain.models.movie_list.MovieListResponse
+import uz.isystem.domain.models.movie_list.trending.TrendingResponse
 
 interface MovieService {
 
@@ -34,4 +35,10 @@ interface MovieService {
         @Query("language") lang: String,
         @Query("page") page: Int
     ): Response<MovieListResponse?>
+
+    @GET("3/trending/movie/week")
+    suspend fun getTrending(
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String
+    ):Response<MovieListResponse?>
 }

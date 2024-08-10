@@ -99,17 +99,20 @@ class HomePage : BaseFragment(R.layout.page_home) {
     }
 
     private fun sendRequest() {
-        viewModel.getNowPlaying("ru")
-        viewModel.getTopRatedList("ru")
-        viewModel.getPopular("ru")
-        viewModel.getUpcoming("ru")
+        viewModel.getNowPlaying()
+        viewModel.getTopRatedList()
+        viewModel.getPopular()
+        viewModel.getUpcoming()
+        viewModel.getTrending()
     }
 
     private fun observe() {
 
         viewModel.successNowPLaying.observe(viewLifecycleOwner) {
             it!!.sortType = 0
-            adapter.setData(it.results)
+            multiData.add(it)
+            dataCount++
+            checkIsFull()
         }
         viewModel.successPopular.observe(viewLifecycleOwner) {
             it!!.sortType = 1
@@ -130,10 +133,14 @@ class HomePage : BaseFragment(R.layout.page_home) {
             checkIsFull()
         }
 
+        viewModel.successTrending.observe(viewLifecycleOwner) {
+            adapter.setData(it!!.results)
+        }
+
     }
 
     private fun checkIsFull() {
-        if (dataCount >= 3) {
+        if (dataCount >= 4) {
             multiAdapter.setData(multiData)
         }
     }

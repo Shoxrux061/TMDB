@@ -12,113 +12,70 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="50dp">
-
-            <ImageButton
-                android:id="@+id/search_btn"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center|start"
-                android:background="?selectableItemBackgroundBorderless"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_search" />
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:src="@drawable/tmdb_logo" />
-
-        </FrameLayout>
-
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|start"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/font_black"
+                    android:text="@string/trending"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="280dp"
+                    android:layout_marginTop="20dp">
 
-                    <TextView
+
+                    <ImageView
+                        android:id="@+id/background_poster"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/home_background" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/view_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp"
+                        android:layout_gravity="center" />
+
+                    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                        android:id="@+id/dots_indicator"
                         android:layout_width="wrap_content"
-                        android:fontFamily="@font/font_black"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        android:layout_gravity="center|start"
-                        android:text="@string/now_playing"
-                        android:layout_height="wrap_content"/>
-
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:layout_width="60dp"
-                        android:layout_gravity="end"
-                        android:textColor="@color/white"
-                        android:gravity="center"
-                        android:textSize="11sp"
-                        android:textAllCaps="false"
-                        android:background="@drawable/btn_see_all"
-                        android:fontFamily="@font/font_regular"
-                        android:text="@string/see_all"
-                        android:layout_height="25dp"/>
+                        android:layout_height="12dp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginBottom="10dp"
+                        android:layerType="none"
+                        app:dotsClickable="false"
+                        app:dotsColor="#6F7A7A7A"
+                        app:dotsSize="8dp"
+                        app:dotsSpacing="4dp"
+                        app:selectedDotColor="#00BCD4" />
 
                 </FrameLayout>
 
-
-                <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="280dp"
-                android:layout_marginTop="20dp">
-
-
-                <ImageView
-                    android:id="@+id/background_poster"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/multiRecycler"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:src="@drawable/home_background"
-                    android:layout_height="match_parent" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp"
-                    android:layout_gravity="center" />
-
-                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                    android:layout_width="wrap_content"
-                    app:selectedDotColor="#00BCD4"
-                    app:dotsSize="8dp"
-                    android:layerType="none"
-                    android:id="@+id/dots_indicator"
-                    app:dotsColor="#6F7A7A7A"
-                    app:dotsSpacing="4dp"
-                    android:layout_gravity="bottom|center"
-                    app:dotsClickable="false"
-                    android:layout_marginBottom="10dp"
-                    android:layout_height="12dp"/>
-
-            </FrameLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/multiRecycler"
-                tools:listitem="@layout/item_parent"
-                android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:listitem="@layout/item_parent" />
 
             </LinearLayout>
 

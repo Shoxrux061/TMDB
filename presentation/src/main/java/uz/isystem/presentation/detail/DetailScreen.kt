@@ -77,13 +77,14 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
         adapterGenre.setData(data.genres)
         val hours = data.runtime / 60
         val minutes = data.runtime % 60
-        val filmDuration = "$hours${getString(R.string.hours)} $minutes${getString(R.string.minutes)}"
+        val filmDuration =
+            "$hours${getString(R.string.hours)} $minutes${getString(R.string.minutes)}"
         binding.durationText.text = filmDuration
         binding.dateText.text = data.release_date
-        if(data.status == "Released"){
+        if (data.status == "Released") {
             binding.statusText.setTextColor(Color.GREEN)
             binding.statusText.text = getString(R.string.released)
-        }else {
+        } else {
             binding.statusText.setTextColor(Color.RED)
             binding.statusText.text = getString(R.string.notRealised)
         }

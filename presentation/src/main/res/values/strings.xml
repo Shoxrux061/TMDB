@@ -21,5 +21,6 @@
     <string name="minutes">m</string>
     <string name="released">Released</string>
     <string name="notRealised">Not Released</string>
+    <string name="trending">Trending</string>
 
 </resources>

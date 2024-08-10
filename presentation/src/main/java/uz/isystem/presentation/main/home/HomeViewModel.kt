@@ -9,7 +9,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import uz.isystem.domain.models.movie_list.MovieListResponse
+import uz.isystem.domain.models.movie_list.trending.TrendingResponse
 import uz.isystem.domain.repository.MovieListRepository
+import uz.isystem.presentation.R
 import uz.isystem.utills.Constants
 import uz.isystem.utills.ResultWrapper
 import javax.inject.Inject
@@ -17,7 +19,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: MovieListRepository<MovieListResponse>
+    private val repository: MovieListRepository<MovieListResponse?>,
+    @ApplicationContext
+    val context: Context
 ) : ViewModel() {
 
 
@@ -30,11 +34,11 @@ class HomeViewModel @Inject constructor(
     val errorTopRated: LiveData<String?>
         get() = errorDataTopRated
 
-    fun getTopRatedList(lang: String) {
+    fun getTopRatedList() {
 
         viewModelScope.launch {
             when (val result = repository.getTopRatedList(
-                lang = lang,
+                lang = context.getString(R.string.lang),
                 page = 1,
                 apiKey = Constants.API_KEY
             )) {
@@ -63,11 +67,11 @@ class HomeViewModel @Inject constructor(
     val errorNowPlaying: LiveData<String?>
         get() = errorDataNowPlaying
 
-    fun getNowPlaying(lang: String) {
+    fun getNowPlaying() {
 
         viewModelScope.launch {
             when (val result = repository.getNowPlayingList(
-                lang = lang,
+                lang = context.getString(R.string.lang),
                 page = 1,
                 apiKey = Constants.API_KEY
             )) {
@@ -96,11 +100,11 @@ class HomeViewModel @Inject constructor(
     val errorPopular: LiveData<String?>
         get() = errorDataPopular
 
-    fun getPopular(lang: String) {
+    fun getPopular() {
 
         viewModelScope.launch {
             when (val result = repository.getPopularList(
-                lang = lang,
+                lang = context.getString(R.string.lang),
                 page = 1,
                 apiKey = Constants.API_KEY
             )) {
@@ -129,11 +133,11 @@ class HomeViewModel @Inject constructor(
     val errorUpcoming: LiveData<String?>
         get() = errorDataUpcoming
 
-    fun getUpcoming(lang: String) {
+    fun getUpcoming() {
 
         viewModelScope.launch {
             when (val result = repository.getUpcomingList(
-                lang = lang,
+                lang = context.getString(R.string.lang),
                 page = 1,
                 apiKey = Constants.API_KEY
             )) {
@@ -147,6 +151,37 @@ class HomeViewModel @Inject constructor(
 
                 is ResultWrapper.NetworkError -> {
                     errorDataUpcoming.postValue("No internet")
+                }
+            }
+        }
+    }
+
+    private val successDataTrending: MutableLiveData<MovieListResponse?> =
+        MutableLiveData<MovieListResponse?>()
+    val successTrending: LiveData<MovieListResponse?>
+        get() = successDataTrending
+
+    private val errorDataTrending: MutableLiveData<String?> = MutableLiveData<String?>()
+    val errorTrending: LiveData<String?>
+        get() = errorDataTrending
+
+
+    fun getTrending() {
+        viewModelScope.launch {
+            when (val result = repository.getTrendingList(
+                lang = context.getString(R.string.lang),
+                apiKey = Constants.API_KEY
+            )) {
+                is ResultWrapper.Success -> {
+                    successDataTrending.postValue(result.data)
+                }
+
+                is ResultWrapper.Error -> {
+                    errorDataTrending.postValue(result.message.toString())
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    errorDataTrending.postValue("No internet")
                 }
             }
         }

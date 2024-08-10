@@ -4,21 +4,21 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import uz.isystem.domain.models.movie_list.MovieListResponse
+import uz.isystem.domain.models.tv_series_list.SeriesResponse
 import uz.isystem.presentation.R
 import uz.isystem.presentation.databinding.ItemParentBinding
 
-class ParentAdapter(private val context: Context) :
-    RecyclerView.Adapter<ParentAdapter.ViewHolder>() {
+class ParentAdapterSeries(private val context: Context) :
+    RecyclerView.Adapter<ParentAdapterSeries.ViewHolder>() {
 
-    private val data = ArrayList<MovieListResponse>()
+    private val data = ArrayList<SeriesResponse>()
 
     lateinit var onClickItem: (Int) -> Unit
 
     lateinit var onClickChildItem: (Int) -> Unit
 
 
-    fun setData(data: List<MovieListResponse>) {
+    fun setData(data: List<SeriesResponse>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
@@ -28,13 +28,13 @@ class ParentAdapter(private val context: Context) :
     inner class ViewHolder(private val binding: ItemParentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        private val adapter = ChildAdapter()
+        private val adapter = ChildAdapterSeries()
 
         init {
             binding.recylerView.adapter = adapter
         }
 
-        fun bindData(data: MovieListResponse) {
+        fun bindData(data:SeriesResponse ) {
             adapter.setData(data.results)
             when (data.sortType) {
                 0 -> binding.sortType.text = context.getString(R.string.now_playing)

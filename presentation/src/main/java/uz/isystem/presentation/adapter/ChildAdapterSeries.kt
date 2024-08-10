@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.movie_list.Result
-import uz.isystem.presentation.databinding.ItemTopHomeBinding
+import uz.isystem.domain.models.tv_series_list.Result
+import uz.isystem.presentation.databinding.ItemChildBinding
 import uz.isystem.utills.Constants
 
-class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
+class ChildAdapterSeries : RecyclerView.Adapter<ChildAdapterSeries.ViewHolder>() {
 
     private val data = ArrayList<Result>()
-
     lateinit var onClickItem: (Int) -> Unit
 
     fun setData(data: List<Result>) {
@@ -20,16 +19,12 @@ class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun getImage(position: Int): String {
-        return data[position].poster_path
-    }
-
-
-    inner class ViewHolder(private val binding: ItemTopHomeBinding) :
+    inner class ViewHolder(private val binding: ItemChildBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(data: Result) {
-            binding.poster.load(Constants.IMAGE_URL.plus(data.backdrop_path))
-            binding.title.text = data.title
+        fun bindData(data:Result ) {
+            binding.poster.load(Constants.IMAGE_URL.plus(data.poster_path))
+            binding.title.text = data.name
+            binding.rating.text = data.vote_average.toString()
             binding.root.setOnClickListener {
                 onClickItem.invoke(data.id)
             }
@@ -38,7 +33,7 @@ class HomeTopAdapter : RecyclerView.Adapter<HomeTopAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemTopHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemChildBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

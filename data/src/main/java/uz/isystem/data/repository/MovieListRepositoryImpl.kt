@@ -3,6 +3,7 @@ package uz.isystem.data.repository
 import kotlinx.coroutines.Dispatchers
 import uz.isystem.data.network.MovieService
 import uz.isystem.domain.models.movie_list.MovieListResponse
+import uz.isystem.domain.models.movie_list.trending.TrendingResponse
 import uz.isystem.domain.repository.MovieListRepository
 import uz.isystem.utills.ResultWrapper
 import uz.isystem.utills.parseResponse
@@ -15,7 +16,7 @@ class MovieListRepositoryImpl @Inject constructor(private val service: MovieServ
     override suspend fun getTopRatedList(
         lang: String,
         page: Int,
-        apiKey:String
+        apiKey: String
     ): ResultWrapper<MovieListResponse?, Any?> {
         return parseResponse(Dispatchers.IO) {
             service.getTopRated(lang = lang, page = page, apiKey = apiKey)
@@ -48,8 +49,17 @@ class MovieListRepositoryImpl @Inject constructor(private val service: MovieServ
         page: Int,
         apiKey: String
     ): ResultWrapper<MovieListResponse?, Any?> {
-        return parseResponse(Dispatchers.IO){
+        return parseResponse(Dispatchers.IO) {
             service.getUpcoming(lang = lang, page = page, apiKey = apiKey)
+        }
+    }
+
+    override suspend fun getTrendingList(
+        lang: String,
+        apiKey: String
+    ): ResultWrapper<MovieListResponse?, Any?> {
+        return parseResponse(Dispatchers.IO) {
+            service.getTrending(lang = lang, apiKey = apiKey)
         }
     }
 }
