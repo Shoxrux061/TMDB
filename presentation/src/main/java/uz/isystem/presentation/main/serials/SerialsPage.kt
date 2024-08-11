@@ -55,13 +55,13 @@ class SerialsPage : BaseFragment(R.layout.page_serials) {
             }
         })
 
-        adapterTop.onClickItem={
+        adapterTop.onClickItem = {
 
         }
-        adapterSeries.onClickItem={
+        adapterSeries.onClickItem = {
 
         }
-        adapterSeries.onClickChildItem={
+        adapterSeries.onClickChildItem = {
 
         }
     }

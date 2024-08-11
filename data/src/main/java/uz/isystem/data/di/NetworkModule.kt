@@ -18,9 +18,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.isystem.data.network.DetailService
 import uz.isystem.data.network.MovieService
+import uz.isystem.data.network.PeopleService
 import uz.isystem.data.network.SeriesService
 import uz.isystem.data.repository.DetailRepositoryImpl
 import uz.isystem.data.repository.MovieListRepositoryImpl
+import uz.isystem.data.repository.PeopleListRepositoryImpl
 import uz.isystem.data.repository.SeriesRepositoryImpl
 import uz.isystem.domain.models.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie_detail.TrailerResponse
@@ -28,9 +30,11 @@ import uz.isystem.domain.models.movie_detail.crew_details.PeopleDetailResponse
 import uz.isystem.domain.models.movie_detail.rec.RecommResponse
 import uz.isystem.domain.models.movie_detail.similar.SimilarResponse
 import uz.isystem.domain.models.movie_list.MovieListResponse
+import uz.isystem.domain.models.people.people_list.PeopleListResponse
 import uz.isystem.domain.models.tv_series_list.SeriesResponse
 import uz.isystem.domain.repository.DetailRepository
 import uz.isystem.domain.repository.MovieListRepository
+import uz.isystem.domain.repository.PeopleListRepository
 import uz.isystem.domain.repository.SeriesRepository
 import uz.isystem.utills.Constants
 import javax.inject.Singleton
@@ -47,6 +51,11 @@ object NetworkModule {
     @[Provides Singleton]
     fun provideRepository(service: SeriesService): SeriesRepository<SeriesResponse?> {
         return SeriesRepositoryImpl(service)
+    }
+
+    @[Provides Singleton]
+    fun providePeopleListRepository(service: PeopleService): PeopleListRepository<PeopleListResponse?> {
+        return PeopleListRepositoryImpl(service)
     }
 
     @[Provides Singleton]
