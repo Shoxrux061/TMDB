@@ -2,8 +2,8 @@ package uz.isystem.data.repository
 
 import kotlinx.coroutines.Dispatchers
 import uz.isystem.data.network.MovieService
-import uz.isystem.domain.models.movie_list.MovieListResponse
-import uz.isystem.domain.repository.MovieListRepository
+import uz.isystem.domain.models.movie.movie_list.MovieListResponse
+import uz.isystem.domain.repository.movie.MovieListRepository
 import uz.isystem.utills.ResultWrapper
 import uz.isystem.utills.parseResponse
 import javax.inject.Inject

@@ -16,11 +16,14 @@
     </fragment>
     <fragment
         android:id="@+id/detailScreen"
-        android:name="uz.isystem.presentation.detail.DetailScreen"
+        android:name="uz.isystem.presentation.detail.film_details.DetailScreen"
         android:label="screen_detail"
         tools:layout="@layout/screen_detail" >
         <argument
             android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="type"
             app:argType="integer" />
     </fragment>
 </navigation>

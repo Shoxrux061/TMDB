@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import uz.isystem.domain.models.people.people_list.PeopleListResponse
-import uz.isystem.domain.repository.PeopleListRepository
+import uz.isystem.domain.repository.people.PeopleListRepository
 import uz.isystem.presentation.R
 import uz.isystem.utills.Constants
 import uz.isystem.utills.ResultWrapper

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlinx-serialization'
     id 'com.google.dagger.hilt.android'
     
 
@@ -42,7 +43,7 @@ dependencies {
     implementation libs.hilt.android
     kapt libs.hilt.compiler
 
-    implementation libs.kotlinx.serialization.json
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0"
 
 }
 

@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.movie_list.Result
+import uz.isystem.domain.models.movie.movie_list.Result
 import uz.isystem.presentation.databinding.ItemTopHomeBinding
 import uz.isystem.utills.Constants
 

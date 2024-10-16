@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.movie_detail.Result
+import uz.isystem.domain.models.movie.movie_detail.Result
 import uz.isystem.presentation.databinding.ItemYoutubeBinding
 import uz.isystem.utills.Constants
 

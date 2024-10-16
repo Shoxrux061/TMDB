@@ -5,6 +5,8 @@ buildscript {
     dependencies {
         classpath libs.androidx.navigation.safe.args.gradle.plugin
         classpath libs.google.services
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:1.9.0"
     }
 }
 
@@ -14,4 +16,5 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm) apply false
     id 'com.google.dagger.hilt.android' version '2.51.1' apply false
     alias(libs.plugins.android.library) apply false
+
 }

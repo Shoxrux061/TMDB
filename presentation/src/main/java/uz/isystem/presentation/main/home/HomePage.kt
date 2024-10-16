@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
-import uz.isystem.domain.models.movie_list.MovieListResponse
+import uz.isystem.domain.models.movie.movie_list.MovieListResponse
 import uz.isystem.presentation.R
 import uz.isystem.presentation.adapter.HomeTopAdapter
 import uz.isystem.presentation.adapter.ParentAdapter
@@ -58,13 +58,13 @@ class HomePage : BaseFragment(R.layout.page_home) {
         })
 
         adapter.onClickItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(it))
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it))
         }
         multiAdapter.onClickItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(it))
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it))
         }
         multiAdapter.onClickChildItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(it))
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it))
 
         }
     }

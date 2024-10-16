@@ -26,7 +26,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|start"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/font_black"
                     android:text="@string/trending"
                     android:textColor="@color/white"
@@ -73,7 +72,6 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/multiRecycler"
                     android:layout_width="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     tools:listitem="@layout/item_parent" />

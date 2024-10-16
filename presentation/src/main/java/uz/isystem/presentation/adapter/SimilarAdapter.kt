@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.movie_detail.Genre
-import uz.isystem.domain.models.movie_detail.similar.SimilarResponse
-import uz.isystem.domain.models.movie_detail.similar.SimilarResult
-import uz.isystem.domain.models.movie_list.Result
+import uz.isystem.domain.models.movie.movie_detail.Genre
+import uz.isystem.domain.models.movie.movie_detail.similar.SimilarResponse
+import uz.isystem.domain.models.movie.movie_detail.similar.SimilarResult
+import uz.isystem.domain.models.movie.movie_list.Result
 import uz.isystem.presentation.databinding.ItemChildBinding
 import uz.isystem.presentation.databinding.ItemGenreBinding
 import uz.isystem.utills.Constants

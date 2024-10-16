@@ -8,8 +8,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
-import uz.isystem.domain.models.tv_series_list.SeriesResponse
-import uz.isystem.domain.repository.SeriesRepository
+import uz.isystem.domain.models.series.tv_series_list.SeriesResponse
+import uz.isystem.domain.repository.series.SeriesRepository
 import uz.isystem.presentation.R
 import uz.isystem.utills.Constants
 import uz.isystem.utills.ResultWrapper
@@ -55,7 +55,6 @@ class SeriesViewModel @Inject constructor(
             }
         }
     }
-
 
     private val successDataTrending: MutableLiveData<SeriesResponse?> =
         MutableLiveData<SeriesResponse?>()
@@ -187,5 +186,7 @@ class SeriesViewModel @Inject constructor(
         }
 
     }
+
+
 
 }

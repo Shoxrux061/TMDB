@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import uz.isystem.domain.models.tv_series_list.SeriesResponse
+import uz.isystem.domain.models.series.tv_series_list.SeriesResponse
 import uz.isystem.presentation.R
 import uz.isystem.presentation.databinding.ItemParentBinding
 

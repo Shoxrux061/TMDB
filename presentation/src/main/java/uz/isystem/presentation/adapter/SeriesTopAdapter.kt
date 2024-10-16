@@ -1,20 +1,21 @@
 package uz.isystem.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.tv_series_list.Result
+import uz.isystem.domain.models.series.tv_series_list.SerialsResult
 import uz.isystem.presentation.databinding.ItemTopHomeBinding
 import uz.isystem.utills.Constants
 
 class SeriesTopAdapter : RecyclerView.Adapter<SeriesTopAdapter.ViewHolder>() {
 
-    private val data = ArrayList<Result>()
+    private val data = ArrayList<SerialsResult>()
 
     lateinit var onClickItem: (Int) -> Unit
 
-    fun setData(data: List<Result>) {
+    fun setData(data: List<SerialsResult>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
@@ -27,10 +28,12 @@ class SeriesTopAdapter : RecyclerView.Adapter<SeriesTopAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemTopHomeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(data: Result) {
+        fun bindData(data: SerialsResult) {
             binding.poster.load(Constants.IMAGE_URL.plus(data.backdrop_path))
             binding.title.text = data.name
+            binding.id.text = data.id.toString()
             binding.root.setOnClickListener {
+                Log.d("TAGID", "bindData: $data")
                 onClickItem.invoke(data.id)
             }
         }

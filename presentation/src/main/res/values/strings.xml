@@ -24,5 +24,6 @@
     <string name="trending">Trending</string>
     <string name="airing_today">Airing Today</string>
     <string name="on_thr_air">On The Air</string>
+    <string name="current_season">Current season</string>
 
 </resources>

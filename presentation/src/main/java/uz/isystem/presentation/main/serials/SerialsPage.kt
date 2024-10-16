@@ -1,21 +1,24 @@
 package uz.isystem.presentation.main.serials
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
-import uz.isystem.domain.models.tv_series_list.SeriesResponse
+import uz.isystem.domain.models.series.tv_series_list.SeriesResponse
 import uz.isystem.presentation.R
 import uz.isystem.presentation.adapter.ParentAdapterSeries
 import uz.isystem.presentation.adapter.SeriesTopAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.base.HorizontalMarginItemDecoration
 import uz.isystem.presentation.databinding.PageSerialsBinding
+import uz.isystem.presentation.main.MainScreenDirections
 import uz.isystem.utills.Constants
-import kotlin.math.log
 
 class SerialsPage : BaseFragment(R.layout.page_serials) {
 
@@ -56,19 +59,21 @@ class SerialsPage : BaseFragment(R.layout.page_serials) {
         })
 
         adapterTop.onClickItem = {
-
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(id= it, type = 2))
         }
         adapterSeries.onClickItem = {
-
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(id= it, type = 2))
         }
         adapterSeries.onClickChildItem = {
-
+            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(id= it, type = 2))
         }
     }
 
     private fun setAdapter() {
         binding.viewPager.adapter = adapterTop
         binding.multiRecycler.adapter = adapterSeries
+        binding.multiRecycler.layoutManager = LinearLayoutManager(context)
+        binding.multiRecycler.isNestedScrollingEnabled = false
         binding.dotsIndicator.attachTo(binding.viewPager)
     }
 
@@ -135,5 +140,15 @@ class SerialsPage : BaseFragment(R.layout.page_serials) {
             R.dimen.viewpager_current_item_horizontal_margin
         )
         binding.viewPager.addItemDecoration(itemDecoration)
+    }
+
+    private fun changeScreen(navDirections: NavDirections) {
+        val navOptions = NavOptions.Builder()
+            .setEnterAnim(R.anim.alpha_in)
+            .setExitAnim(R.anim.alpha_out)
+            .setPopEnterAnim(R.anim.alpha_pop_in)
+            .setPopExitAnim(R.anim.alpha_pop_out)
+            .build()
+        findNavController().navigate(navDirections, navOptions)
     }
 }

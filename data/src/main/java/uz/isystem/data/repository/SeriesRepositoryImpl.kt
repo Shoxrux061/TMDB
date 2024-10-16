@@ -2,8 +2,8 @@ package uz.isystem.data.repository
 
 import kotlinx.coroutines.Dispatchers
 import uz.isystem.data.network.SeriesService
-import uz.isystem.domain.models.tv_series_list.SeriesResponse
-import uz.isystem.domain.repository.SeriesRepository
+import uz.isystem.domain.models.series.tv_series_list.SeriesResponse
+import uz.isystem.domain.repository.series.SeriesRepository
 import uz.isystem.utills.ResultWrapper
 import uz.isystem.utills.parseResponse
 import javax.inject.Inject
