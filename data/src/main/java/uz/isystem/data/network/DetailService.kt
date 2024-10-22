@@ -4,6 +4,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import uz.isystem.domain.models.content.images.ImagesData
 import uz.isystem.domain.models.movie.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie.movie_detail.TrailerResponse
 import uz.isystem.domain.models.movie.movie_detail.crew_details.PeopleDetailResponse
@@ -55,5 +56,11 @@ interface DetailService {
         @Query("api_key") key: String,
         @Query("language") lang: String
     ): Response<SeriesDetailResponse?>
+
+    @GET("3/movie/{id}/images")
+    suspend fun getImages(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+    ) : Response<ImagesData?>
 
 }

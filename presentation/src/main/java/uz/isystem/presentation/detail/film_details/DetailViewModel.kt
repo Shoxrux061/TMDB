@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
+import uz.isystem.domain.models.content.images.ImagesData
 import uz.isystem.domain.models.movie.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie.movie_detail.TrailerResponse
 import uz.isystem.domain.models.movie.movie_detail.crew_details.PeopleDetailResponse
@@ -24,7 +25,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val repository: DetailRepository<DetailResponse, TrailerResponse, PeopleDetailResponse?, RecommResponse, SimilarResponse?, SeriesDetailResponse?>,
+    private val repository: DetailRepository<DetailResponse, TrailerResponse, PeopleDetailResponse?, RecommResponse, SimilarResponse?, SeriesDetailResponse?, ImagesData?>,
     @ApplicationContext
     val context: Context
 ) : ViewModel() {
@@ -229,6 +230,40 @@ class DetailViewModel @Inject constructor(
 
                 is ResultWrapper.NetworkError -> {
                     Log.d("serial_status", "getSerial: Error${result.message}")
+                }
+            }
+        }
+    }
+
+    private val successDataImages: MutableLiveData<ImagesData?> =
+        MutableLiveData<ImagesData?>()
+    val successImages: LiveData<ImagesData?>
+        get() = successDataImages
+
+
+    private val errorDataImage: MutableLiveData<String?> = MutableLiveData<String?>()
+    val errorImage: LiveData<String?>
+        get() = errorDataImage
+
+    fun getImages(id: Int) {
+
+        viewModelScope.launch {
+
+            when (val result = repository.getImages(
+                id = id,
+                apiKey = Constants.API_KEY
+            )) {
+                is ResultWrapper.Success -> {
+                    successDataImages.postValue(result.data)
+                }
+
+                is ResultWrapper.Error -> {
+                    Log.d("serial_status", "getSerial: Error${result.message}")
+                }
+
+                is ResultWrapper.NetworkError -> {
+                    Log.d("serial_status", "getSerial: Error${result.message}")
+
                 }
             }
         }

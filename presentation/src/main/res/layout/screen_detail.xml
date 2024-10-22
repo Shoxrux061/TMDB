@@ -272,25 +272,6 @@
                         android:textSize="15sp" />
 
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginHorizontal="10dp"
-                        android:orientation="vertical"
-                        android:background="@drawable/frame_back"
-                        android:layout_height="wrap_content">
-
-                        <TableLayout
-                            android:layout_width="match_parent"
-                            android:layout_margin="10dp"
-                            android:layout_height="wrap_content"/>
-
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:layout_width="match_parent"
-                            android:layout_margin="10dp"
-                            android:layout_height="140dp"/>
-
-                    </LinearLayout>
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -309,11 +290,33 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_crew" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginHorizontal="10dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/frame_back"
+                        android:layout_height="wrap_content">
+
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_margin="10dp"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:layout_width="match_parent"
+                            android:layout_margin="10dp"
+                            android:id="@+id/content_list"
+                            android:layout_height="160dp"/>
+
+                    </LinearLayout>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_marginStart="20dp"
                         android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
                         android:textSize="15sp"
+                        android:id="@+id/season_text"
                         android:fontFamily="@font/font_medium"
                         android:textColor="@color/white"
                         android:text="@string/current_season"
@@ -322,6 +325,7 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_marginHorizontal="10dp"
+                        android:id="@+id/seasons_inf"
                         android:background="@drawable/frame_back"
                         android:layout_height="wrap_content">
 

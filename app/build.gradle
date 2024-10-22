@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace 'uz.isystem.tmdb'
-    compileSdk 34d
+    compileSdk 34
 
     defaultConfig {
         applicationId "uz.isystem.tmdb"

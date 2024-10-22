@@ -7,5 +7,6 @@
     <color name="black">#000</color>
     <color name="white">#fff</color>
     <color name="textColor">#fff</color>
+    <color name="place_holder">#18293B</color>
 
 </resources>

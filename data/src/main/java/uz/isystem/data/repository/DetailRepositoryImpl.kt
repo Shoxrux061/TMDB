@@ -2,6 +2,7 @@ package uz.isystem.data.repository
 
 import kotlinx.coroutines.Dispatchers
 import uz.isystem.data.network.DetailService
+import uz.isystem.domain.models.content.images.ImagesData
 import uz.isystem.domain.models.movie.movie_detail.DetailResponse
 import uz.isystem.domain.models.movie.movie_detail.TrailerResponse
 import uz.isystem.domain.models.movie.movie_detail.crew_details.PeopleDetailResponse
@@ -14,7 +15,7 @@ import uz.isystem.utills.parseResponse
 import javax.inject.Inject
 
 class DetailRepositoryImpl @Inject constructor(private val service: DetailService) :
-    DetailRepository<DetailResponse?, TrailerResponse?, PeopleDetailResponse?, RecommResponse?, SimilarResponse?, SeriesDetailResponse?> {
+    DetailRepository<DetailResponse?, TrailerResponse?, PeopleDetailResponse?, RecommResponse?, SimilarResponse?, SeriesDetailResponse?, ImagesData?> {
 
 
     override suspend fun getMovie(
@@ -75,6 +76,15 @@ class DetailRepositoryImpl @Inject constructor(private val service: DetailServic
     ): ResultWrapper<SeriesDetailResponse?, Any?> {
         return parseResponse(Dispatchers.IO) {
             service.getSerial(id = id, lang = lang, key = apiKey)
+        }
+    }
+
+    override suspend fun getImages(
+        id: Int,
+        apiKey: String
+    ): ResultWrapper<ImagesData?, Any> {
+        return parseResponse(Dispatchers.IO) {
+            service.getImages(id = id, apiKey = apiKey)
         }
     }
 }

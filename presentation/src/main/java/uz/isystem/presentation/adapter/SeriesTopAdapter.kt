@@ -31,7 +31,6 @@ class SeriesTopAdapter : RecyclerView.Adapter<SeriesTopAdapter.ViewHolder>() {
         fun bindData(data: SerialsResult) {
             binding.poster.load(Constants.IMAGE_URL.plus(data.backdrop_path))
             binding.title.text = data.name
-            binding.id.text = data.id.toString()
             binding.root.setOnClickListener {
                 Log.d("TAGID", "bindData: $data")
                 onClickItem.invoke(data.id)

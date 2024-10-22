@@ -2,7 +2,7 @@ package uz.isystem.domain.repository.movie
 
 import uz.isystem.utills.ResultWrapper
 
-interface DetailRepository<T,E,S,R,I,A> {
+interface DetailRepository<T,E,S,R,I,A,C> {
 
     suspend fun getMovie(lang: String, apiKey: String, id: Int): ResultWrapper<T?, Any?>
 
@@ -15,6 +15,9 @@ interface DetailRepository<T,E,S,R,I,A> {
     suspend fun getSimilar(id: Int, apiKey: String, lang: String) : ResultWrapper<I?, Any>
 
     suspend fun getSeriesDetail(lang: String, apiKey: String, id:Int): ResultWrapper<A?, Any?>
+
+    suspend fun getImages(id: Int, apiKey: String) : ResultWrapper<C?, Any>
+
 
 
 
