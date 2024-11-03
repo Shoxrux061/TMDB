@@ -8,9 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
+import com.google.android.material.tabs.TabLayout
 import uz.isystem.domain.models.content.MultiContentModel
-import uz.isystem.domain.models.content.images.Backdrop
-import uz.isystem.domain.models.content.images.Poster
 import uz.isystem.domain.models.movie.movie_detail.DetailResponse
 import uz.isystem.domain.models.series.series_details.SeriesDetailResponse
 import uz.isystem.presentation.R
@@ -45,7 +44,7 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
 
         if (!isFirst) {
             setAdapter()
-
+            listenActions()
             when (args.type) {
                 1 -> {
                     sendRequest()
@@ -58,13 +57,32 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
                 }
             }
         }
+    }
 
+    private fun listenActions() {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.text) {
+                    "Videos" -> binding.contentList.currentItem = 0
+                    "Posters" -> binding.contentList.currentItem = 1
+                    "Backdrops" -> binding.contentList.currentItem = 2
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+
+        })
     }
 
     private fun observeSerial() {
         viewModel.successDetailsSerial.observe(viewLifecycleOwner) {
             loadDataToViewSerial(it!!)
-            Log.d("serial_status", "observeSerial: $it")
         }
     }
 
@@ -88,6 +106,8 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
         binding.recommRecycler.adapter = adapterRecomm
         binding.contentList.adapter = contentAdapter
         binding.contentList.isUserInputEnabled = false
+
+
     }
 
     private fun observe() {
@@ -127,9 +147,35 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
 
     private fun checkIsFull() {
         if (isFull == 2) {
+            var dataSize = 0
             val data = ArrayList<MultiContentModel>()
             data.add(contentMultiData)
+
+            if (data[0].videos != null) {
+                dataSize++
+            }
+            if (data[0].backdrops != null) {
+                dataSize++
+            }
+            if (data[0].posters != null) {
+                dataSize++
+            }
+
+            setTabLayout(dataSize)
             contentAdapter.setData(data[0])
+        }
+    }
+
+    private fun setTabLayout(dataSize: Int) {
+        for (i in 0 until dataSize) {
+            val tab = binding.tabLayout.newTab().apply {
+                text = when (i) {
+                    0 -> "Videos"
+                    1 -> "Posters"
+                    else -> "Backdrops"
+                }
+            }
+            binding.tabLayout.addTab(tab)
         }
     }
 

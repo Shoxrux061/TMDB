@@ -23,7 +23,7 @@ class TrailerAdapter : RecyclerView.Adapter<TrailerAdapter.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: Result) {
             Log.d("YouTube", "bindData: ${data.key}")
-            binding.poster.load(Constants.YOUTUBE_IMAGE_URL.plus(data.key).plus(Constants.QUALITY))
+            binding.image.load(Constants.YOUTUBE_IMAGE_URL.plus(data.key).plus(Constants.QUALITY))
         }
     }
 

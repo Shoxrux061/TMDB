@@ -11,6 +11,7 @@ import uz.isystem.domain.models.movie.movie_detail.Result
 import uz.isystem.presentation.databinding.ItemBackdropBinding
 import uz.isystem.presentation.databinding.ItemContentParentBinding
 import uz.isystem.presentation.databinding.ItemPosterBinding
+import uz.isystem.presentation.databinding.ItemYoutubeBinding
 import uz.isystem.utills.Constants
 
 class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
@@ -24,16 +25,18 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: ItemBackdropBinding) :
+    inner class ViewHolder(private val binding: ItemYoutubeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: Result) {
-            binding.backdrop.load(Constants.YOUTUBE_IMAGE_URL.plus(Constants.QUALITY.plus(data.key)))
+            binding.image.load(
+                Constants.YOUTUBE_IMAGE_URL.plus(data.key).plus(Constants.QUALITY)
+            )
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemBackdropBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemYoutubeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

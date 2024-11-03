@@ -28,8 +28,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
 
         <LinearLayout
@@ -292,96 +292,109 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
-                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"
                         android:background="@drawable/frame_back"
-                        android:layout_height="wrap_content">
+                        android:orientation="vertical">
 
-                        <TableLayout
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tab_layout"
                             android:layout_width="match_parent"
+                            android:layout_height="30dp"
                             android:layout_margin="10dp"
-                            android:layout_height="wrap_content"/>
+                            android:background="#00000000"
+                            app:tabIndicatorColor="#2196F3"
+                            app:tabIndicatorFullWidth="true"
+                            app:tabSelectedTextColor="#2196F3"
+                            app:tabTextColor="@color/white" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:background="#2196F3" />
 
                         <androidx.viewpager2.widget.ViewPager2
-                            android:layout_width="match_parent"
-                            android:layout_margin="10dp"
                             android:id="@+id/content_list"
-                            android:layout_height="160dp"/>
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:layout_marginVertical="10dp" />
 
                     </LinearLayout>
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="20dp"
-                        android:textSize="15sp"
                         android:id="@+id/season_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
                         android:fontFamily="@font/font_medium"
-                        android:textColor="@color/white"
                         android:text="@string/current_season"
-                        android:layout_height="wrap_content"/>
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
 
                     <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginHorizontal="10dp"
                         android:id="@+id/seasons_inf"
-                        android:background="@drawable/frame_back"
-                        android:layout_height="wrap_content">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:background="@drawable/frame_back">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <androidx.cardview.widget.CardView
-                                app:cardCornerRadius="10dp"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintBottom_toBottomOf="parent"
                                 android:id="@+id/current_poster_card"
-                                app:layout_constraintStart_toStartOf="parent"
+                                android:layout_width="100dp"
+                                android:layout_height="150dp"
                                 android:layout_margin="10dp"
                                 app:cardBackgroundColor="@color/themeColor"
-                                android:layout_width="100dp"
-                                android:layout_height="150dp">
+                                app:cardCornerRadius="10dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
                                 <ImageView
-                                    android:layout_width="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:src="@drawable/sample_poster"
                                     android:id="@+id/current_season_poster"
-                                    android:layout_height="match_parent"/>
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/sample_poster" />
 
                             </androidx.cardview.widget.CardView>
 
                             <TextView
+                                android:id="@+id/current_season_text"
                                 android:layout_width="wrap_content"
-                                app:layout_constraintTop_toTopOf="@id/current_poster_card"
+                                android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
+                                android:layout_marginEnd="10dp"
+                                android:fontFamily="@font/font_bold"
+                                android:maxLines="1"
+                                android:text="Season-2 episode-21"
                                 android:textColor="@color/white"
                                 android:textSize="16sp"
-                                android:fontFamily="@font/font_bold"
+                                app:layout_constraintBottom_toBottomOf="@id/current_poster_card"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0"
-                                android:maxLines="1"
-                                android:id="@+id/current_season_text"
-                                android:layout_marginEnd="10dp"
-                                android:text="Season-2 episode-21"
                                 app:layout_constraintStart_toEndOf="@id/current_poster_card"
-                                app:layout_constraintBottom_toBottomOf="@id/current_poster_card"
-                                app:layout_constraintVertical_bias="0.2"
-                                android:layout_height="wrap_content"/>
+                                app:layout_constraintTop_toTopOf="@id/current_poster_card"
+                                app:layout_constraintVertical_bias="0.2" />
 
                             <TextView
+                                android:id="@+id/season_vote"
                                 android:layout_width="wrap_content"
-                                app:layout_constraintStart_toStartOf="@id/current_season_text"
-                                app:layout_constraintEnd_toEndOf="parent"
+                                android:layout_height="wrap_content"
                                 android:layout_marginTop="10dp"
                                 android:fontFamily="@font/font_regular"
-                                android:id="@+id/season_vote"
                                 android:textColor="#FFC107"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0"
-                                app:layout_constraintTop_toBottomOf="@id/current_season_text"
-                                android:layout_height="wrap_content"/>
+                                app:layout_constraintStart_toStartOf="@id/current_season_text"
+                                app:layout_constraintTop_toBottomOf="@id/current_season_text" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 

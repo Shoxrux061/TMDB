@@ -12,15 +12,16 @@ import uz.isystem.presentation.databinding.ItemContentParentBinding
 class ContentParentAdapter(
 ) : RecyclerView.Adapter<ContentParentAdapter.ContentViewHolder>() {
 
-    private var multiContentModel : MultiContentModel?=null
+    private var multiContentModel: MultiContentModel? = null
+    private var itemCount = 0
 
     companion object {
-        private const val TYPE_POSTERS = 0
-        private const val TYPE_BACKDROPS = 1
-        private const val TYPE_VIDEOS = 2
+        private const val TYPE_VIDEOS = 0
+        private const val TYPE_POSTERS = 1
+        private const val TYPE_BACKDROPS = 2
     }
 
-    fun setData(data:MultiContentModel){
+    fun setData(data: MultiContentModel) {
         this.multiContentModel = data
         notifyDataSetChanged()
     }
@@ -29,6 +30,7 @@ class ContentParentAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bindPosters(posters: List<Poster>?) {
             posters?.let {
+                itemCount++
                 val adapter = PosterAdapter()
                 binding.root.adapter = adapter
                 adapter.setData(it)
@@ -37,6 +39,7 @@ class ContentParentAdapter(
 
         fun bindBackdrops(backdrops: List<Backdrop>?) {
             backdrops?.let {
+                itemCount++
                 val adapter = BackdropAdapter()
                 binding.root.adapter = adapter
                 adapter.setData(it)
@@ -45,6 +48,7 @@ class ContentParentAdapter(
 
         fun bindVideos(videos: List<Result>?) {
             videos?.let {
+                itemCount++
                 val adapter = VideoAdapter()
                 binding.root.adapter = adapter
                 adapter.setData(it)

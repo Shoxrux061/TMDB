@@ -14,7 +14,7 @@
         <item
             android:id="@+id/actingID"
             android:icon="@drawable/ic_acting"
-            android:title="@string/crew" />
+            android:title="@string/people" />
 
         <item
             android:id="@+id/profileID"

@@ -63,4 +63,11 @@ interface DetailService {
         @Query("api_key") apiKey: String,
     ) : Response<ImagesData?>
 
+    @GET("3/tv/{id}/credits")
+    suspend fun getSerialCrew(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") lang: String
+    ) : Response<PeopleDetailResponse?>
+
 }
