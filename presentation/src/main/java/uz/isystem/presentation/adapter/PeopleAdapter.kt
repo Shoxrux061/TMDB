@@ -18,6 +18,8 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
 
     private val data = ArrayList<PeopleResult>()
 
+    lateinit var onClickItem: (Int) -> Unit
+
     fun setData(data: List<PeopleResult>) {
         this.data.clear()
         this.data.addAll(data)
@@ -29,6 +31,9 @@ class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
         fun bindData(data: PeopleResult) {
             binding.postName.text = data.name
             binding.poster.load(Constants.IMAGE_URL.plus(data.profile_path))
+            binding.root.setOnClickListener {
+                onClickItem.invoke(data.id)
+            }
         }
     }
 

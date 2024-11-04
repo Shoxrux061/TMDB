@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import uz.isystem.data.network.DetailService
 import uz.isystem.data.network.MovieService
+import uz.isystem.data.network.PeopleDetailService
 import uz.isystem.data.network.PeopleService
 import uz.isystem.data.network.SeriesService
 import javax.inject.Singleton
@@ -33,5 +34,10 @@ object Service {
     @[Provides Singleton]
     fun providePeopleService(retrofit: Retrofit): PeopleService {
         return retrofit.create(PeopleService::class.java)
+    }
+
+    @[Provides Singleton]
+    fun providePDetailsService(retrofit: Retrofit): PeopleDetailService {
+        return retrofit.create(PeopleDetailService::class.java)
     }
 }

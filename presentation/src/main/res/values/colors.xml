@@ -8,5 +8,6 @@
     <color name="white">#fff</color>
     <color name="textColor">#fff</color>
     <color name="place_holder">#18293B</color>
+    <color name="themeColor2">#2A3142</color>
 
 </resources>

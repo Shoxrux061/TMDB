@@ -18,10 +18,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.isystem.data.network.DetailService
 import uz.isystem.data.network.MovieService
+import uz.isystem.data.network.PeopleDetailService
 import uz.isystem.data.network.PeopleService
 import uz.isystem.data.network.SeriesService
 import uz.isystem.data.repository.DetailRepositoryImpl
 import uz.isystem.data.repository.MovieListRepositoryImpl
+import uz.isystem.data.repository.PeopleDetailsRepositoryImpl
 import uz.isystem.data.repository.PeopleListRepositoryImpl
 import uz.isystem.data.repository.SeriesRepositoryImpl
 import uz.isystem.domain.models.content.images.ImagesData
@@ -31,12 +33,14 @@ import uz.isystem.domain.models.movie.movie_detail.crew_details.PeopleDetailResp
 import uz.isystem.domain.models.movie.movie_detail.rec.RecommResponse
 import uz.isystem.domain.models.movie.movie_detail.similar.SimilarResponse
 import uz.isystem.domain.models.movie.movie_list.MovieListResponse
+import uz.isystem.domain.models.people.details.PeopleDetailsResponse
 import uz.isystem.domain.models.people.people_list.PeopleListResponse
 import uz.isystem.domain.models.series.series_details.SeriesDetailResponse
 import uz.isystem.domain.models.series.tv_series_list.SeriesResponse
 import uz.isystem.domain.repository.movie.DetailRepository
 import uz.isystem.domain.repository.movie.MovieListRepository
 import uz.isystem.domain.repository.people.PeopleListRepository
+import uz.isystem.domain.repository.people.details.PeopleDetailsRepository
 import uz.isystem.domain.repository.series.SeriesRepository
 import uz.isystem.utills.Constants
 import javax.inject.Singleton
@@ -48,6 +52,11 @@ object NetworkModule {
     @[Provides Singleton]
     fun provideOfferRepository(service: MovieService): MovieListRepository<MovieListResponse?> {
         return MovieListRepositoryImpl(service)
+    }
+
+    @[Provides Singleton]
+    fun providePDetailsRepository(service: PeopleDetailService): PeopleDetailsRepository<PeopleDetailsResponse?> {
+        return PeopleDetailsRepositoryImpl(service)
     }
 
     @[Provides Singleton]

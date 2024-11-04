@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainScreen_to_detailScreen"
             app:destination="@id/detailScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_peopleDetailScreen"
+            app:destination="@id/peopleDetailScreen" />
     </fragment>
     <fragment
         android:id="@+id/detailScreen"
@@ -24,6 +27,18 @@
             app:argType="integer" />
         <argument
             android:name="type"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_detailScreen_to_peopleDetailScreen"
+            app:destination="@id/peopleDetailScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/peopleDetailScreen"
+        android:name="uz.isystem.presentation.detail.people_details.PeopleDetailScreen"
+        android:label="screen_people_detail"
+        tools:layout="@layout/screen_people_detail" >
+        <argument
+            android:name="id"
             app:argType="integer" />
     </fragment>
 </navigation>
