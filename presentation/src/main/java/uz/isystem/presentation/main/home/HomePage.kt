@@ -12,8 +12,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import uz.isystem.domain.models.movie.movie_list.MovieListResponse
 import uz.isystem.presentation.R
-import uz.isystem.presentation.adapter.HomeTopAdapter
-import uz.isystem.presentation.adapter.ParentAdapter
+import uz.isystem.presentation.adapter.other.HomeTopAdapter
+import uz.isystem.presentation.adapter.movie.ParentAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.base.HorizontalMarginItemDecoration
 import uz.isystem.presentation.databinding.PageHomeBinding

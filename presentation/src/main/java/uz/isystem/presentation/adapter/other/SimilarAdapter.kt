@@ -1,15 +1,11 @@
-package uz.isystem.presentation.adapter
+package uz.isystem.presentation.adapter.other
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.movie.movie_detail.Genre
-import uz.isystem.domain.models.movie.movie_detail.similar.SimilarResponse
 import uz.isystem.domain.models.movie.movie_detail.similar.SimilarResult
-import uz.isystem.domain.models.movie.movie_list.Result
 import uz.isystem.presentation.databinding.ItemChildBinding
-import uz.isystem.presentation.databinding.ItemGenreBinding
 import uz.isystem.utills.Constants
 
 class SimilarAdapter : RecyclerView.Adapter<SimilarAdapter.ViewHolder>() {

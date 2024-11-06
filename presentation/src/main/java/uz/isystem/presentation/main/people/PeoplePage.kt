@@ -2,7 +2,6 @@ package uz.isystem.presentation.main.people
 
 import android.os.Bundle
 import android.view.View
-import android.widget.GridLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
@@ -11,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.presentation.R
-import uz.isystem.presentation.adapter.PeopleAdapter
+import uz.isystem.presentation.adapter.people.PeopleAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.PagePeopleBinding
 import uz.isystem.presentation.main.MainScreenDirections

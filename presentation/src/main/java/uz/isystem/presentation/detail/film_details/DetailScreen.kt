@@ -13,11 +13,11 @@ import uz.isystem.domain.models.content.MultiContentModel
 import uz.isystem.domain.models.movie.movie_detail.DetailResponse
 import uz.isystem.domain.models.series.series_details.SeriesDetailResponse
 import uz.isystem.presentation.R
-import uz.isystem.presentation.adapter.ActorsAdapter
-import uz.isystem.presentation.adapter.ContentParentAdapter
-import uz.isystem.presentation.adapter.GenreAdapter
-import uz.isystem.presentation.adapter.RecommAdapter
-import uz.isystem.presentation.adapter.SimilarAdapter
+import uz.isystem.presentation.adapter.movie.ActorsAdapter
+import uz.isystem.presentation.adapter.movie.ContentParentAdapter
+import uz.isystem.presentation.adapter.movie.GenreAdapter
+import uz.isystem.presentation.adapter.movie.RecommAdapter
+import uz.isystem.presentation.adapter.other.SimilarAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.ScreenDetailBinding
 import uz.isystem.utills.Constants

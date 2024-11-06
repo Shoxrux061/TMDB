@@ -1,30 +1,30 @@
-package uz.isystem.presentation.adapter
+package uz.isystem.presentation.adapter.people
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.series.tv_series_list.SerialsResult
-import uz.isystem.presentation.databinding.ItemChildBinding
+import uz.isystem.domain.models.people.people_list.PeopleResult
+import uz.isystem.presentation.databinding.ItemPeopleBinding
 import uz.isystem.utills.Constants
 
-class ChildAdapterSeries : RecyclerView.Adapter<ChildAdapterSeries.ViewHolder>() {
+class PeopleAdapter : RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
 
-    private val data = ArrayList<SerialsResult>()
+    private val data = ArrayList<PeopleResult>()
+
     lateinit var onClickItem: (Int) -> Unit
 
-    fun setData(data: List<SerialsResult>) {
+    fun setData(data: List<PeopleResult>) {
         this.data.clear()
         this.data.addAll(data)
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: ItemChildBinding) :
+    inner class ViewHolder(private val binding: ItemPeopleBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bindData(data: SerialsResult) {
-            binding.poster.load(Constants.IMAGE_URL.plus(data.poster_path))
-            binding.title.text = data.name
-            binding.rating.text = data.vote_average.toString()
+        fun bindData(data: PeopleResult) {
+            binding.postName.text = data.name
+            binding.poster.load(Constants.IMAGE_URL.plus(data.profile_path))
             binding.root.setOnClickListener {
                 onClickItem.invoke(data.id)
             }
@@ -33,7 +33,7 @@ class ChildAdapterSeries : RecyclerView.Adapter<ChildAdapterSeries.ViewHolder>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemChildBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemPeopleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 

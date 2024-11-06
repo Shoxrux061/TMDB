@@ -1,4 +1,4 @@
-package uz.isystem.presentation.adapter
+package uz.isystem.presentation.adapter.movie
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.isystem.domain.models.movie.movie_list.MovieListResponse
 import uz.isystem.presentation.R
+import uz.isystem.presentation.adapter.other.ChildAdapter
 import uz.isystem.presentation.databinding.ItemParentBinding
 
 class ParentAdapter(private val context: Context) :

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.isystem.presentation.R
-import uz.isystem.presentation.adapter.MainAdapter
+import uz.isystem.presentation.adapter.other.MainAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.ScreenMainBinding
 

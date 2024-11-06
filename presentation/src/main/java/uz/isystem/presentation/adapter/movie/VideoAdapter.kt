@@ -1,14 +1,14 @@
-package uz.isystem.presentation.adapter
+package uz.isystem.presentation.adapter.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import uz.isystem.domain.models.movie.movie_list.Result
-import uz.isystem.presentation.databinding.ItemChildBinding
+import uz.isystem.domain.models.movie.movie_detail.Result
+import uz.isystem.presentation.databinding.ItemYoutubeBinding
 import uz.isystem.utills.Constants
 
-class ChildAdapter : RecyclerView.Adapter<ChildAdapter.ViewHolder>() {
+class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
 
     private val data = ArrayList<Result>()
     lateinit var onClickItem: (Int) -> Unit
@@ -19,25 +19,26 @@ class ChildAdapter : RecyclerView.Adapter<ChildAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(private val binding: ItemChildBinding) :
+    inner class ViewHolder(private val binding: ItemYoutubeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: Result) {
-            binding.poster.load(Constants.IMAGE_URL.plus(data.poster_path))
-            binding.title.text = data.title
-            binding.rating.text = data.vote_average.toString()
-            binding.root.setOnClickListener {
-                onClickItem.invoke(data.id)
-            }
+            binding.image.load(
+                Constants.YOUTUBE_IMAGE_URL.plus(data.key).plus(Constants.QUALITY)
+            )
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemChildBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemYoutubeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int {
+        return if (data.size > 10) {
+            10
+        } else data.size
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindData(data[position])

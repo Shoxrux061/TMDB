@@ -1,4 +1,4 @@
-package uz.isystem.presentation.adapter
+package uz.isystem.presentation.adapter.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,8 @@ import uz.isystem.domain.models.content.MultiContentModel
 import uz.isystem.domain.models.content.images.Backdrop
 import uz.isystem.domain.models.content.images.Poster
 import uz.isystem.domain.models.movie.movie_detail.Result
+import uz.isystem.presentation.adapter.other.PosterAdapter
+import uz.isystem.presentation.adapter.other.BackdropAdapter
 import uz.isystem.presentation.databinding.ItemContentParentBinding
 
 class ContentParentAdapter(

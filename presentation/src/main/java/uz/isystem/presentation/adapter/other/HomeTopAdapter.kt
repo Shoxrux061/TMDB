@@ -1,4 +1,4 @@
-package uz.isystem.presentation.adapter
+package uz.isystem.presentation.adapter.other
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package uz.isystem.presentation.adapter
+package uz.isystem.presentation.adapter.other
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

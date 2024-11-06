@@ -1,4 +1,4 @@
-package uz.isystem.presentation.adapter
+package uz.isystem.presentation.adapter.tv
 
 import android.util.Log
 import android.view.LayoutInflater

@@ -34,6 +34,10 @@ import uz.isystem.domain.models.movie.movie_detail.rec.RecommResponse
 import uz.isystem.domain.models.movie.movie_detail.similar.SimilarResponse
 import uz.isystem.domain.models.movie.movie_list.MovieListResponse
 import uz.isystem.domain.models.people.details.PeopleDetailsResponse
+import uz.isystem.domain.models.people.details.credits.movie.MovieCreditsResponse
+import uz.isystem.domain.models.people.details.credits.tv.TvCreditsResponse
+import uz.isystem.domain.models.people.details.ids.ExternalIdsResponse
+import uz.isystem.domain.models.people.details.images.PeopleImagesResponse
 import uz.isystem.domain.models.people.people_list.PeopleListResponse
 import uz.isystem.domain.models.series.series_details.SeriesDetailResponse
 import uz.isystem.domain.models.series.tv_series_list.SeriesResponse
@@ -55,7 +59,7 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
-    fun providePDetailsRepository(service: PeopleDetailService): PeopleDetailsRepository<PeopleDetailsResponse?> {
+    fun providePDetailsRepository(service: PeopleDetailService): PeopleDetailsRepository<PeopleDetailsResponse?, PeopleImagesResponse?, MovieCreditsResponse?, TvCreditsResponse?, ExternalIdsResponse?> {
         return PeopleDetailsRepositoryImpl(service)
     }
 

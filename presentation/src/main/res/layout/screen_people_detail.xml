@@ -8,49 +8,48 @@
     android:orientation="vertical"
     tools:context=".detail.people_details.PeopleDetailScreen">
 
+    <ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:elevation="100dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/person_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|top"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/font_medium"
+        android:textColor="@color/textColor"
+        android:textSize="16sp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:animateLayoutChanges="true"
             android:layout_height="wrap_content">
 
-
-            <ImageButton
-                android:id="@+id/back_btn"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/person_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/font_medium"
-                android:textColor="@color/textColor"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/back_btn" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_poster"
                 android:layout_width="150dp"
                 android:layout_height="210dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
                 app:cardBackgroundColor="@color/themeColor2"
                 app:cardCornerRadius="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/person_name">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
                     android:id="@+id/poster"
@@ -139,7 +138,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/font_regular"
-
                 android:text="place of birth"
                 android:textColor="@color/textColor"
                 android:textSize="14sp"
@@ -159,6 +157,17 @@
                 app:layout_constraintStart_toStartOf="@id/date_of_birth"
                 app:layout_constraintTop_toTopOf="@id/place_of_birth_text" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/person_link_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/card_poster"
+                tools:listitem="@layout/item_person_links" />
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_bio"
@@ -169,7 +178,7 @@
                 android:contentDescription="collapsed"
                 app:cardBackgroundColor="@color/themeColor2"
                 app:cardCornerRadius="10dp"
-                app:layout_constraintTop_toBottomOf="@id/card_poster">
+                app:layout_constraintTop_toBottomOf="@id/person_link_recycler_view">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -204,9 +213,84 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_see_profiles"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/btn_see_all"
+                android:fontFamily="@font/font_medium"
+                android:text="@string/see_all"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_bio" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profiles_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/btn_see_profiles"
+                tools:listitem="@layout/item_actor_profile" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_see_credits"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:animateLayoutChanges="true"
+                android:background="@drawable/btn_see_all"
+                android:fontFamily="@font/font_medium"
+                android:text="@string/see_all"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profiles_recycler" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:animateLayoutChanges="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/frame_back"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/btn_see_credits">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:background="#00000000"
+                    app:tabIndicatorColor="#2196F3"
+                    app:tabIndicatorFullWidth="true"
+                    app:tabTextColor="#2196F3" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="#2196F3" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="10dp" />
+
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
 
 </FrameLayout>

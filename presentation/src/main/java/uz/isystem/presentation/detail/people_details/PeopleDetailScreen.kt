@@ -1,17 +1,19 @@
 package uz.isystem.presentation.detail.people_details
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
+import uz.isystem.domain.models.people.details.PeopleCreditsModel
 import uz.isystem.domain.models.people.details.PeopleDetailsResponse
 import uz.isystem.presentation.R
+import uz.isystem.presentation.adapter.people.PeopleCreditsAdapter
+import uz.isystem.presentation.adapter.people.PeopleImagesAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.ScreenPeopleDetailBinding
 import uz.isystem.utills.Constants
@@ -19,9 +21,13 @@ import uz.isystem.utills.Constants
 class PeopleDetailScreen : BaseFragment(R.layout.screen_people_detail) {
     private val binding by viewBinding(ScreenPeopleDetailBinding::bind)
     private val viewModel: PeopleDetailsViewModel by viewModels()
+    private val peopleImagesAdapter by lazy { PeopleImagesAdapter() }
     private val args: PeopleDetailScreenArgs by navArgs()
+    private var dataCount = 0
+    private var creditsData = PeopleCreditsModel()
+    private val creditsAdapter by lazy { PeopleCreditsAdapter() }
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("TAGID", "onBaseViewCreated: ${args.id}")
+
         setAdapter()
         sendRequest()
         observe()
@@ -29,9 +35,61 @@ class PeopleDetailScreen : BaseFragment(R.layout.screen_people_detail) {
 
     }
 
+    private fun setTabs(dataSize: Int) {
+        for (i in 0 until dataSize) {
+            val tab = binding.tabs.newTab().apply {
+                text =
+                    when (i) {
+                        0 -> "Movies"
+                        else -> "Serials"
+                    }
+            }
+            binding.tabs.addTab(tab)
+        }
+    }
+
     private fun observe() {
         viewModel.successDetail.observe(viewLifecycleOwner) {
             loadDataToView(it)
+        }
+        viewModel.successImages.observe(viewLifecycleOwner) {
+            peopleImagesAdapter.setData(it!!.profiles!!)
+        }
+
+        viewModel.successMovie.observe(viewLifecycleOwner) {
+            creditsData.movies = it?.cast!!
+            Toast.makeText(context, "Success Movie", Toast.LENGTH_SHORT).show()
+            dataCount++
+            checkIsFull()
+        }
+        viewModel.successTv.observe(viewLifecycleOwner) {
+            Toast.makeText(context, "Success Movie", Toast.LENGTH_SHORT).show()
+            creditsData.tv = it?.cast!!
+            dataCount++
+            checkIsFull()
+        }
+        viewModel.errorMovie.observe(viewLifecycleOwner) {
+            dataCount++
+            checkIsFull()
+        }
+        viewModel.errorTv.observe(viewLifecycleOwner) {
+            dataCount++
+            checkIsFull()
+        }
+    }
+
+    private fun checkIsFull() {
+        if (dataCount == 2) {
+            var dataSize = 0
+            if (creditsData.tv != null) {
+                dataSize++
+            }
+            if (creditsData.movies != null) {
+                dataSize++
+            }
+            setTabs(dataSize)
+            Log.d("TAGData", "checkIsFull: $creditsData")
+            creditsAdapter.setData(creditsData)
         }
     }
 
@@ -80,14 +138,22 @@ class PeopleDetailScreen : BaseFragment(R.layout.screen_people_detail) {
             binding.placeOfBirth.visibility = View.GONE
             binding.placeOfBirthText.visibility = View.GONE
         }
+
+
     }
 
     private fun sendRequest() {
         viewModel.getPeopleDetails(args.id)
+        viewModel.getPeopleImages(args.id)
+        viewModel.getPeopleMovie(args.id)
+        viewModel.getPeopleTv(args.id)
+        viewModel.getPeopleIds(args.id)
     }
 
     private fun setAdapter() {
-
+        binding.profilesRecycler.adapter = peopleImagesAdapter
+        binding.viewPager.isUserInputEnabled = false
+        binding.viewPager.adapter = creditsAdapter
     }
 
     private fun listenActions() {

@@ -12,8 +12,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import uz.isystem.domain.models.series.tv_series_list.SeriesResponse
 import uz.isystem.presentation.R
-import uz.isystem.presentation.adapter.ParentAdapterSeries
-import uz.isystem.presentation.adapter.SeriesTopAdapter
+import uz.isystem.presentation.adapter.tv.ParentAdapterSeries
+import uz.isystem.presentation.adapter.tv.SeriesTopAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.base.HorizontalMarginItemDecoration
 import uz.isystem.presentation.databinding.PageSerialsBinding
