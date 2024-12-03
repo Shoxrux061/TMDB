@@ -9,5 +9,13 @@
     <color name="textColor">#fff</color>
     <color name="place_holder">#18293B</color>
     <color name="themeColor2">#2A3142</color>
+    <color name="facebook_color">#4460A0</color>
+    <color name="instagram_color">#FF3B7C</color>
+    <color name="youtube_color">#FF0000</color>
+    <color name="tik_tok_color">#000</color>
+    <color name="twitter_color">#FFFFFF</color>
+    <color name="imdb_color">#FFC107</color>
+    <color name="wiki_color">#BFBFBF</color>
+    <color name="home_page_color">#fff</color>
 
 </resources>

@@ -39,7 +39,7 @@ interface PeopleDetailService {
         @Query("language") lang: String
     ): Response<TvCreditsResponse?>
 
-    @GET("3/person/{id}external_ids")
+    @GET("3/person/{id}/external_ids")
     suspend fun getPeopleIds(
         @Path("id") id: Int,
         @Query("api_key") key: String,

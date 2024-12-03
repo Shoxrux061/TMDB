@@ -9,10 +9,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
+import com.google.android.material.tabs.TabLayout
 import uz.isystem.domain.models.people.details.PeopleCreditsModel
 import uz.isystem.domain.models.people.details.PeopleDetailsResponse
+import uz.isystem.domain.models.people.details.ids.ExternalIdItem
+import uz.isystem.domain.models.people.details.ids.ExternalIdsResponse
+import uz.isystem.domain.models.people.details.ids.Platform
 import uz.isystem.presentation.R
 import uz.isystem.presentation.adapter.people.PeopleCreditsAdapter
+import uz.isystem.presentation.adapter.people.PeopleIdsAdapter
 import uz.isystem.presentation.adapter.people.PeopleImagesAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.ScreenPeopleDetailBinding
@@ -26,6 +31,10 @@ class PeopleDetailScreen : BaseFragment(R.layout.screen_people_detail) {
     private var dataCount = 0
     private var creditsData = PeopleCreditsModel()
     private val creditsAdapter by lazy { PeopleCreditsAdapter() }
+    private val idAdapter by lazy {
+        PeopleIdsAdapter(requireContext())
+    }
+
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setAdapter()
@@ -76,6 +85,39 @@ class PeopleDetailScreen : BaseFragment(R.layout.screen_people_detail) {
             dataCount++
             checkIsFull()
         }
+
+        viewModel.successId.observe(viewLifecycleOwner) {
+            Log.d("Tag12", "observe: $it")
+            setIds(it)
+        }
+    }
+
+    private fun setIds(data: ExternalIdsResponse?) {
+
+        val idList = mutableListOf<ExternalIdItem>()
+
+        data?.instagram_id?.let {
+            idList.add(ExternalIdItem(Platform.Instagram, id = data.instagram_id))
+        }
+        data?.imdb_id?.let {
+            idList.add(ExternalIdItem(platform = Platform.IMDB, id = data.imdb_id))
+        }
+        data?.tiktok_id?.let {
+            idList.add(ExternalIdItem(platform = Platform.TikTok, id = data.tiktok_id))
+        }
+        data?.facebook_id?.let {
+            idList.add(ExternalIdItem(Platform.Facebook, id = data.facebook_id))
+        }
+        data?.twitter_id?.let {
+            idList.add(ExternalIdItem(Platform.X, id = data.twitter_id))
+        }
+        data?.youtube_id?.let {
+            idList.add(ExternalIdItem(Platform.YouTube, id = data.youtube_id))
+        }
+        data?.wikidata_id?.let {
+            idList.add(ExternalIdItem(Platform.Wiki, id = data.wikidata_id))
+        }
+        idAdapter.setData(idList)
     }
 
     private fun checkIsFull() {
@@ -154,6 +196,7 @@ class PeopleDetailScreen : BaseFragment(R.layout.screen_people_detail) {
         binding.profilesRecycler.adapter = peopleImagesAdapter
         binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = creditsAdapter
+        binding.personLinkRecyclerView.adapter = idAdapter
     }
 
     private fun listenActions() {
@@ -166,7 +209,20 @@ class PeopleDetailScreen : BaseFragment(R.layout.screen_people_detail) {
                 binding.textBio.contentDescription = "collapsed"
                 binding.textBio.maxLines = 1
             }
-            TransitionManager.beginDelayedTransition(binding.cardBio)
+            TransitionManager.beginDelayedTransition(binding.root)
         }
+
+        binding.tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+                    0 -> binding.viewPager.currentItem = 0
+                    1 -> binding.viewPager.currentItem = 1
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+
+        })
     }
 }
