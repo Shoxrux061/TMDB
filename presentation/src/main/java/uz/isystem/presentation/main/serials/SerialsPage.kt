@@ -3,8 +3,6 @@ package uz.isystem.presentation.main.serials
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -18,6 +16,7 @@ import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.base.HorizontalMarginItemDecoration
 import uz.isystem.presentation.databinding.PageSerialsBinding
 import uz.isystem.presentation.main.MainScreenDirections
+import uz.isystem.presentation.util.Utils
 import uz.isystem.utills.Constants
 
 class SerialsPage : BaseFragment(R.layout.page_serials) {
@@ -59,13 +58,22 @@ class SerialsPage : BaseFragment(R.layout.page_serials) {
         })
 
         adapterTop.onClickItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(id= it, type = 2))
+            Utils.navigateWithAnimations(
+                findNavController(),
+                MainScreenDirections.actionMainScreenToDetailScreen(type = 2, id = it)
+            )
         }
         adapterSeries.onClickItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(id= it, type = 2))
+            Utils.navigateWithAnimations(
+                findNavController(),
+                MainScreenDirections.actionMainScreenToDetailScreen(type = 2, id = it)
+            )
         }
         adapterSeries.onClickChildItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(id= it, type = 2))
+            Utils.navigateWithAnimations(
+                findNavController(),
+                MainScreenDirections.actionMainScreenToDetailScreen(type = 2, id = it)
+            )
         }
     }
 
@@ -142,13 +150,5 @@ class SerialsPage : BaseFragment(R.layout.page_serials) {
         binding.viewPager.addItemDecoration(itemDecoration)
     }
 
-    private fun changeScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.alpha_in)
-            .setExitAnim(R.anim.alpha_out)
-            .setPopEnterAnim(R.anim.alpha_pop_in)
-            .setPopExitAnim(R.anim.alpha_pop_out)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
-    }
+
 }

@@ -3,8 +3,6 @@ package uz.isystem.presentation.main.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -18,6 +16,7 @@ import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.base.HorizontalMarginItemDecoration
 import uz.isystem.presentation.databinding.PageHomeBinding
 import uz.isystem.presentation.main.MainScreenDirections
+import uz.isystem.presentation.util.Utils
 import uz.isystem.utills.Constants
 
 class HomePage : BaseFragment(R.layout.page_home) {
@@ -58,14 +57,22 @@ class HomePage : BaseFragment(R.layout.page_home) {
         })
 
         adapter.onClickItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it))
+            Utils.navigateWithAnimations(
+                findNavController(),
+                MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it)
+            )
         }
         multiAdapter.onClickItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it))
+            Utils.navigateWithAnimations(
+                findNavController(),
+                MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it)
+            )
         }
         multiAdapter.onClickChildItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it))
-
+            Utils.navigateWithAnimations(
+                findNavController(),
+                MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it)
+            )
         }
     }
 
@@ -145,15 +152,6 @@ class HomePage : BaseFragment(R.layout.page_home) {
         }
     }
 
-    private fun changeScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.alpha_in)
-            .setExitAnim(R.anim.alpha_out)
-            .setPopEnterAnim(R.anim.alpha_pop_in)
-            .setPopExitAnim(R.anim.alpha_pop_out)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
-    }
 
 }
 

@@ -20,7 +20,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: MovieListRepository<MovieListResponse?>,
     @ApplicationContext
-    val context: Context
+    private val context: Context
 ) : ViewModel() {
 
 

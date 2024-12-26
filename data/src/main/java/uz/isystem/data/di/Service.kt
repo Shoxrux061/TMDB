@@ -9,6 +9,7 @@ import uz.isystem.data.network.DetailService
 import uz.isystem.data.network.MovieService
 import uz.isystem.data.network.PeopleDetailService
 import uz.isystem.data.network.PeopleService
+import uz.isystem.data.network.SearchService
 import uz.isystem.data.network.SeriesService
 import javax.inject.Singleton
 
@@ -39,5 +40,10 @@ object Service {
     @[Provides Singleton]
     fun providePDetailsService(retrofit: Retrofit): PeopleDetailService {
         return retrofit.create(PeopleDetailService::class.java)
+    }
+
+    @[Provides Singleton]
+    fun provideSearchService(retrofit: Retrofit): SearchService {
+        return retrofit.create(SearchService::class.java)
     }
 }

@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -14,6 +12,7 @@ import uz.isystem.presentation.adapter.people.PeopleAdapter
 import uz.isystem.presentation.base.BaseFragment
 import uz.isystem.presentation.databinding.PagePeopleBinding
 import uz.isystem.presentation.main.MainScreenDirections
+import uz.isystem.presentation.util.Utils
 
 class PeoplePage : BaseFragment(R.layout.page_people) {
 
@@ -40,7 +39,10 @@ class PeoplePage : BaseFragment(R.layout.page_people) {
 
     private fun listenActions() {
         adapter.onClickItem = {
-            changeScreen(MainScreenDirections.actionMainScreenToPeopleDetailScreen(id = it))
+            Utils.navigateWithAnimations(
+                findNavController(),
+                MainScreenDirections.actionMainScreenToPeopleDetailScreen(it)
+            )
         }
     }
 
@@ -57,14 +59,5 @@ class PeoplePage : BaseFragment(R.layout.page_people) {
         }
     }
 
-    private fun changeScreen(navDirections: NavDirections) {
-        val navOptions = NavOptions.Builder()
-            .setEnterAnim(R.anim.alpha_in)
-            .setExitAnim(R.anim.alpha_out)
-            .setPopEnterAnim(R.anim.alpha_pop_in)
-            .setPopExitAnim(R.anim.alpha_pop_out)
-            .build()
-        findNavController().navigate(navDirections, navOptions)
-    }
 
 }

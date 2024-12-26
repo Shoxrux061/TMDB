@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="120dp"
+        android:layout_height="180dp"
         app:cardBackgroundColor="#515151"
-        app:cardCornerRadius="10dp"
-        android:layout_height="180dp">
+        app:cardCornerRadius="10dp">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:scaleType="centerCrop"
             android:id="@+id/poster"
-            android:src="@drawable/sample_poster"
-            android:layout_height="match_parent"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_poster" />
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="40dp"
+            android:layout_height="20dp"
             android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
             app:cardBackgroundColor="#A3272727"
-            android:layout_height="20dp">
-            
+            app:cardCornerRadius="5dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:gravity="center">
 
                 <ImageView
                     android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_star"
-                    android:layout_height="15dp"/>
+                    android:src="@drawable/ic_star" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/font_medium"
                     android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/font_medium"
                     android:maxLength="3"
-                    android:textColor="#FFC107"
                     android:text="7.9"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="#FFC107"
+                    android:textSize="11sp" />
 
             </LinearLayout>
 
@@ -55,16 +55,17 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:layout_width="120dp"
         android:id="@+id/title"
-        android:maxLines="2"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:minLines="2"
         android:ellipsize="end"
-        android:text="ASjkdha aksjdh aks haksj haksjdh "
-        android:textColor="@color/white"
         android:fontFamily="@font/font_regular"
-        android:textSize="13sp"
         android:gravity="center"
-        android:layout_height="wrap_content"/>
+        android:maxLines="2"
+        android:text="ASjkdha aksjdh"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
 
 
 </LinearLayout>

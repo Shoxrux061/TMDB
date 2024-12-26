@@ -5,6 +5,7 @@
         <item name="android:statusBarColor">@color/backgroundColor</item>
         <item name="android:windowBackground">@color/backgroundColor</item>
         <item name="android:navigationBarColor">@color/backgroundColor</item>
+        <item name="colorPrimary">#888888</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>

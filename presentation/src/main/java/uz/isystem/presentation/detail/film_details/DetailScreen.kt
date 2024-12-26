@@ -4,7 +4,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
@@ -42,6 +45,8 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
 
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        setFullScreen()
+
         if (!isFirst) {
             setAdapter()
             listenActions()
@@ -57,6 +62,14 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
                 }
             }
         }
+    }
+
+    private fun setFullScreen() {
+        val w = activity?.window
+        w?.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
     }
 
     private fun listenActions() {
@@ -213,5 +226,11 @@ class DetailScreen : BaseFragment(R.layout.screen_detail) {
         viewModel.getSimilar(args.id)
         viewModel.getRecomm(args.id)
         viewModel.getImages(args.id)
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 }

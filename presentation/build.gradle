@@ -8,10 +8,11 @@ plugins {
 
 android {
     namespace 'uz.isystem.presentation'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         minSdk 24
+        targetSdk 35
         viewBinding.enable true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"

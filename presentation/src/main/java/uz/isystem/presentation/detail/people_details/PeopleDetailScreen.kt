@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -67,12 +66,10 @@ class PeopleDetailScreen : BaseFragment(R.layout.screen_people_detail) {
 
         viewModel.successMovie.observe(viewLifecycleOwner) {
             creditsData.movies = it?.cast!!
-            Toast.makeText(context, "Success Movie", Toast.LENGTH_SHORT).show()
             dataCount++
             checkIsFull()
         }
         viewModel.successTv.observe(viewLifecycleOwner) {
-            Toast.makeText(context, "Success Movie", Toast.LENGTH_SHORT).show()
             creditsData.tv = it?.cast!!
             dataCount++
             checkIsFull()

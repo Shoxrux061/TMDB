@@ -20,11 +20,13 @@ import uz.isystem.data.network.DetailService
 import uz.isystem.data.network.MovieService
 import uz.isystem.data.network.PeopleDetailService
 import uz.isystem.data.network.PeopleService
+import uz.isystem.data.network.SearchService
 import uz.isystem.data.network.SeriesService
 import uz.isystem.data.repository.DetailRepositoryImpl
 import uz.isystem.data.repository.MovieListRepositoryImpl
 import uz.isystem.data.repository.PeopleDetailsRepositoryImpl
 import uz.isystem.data.repository.PeopleListRepositoryImpl
+import uz.isystem.data.repository.SearchRepositoryImpl
 import uz.isystem.data.repository.SeriesRepositoryImpl
 import uz.isystem.domain.models.content.images.ImagesData
 import uz.isystem.domain.models.movie.movie_detail.DetailResponse
@@ -45,6 +47,7 @@ import uz.isystem.domain.repository.movie.DetailRepository
 import uz.isystem.domain.repository.movie.MovieListRepository
 import uz.isystem.domain.repository.people.PeopleListRepository
 import uz.isystem.domain.repository.people.details.PeopleDetailsRepository
+import uz.isystem.domain.repository.search.SearchRepository
 import uz.isystem.domain.repository.series.SeriesRepository
 import uz.isystem.utills.Constants
 import javax.inject.Singleton
@@ -56,6 +59,11 @@ object NetworkModule {
     @[Provides Singleton]
     fun provideOfferRepository(service: MovieService): MovieListRepository<MovieListResponse?> {
         return MovieListRepositoryImpl(service)
+    }
+
+    @[Provides Singleton]
+    fun provideSearchRepository(service: SearchService): SearchRepository<MovieListResponse?> {
+        return SearchRepositoryImpl(service)
     }
 
     @[Provides Singleton]

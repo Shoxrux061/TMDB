@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainScreen_to_peopleDetailScreen"
             app:destination="@id/peopleDetailScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_searchScreen"
+            app:destination="@id/searchScreen" />
     </fragment>
     <fragment
         android:id="@+id/detailScreen"
@@ -41,4 +44,9 @@
             android:name="id"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/searchScreen"
+        android:name="uz.isystem.presentation.search.SearchScreen"
+        android:label="screen_search"
+        tools:layout="@layout/screen_search" />
 </navigation>

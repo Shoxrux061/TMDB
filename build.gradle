@@ -5,8 +5,8 @@ buildscript {
     dependencies {
         classpath libs.androidx.navigation.safe.args.gradle.plugin
         classpath libs.google.services
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:1.9.0"
+        classpath libs.kotlin.gradle.plugin
+        classpath libs.kotlin.serialization
     }
 }
 

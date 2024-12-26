@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         minSdk 24
-        targetSdk 34
+        targetSdk 35
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation libs.androidx.core.ktx
 
+
     //Retrofit
     implementation libs.retrofit
     implementation libs.converter.gson
@@ -48,5 +49,9 @@ dependencies {
 
     // Gson
     implementation libs.gson
+
+    //Navigation Component
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.androidx.navigation.ui.ktx
 
 }
