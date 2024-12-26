@@ -18,6 +18,7 @@
         android:fontFamily="@font/font_regular"
         android:hint="Search..."
         android:maxLines="1"
+        android:inputType="text"
         android:paddingHorizontal="20dp"
         android:singleLine="true"
         android:textColor="@color/textColor"
