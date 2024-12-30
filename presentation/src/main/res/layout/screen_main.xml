@@ -32,6 +32,15 @@
             android:layout_gravity="center"
             android:src="@drawable/tmdb_logo" />
 
+        <ImageButton
+            android:id="@+id/lang_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center|end"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_language" />
+
     </FrameLayout>
 
 

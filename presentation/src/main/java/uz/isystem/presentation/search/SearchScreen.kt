@@ -2,7 +2,6 @@ package uz.isystem.presentation.search
 
 import android.os.Bundle
 import android.text.InputFilter
-import android.util.Log
 import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.widget.addTextChangedListener
@@ -20,7 +19,9 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
     private val binding by viewBinding(ScreenSearchBinding::bind)
     private val viewModel: SearchViewModel by viewModels()
     private val adapter by lazy { SearchParentAdapter(requireContext()) }
+    private var isLoading = false
     private val searchMultiData = SearchModel()
+    private var dataSize = 0
 
     override fun onBaseViewCreated(view: View, savedInstanceState: Bundle?) {
         setAdapter()
@@ -51,7 +52,7 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
 
         binding.floatSearch.setOnClickListener {
             if (binding.searchEdt.text.isNotBlank()) {
-                viewModel.searchMovie(q = binding.searchEdt.text.toString())
+                search(binding.searchEdt.text.toString())
                 binding.floatSearch.visibility = View.GONE
                 val floatingButtonAnimReverse =
                     AnimationUtils.loadAnimation(context, me.ibrahimsn.lib.R.anim.abc_popup_exit)
@@ -80,8 +81,42 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
 
     private fun observe() {
         viewModel.successMovie.observe(viewLifecycleOwner) {
+            dataSize++
             searchMultiData.movieData = it
+            checkIsFull()
             adapter.setData(searchMultiData)
+        }
+
+        viewModel.successSerial.observe(viewLifecycleOwner) {
+            dataSize++
+            searchMultiData.serialData = it
+            checkIsFull()
+            adapter.setData(searchMultiData)
+        }
+
+        viewModel.successPerson.observe(viewLifecycleOwner) {
+            dataSize++
+            searchMultiData.peopleData = it
+            checkIsFull()
+            adapter.setData(searchMultiData)
+        }
+        viewModel.errorMovie.observe(viewLifecycleOwner) {
+            dataSize++
+            checkIsFull()
+        }
+        viewModel.errorSerial.observe(viewLifecycleOwner) {
+            dataSize++
+            checkIsFull()
+        }
+        viewModel.errorPerson.observe(viewLifecycleOwner) {
+            dataSize++
+            checkIsFull()
+        }
+    }
+
+    private fun checkIsFull() {
+        if (dataSize >= 3) {
+            setLoading(false)
         }
     }
 
@@ -91,5 +126,23 @@ class SearchScreen : BaseFragment(R.layout.screen_search) {
             if (dStart == 0 && source.startsWith(" ")) "" else null
         }
         binding.searchEdt.filters = arrayOf(filter)
+    }
+
+    private fun search(q: String) {
+        if (!isLoading) {
+            setLoading(true)
+            viewModel.searchMovie(q)
+            viewModel.searchSerial(q)
+            viewModel.searchPerson(q)
+        }
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        this.isLoading = isLoading
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }

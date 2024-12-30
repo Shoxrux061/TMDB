@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
+import uz.isystem.data.network.AuthService
 import uz.isystem.data.network.DetailService
 import uz.isystem.data.network.MovieService
 import uz.isystem.data.network.PeopleDetailService
@@ -45,5 +46,10 @@ object Service {
     @[Provides Singleton]
     fun provideSearchService(retrofit: Retrofit): SearchService {
         return retrofit.create(SearchService::class.java)
+    }
+
+    @[Provides Singleton]
+    fun provideAuthService(retrofit: Retrofit): AuthService {
+        return retrofit.create(AuthService::class.java)
     }
 }

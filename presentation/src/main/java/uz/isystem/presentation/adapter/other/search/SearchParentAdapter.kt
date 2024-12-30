@@ -54,7 +54,6 @@ class SearchParentAdapter(val context: Context) :
             data?.let {
                 val adapter = SearchPeopleAdapter()
                 binding.root.layoutManager = GridLayoutManager(context, 3)
-                binding.root.layoutParams.width = LayoutParams.WRAP_CONTENT
                 binding.root.adapter = adapter
                 adapter.setData(it.results)
             }

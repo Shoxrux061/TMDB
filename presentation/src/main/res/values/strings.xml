@@ -31,5 +31,10 @@
     <string name="female">Female</string>
     <string name="unknown">Unknown</string>
     <string name="years_of_life">years of life</string>
+    <string name="rated">Rated</string>
+    <string name="saved">Saved</string>
+    <string name="about_app">About App</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
 
 </resources>

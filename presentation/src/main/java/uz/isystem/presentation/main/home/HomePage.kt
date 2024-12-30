@@ -63,10 +63,7 @@ class HomePage : BaseFragment(R.layout.page_home) {
             )
         }
         multiAdapter.onClickItem = {
-            Utils.navigateWithAnimations(
-                findNavController(),
-                MainScreenDirections.actionMainScreenToDetailScreen(type = 1, id = it)
-            )
+
         }
         multiAdapter.onClickChildItem = {
             Utils.navigateWithAnimations(
@@ -151,7 +148,5 @@ class HomePage : BaseFragment(R.layout.page_home) {
             multiAdapter.setData(multiData)
         }
     }
-
-
 }
 
