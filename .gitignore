@@ -1,0 +1,117 @@
+### Android / Gradle ###
+.gradle/
+build/
+*/build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+gradle-app.setting
+
+# Local configuration
+local.properties
+
+# Signing files
+*.jks
+*.keystore
+.signing/
+
+# Generated files
+bin/
+gen/
+out/
+.cxx/
+.externalNativeBuild/
+obj/
+.captures/
+
+# APK / AAB artifacts
+*.apk
+*.ap_
+*.aab
+output.json
+
+# Log / profiling
+*.log
+*.hprof
+hs_err_pid*
+replay_pid*
+
+### Kotlin / Java ###
+*.class
+*.dex
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# KAPT / KSP generated
+.kapt/
+.ksp/
+**/build/generated/
+
+### IntelliJ / Android Studio ###
+*.iml
+.idea/
+.idea/caches/
+.idea/libraries/
+.idea/shelf/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/datasources.xml
+.idea/sqlDataSources.xml
+.idea/dataSources.ids
+.idea/dataSources.local.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+.idea/assetWizardSettings.xml
+.idea/gradle.xml
+.idea/jarRepositories.xml
+.idea/navEditor.xml
+
+# Android Navigation safe args generated
+**/build/generated/source/navigation-args/
+
+# Test generated classes
+**/build/intermediates/
+**/build/tmp/
+**/build/test-results/
+**/build/test-classes/
+**/build/test-report/
+**/build/reports/
+**/build/kotlin/
+
+### Firebase / Google ###
+google-services.json
+firebase.json
+.runtimeconfig.json
+.firebase/
+
+### OS-specific ###
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+### Crashlytics / Fabric ###
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
