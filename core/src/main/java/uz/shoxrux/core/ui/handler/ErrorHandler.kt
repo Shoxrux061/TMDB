@@ -5,14 +5,12 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class ErrorHandler {
-
-    fun parse(throwable: Throwable): String {
+    fun parse(throwable: Throwable): AppError {
         return when (throwable) {
-            is IOException -> "Нет соединения с интернетом"
-            is HttpException -> "Ошибка сервера: ${throwable.message}"
-            is TimeoutCancellationException -> "Время ожидания истекло"
-            else -> "Неизвестная ошибка"
+            is IOException -> AppError.NoInternet
+            is HttpException -> AppError.Server(throwable.message())
+            is TimeoutCancellationException -> AppError.Timeout
+            else -> AppError.Unknown
         }
     }
-
 }
