@@ -4,7 +4,7 @@ import kotlinx.coroutines.TimeoutCancellationException
 import retrofit2.HttpException
 import java.io.IOException
 
-class ErrorHandler {
+object ErrorHandler {
     fun parse(throwable: Throwable): AppError {
         return when (throwable) {
             is IOException -> AppError.NoInternet
