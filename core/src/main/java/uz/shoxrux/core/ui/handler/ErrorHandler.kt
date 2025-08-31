@@ -10,7 +10,7 @@ object ErrorHandler {
             is IOException -> AppError.NoInternet
             is HttpException -> AppError.Server(throwable.message())
             is TimeoutCancellationException -> AppError.Timeout
-            else -> AppError.Unknown
+            else -> AppError.Unknown(throwable)
         }
     }
 }
