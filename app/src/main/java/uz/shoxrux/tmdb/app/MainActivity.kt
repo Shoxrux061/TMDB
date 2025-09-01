@@ -1,4 +1,4 @@
-package uz.shoxrux.tmdb
+package uz.shoxrux.tmdb.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

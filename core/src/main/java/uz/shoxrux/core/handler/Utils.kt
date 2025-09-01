@@ -1,4 +1,4 @@
-package uz.shoxrux.core.ui.handler
+package uz.shoxrux.core.handler
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
