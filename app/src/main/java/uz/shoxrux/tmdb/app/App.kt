@@ -1,4 +1,4 @@
-package uz.shoxrux.tmdb
+package uz.shoxrux.tmdb.app
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

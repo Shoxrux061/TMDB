@@ -23,4 +23,5 @@ rootProject.name = "TMDB"
 include(":app")
 include(":di")
 include(":core")
+include(":data")
 include(":feature-media")
