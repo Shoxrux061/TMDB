@@ -1,15 +1,15 @@
-package uz.shoxrux.feature_media.domain.models.media_types.movies
+package uz.shoxrux.feature_media.data.dto.movie
 
 
 import com.squareup.moshi.Json
 
-data class MovieListModel(
+data class MovieListDTO(
     @field: Json(name = "dates")
-    val dates: MovieDatesModel,
+    val dates: MovieDatesDTO,
     @field: Json(name = "page")
     val page: Int,
     @field: Json(name = "results")
-    val results: List<MovieResultModel>,
+    val results: List<MovieResultDTO>,
     @field: Json(name = "total_pages")
     val totalPages: Int,
     @field: Json(name = "total_results")

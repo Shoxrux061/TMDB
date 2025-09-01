@@ -1,13 +1,13 @@
-package uz.shoxrux.feature_media.domain.models.media_types.series
+package uz.shoxrux.feature_media.data.dto.series
 
 
 import com.squareup.moshi.Json
 
-data class SeriesListModel(
-    @field:Json(name = "page")
+data class SeriesListDTO(
+    @field: Json(name = "page")
     val page: Int,
     @field: Json(name = "results")
-    val results: List<SeriesResultModel>,
+    val results: List<SeriesResultDTO>,
     @field: Json(name = "total_pages")
     val totalPages: Int,
     @field: Json(name = "total_results")

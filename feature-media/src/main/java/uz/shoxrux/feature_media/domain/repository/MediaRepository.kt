@@ -2,17 +2,21 @@ package uz.shoxrux.feature_media.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 import uz.shoxrux.core.ui.handler.NetworkResult
+import uz.shoxrux.feature_media.domain.models.SeriesType
 import uz.shoxrux.feature_media.domain.models.media_types.MovieType
-import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieListModel
-import uz.shoxrux.feature_media.domain.models.media_types.series.SeriesListModel
+import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieResultModel
+import uz.shoxrux.feature_media.domain.models.media_types.series.SeriesResultModel
 
 interface MediaRepository {
 
     suspend fun getMovies(
         type: MovieType,
         page: Int
-    ): Flow<NetworkResult<List<MovieListModel>>>
+    ): Flow<NetworkResult<List<MovieResultModel>>>
 
-    suspend fun getSeries(): Flow<NetworkResult<List<SeriesListModel>>>
+    suspend fun getSeries(
+        type: SeriesType,
+        page: Int
+    ): Flow<NetworkResult<List<SeriesResultModel>>>
 
 }
