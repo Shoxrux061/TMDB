@@ -8,7 +8,7 @@ interface LocalCacheProvider {
 
     fun setLanguage(lang: String)
 
-    fun setIsDark(isDarl: Boolean)
+    fun setIsDark(isDark: Boolean)
 
     fun getIsFirstLaunch(): Boolean
 
@@ -16,6 +16,6 @@ interface LocalCacheProvider {
 
     fun setSessionToken(token: String)
 
-    fun getSessionToken(): String
+    fun getSessionToken(): String?
 
 }
