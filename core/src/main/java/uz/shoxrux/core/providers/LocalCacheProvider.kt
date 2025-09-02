@@ -2,20 +2,20 @@ package uz.shoxrux.core.providers
 
 interface LocalCacheProvider {
 
-    fun getLanguage(): String
+    suspend fun getLanguage(): String
 
-    fun isDark(): Boolean
+    suspend fun isDark(): Boolean
 
-    fun setLanguage(lang: String)
+    suspend fun setLanguage(lang: String)
 
-    fun setIsDark(isDark: Boolean)
+    suspend fun setIsDark(isDark: Boolean)
 
-    fun getIsFirstLaunch(): Boolean
+    suspend fun getIsFirstLaunch(): Boolean
 
-    fun setIsFirstLaunch()
+    suspend fun setIsFirstLaunch()
 
-    fun setSessionToken(token: String)
+    suspend fun setSessionToken(token: String)
 
-    fun getSessionToken(): String?
+    suspend fun getSessionToken(): String?
 
 }

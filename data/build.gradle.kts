@@ -49,4 +49,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
+    //DataStore
+    implementation(libs.datastore)
 }

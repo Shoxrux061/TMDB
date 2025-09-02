@@ -1,9 +1,9 @@
 package uz.shoxrux.feature_media.domain.repository
 
 import kotlinx.coroutines.flow.Flow
-import uz.shoxrux.core.ui.handler.NetworkResult
-import uz.shoxrux.feature_media.domain.models.media_types.SeriesType
+import uz.shoxrux.core.handler.NetworkResult
 import uz.shoxrux.feature_media.domain.models.media_types.MovieType
+import uz.shoxrux.feature_media.domain.models.media_types.SeriesType
 import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieResultModel
 import uz.shoxrux.feature_media.domain.models.media_types.series.SeriesResultModel
 
