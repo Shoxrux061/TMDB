@@ -1,21 +1,16 @@
 package uz.shoxrux.core.providers
 
+import kotlinx.coroutines.flow.Flow
+
 interface LocalCacheProvider {
 
-    fun getLanguage(): String
+    fun getLanguage(): Flow<String>
+    fun isDark(): Flow<Boolean>
+    fun getIsFirstLaunch(): Flow<Boolean>
+    fun getSessionToken(): Flow<String?>
 
-    fun isDark(): Boolean
-
-    fun setLanguage(lang: String)
-
-    fun setIsDark(isDark: Boolean)
-
-    fun getIsFirstLaunch(): Boolean
-
-    fun setIsFirstLaunch()
-
-    fun setSessionToken(token: String)
-
-    fun getSessionToken(): String?
-
+    suspend fun setLanguage(lang: String)
+    suspend fun setIsDark(isDark: Boolean)
+    suspend fun setIsFirstLaunch()
+    suspend fun setSessionToken(token: String)
 }

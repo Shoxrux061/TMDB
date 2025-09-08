@@ -60,4 +60,7 @@ dependencies {
     //Retrofit
     implementation(libs.retrofit)
 
+    //DataStore
+    implementation(libs.datastore)
+
 }
