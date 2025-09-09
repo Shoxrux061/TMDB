@@ -5,15 +5,16 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import uz.shoxrux.core.providers.LocalCacheProvider
+import uz.shoxrux.core.providers.LocaleProvider
 import javax.inject.Inject
 
 class LocalCacheImpl @Inject constructor(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
+    private val localeProvider: LocaleProvider
 ) : LocalCacheProvider {
-
 
     private object Keys {
         val LANGUAGE = stringPreferencesKey("LANGUAGE_KEY")
@@ -22,32 +23,31 @@ class LocalCacheImpl @Inject constructor(
         val SESSION_TOKEN = stringPreferencesKey("SESSION_TOKEN_KEY")
     }
 
-    override suspend fun getLanguage(): String =
-        dataStore.data.map { prefs -> prefs[Keys.LANGUAGE] ?: "en" }.first()
+    override fun getLanguage(): Flow<String> =
+        dataStore.data.map { it[Keys.LANGUAGE] ?: localeProvider.getLanguage() }
+
+    override fun isDark(): Flow<Boolean> =
+        dataStore.data.map { it[Keys.IS_DARK] ?: false }
+
+    override fun getIsFirstLaunch(): Flow<Boolean> =
+        dataStore.data.map { it[Keys.IS_FIRST_LAUNCH] ?: true }
+
+    override fun getSessionToken(): Flow<String?> =
+        dataStore.data.map { it[Keys.SESSION_TOKEN] }
 
     override suspend fun setLanguage(lang: String) {
-        dataStore.edit { prefs -> prefs[Keys.LANGUAGE] = lang }
+        dataStore.edit { it[Keys.LANGUAGE] = lang }
     }
-
-    override suspend fun isDark(): Boolean =
-        dataStore.data.map { prefs -> prefs[Keys.IS_DARK] ?: false }.first()
 
     override suspend fun setIsDark(isDark: Boolean) {
-        dataStore.edit { prefs -> prefs[Keys.IS_DARK] = isDark }
+        dataStore.edit { it[Keys.IS_DARK] = isDark }
     }
-
-    override suspend fun getIsFirstLaunch(): Boolean =
-        dataStore.data.map { prefs -> prefs[Keys.IS_FIRST_LAUNCH] ?: true }.first()
 
     override suspend fun setIsFirstLaunch() {
-        dataStore.edit { prefs -> prefs[Keys.IS_FIRST_LAUNCH] = false }
+        dataStore.edit { it[Keys.IS_FIRST_LAUNCH] = false }
     }
-
-    override suspend fun getSessionToken(): String? =
-        dataStore.data.map { prefs -> prefs[Keys.SESSION_TOKEN] }.first()
 
     override suspend fun setSessionToken(token: String) {
-        dataStore.edit { prefs -> prefs[Keys.SESSION_TOKEN] = token }
+        dataStore.edit { it[Keys.SESSION_TOKEN] = token }
     }
-
 }

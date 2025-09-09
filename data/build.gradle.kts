@@ -11,9 +11,17 @@ android {
 
     defaultConfig {
         minSdk = 28
-
+        buildConfigField(
+            "String",
+            "TMDB_API_KEY",
+            "\"${project.findProperty("TMDB_API_KEY") ?: ""}\""
+        )
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
@@ -49,6 +57,10 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
+    //Retrofit
+    implementation(libs.retrofit)
+
     //DataStore
     implementation(libs.datastore)
+
 }
