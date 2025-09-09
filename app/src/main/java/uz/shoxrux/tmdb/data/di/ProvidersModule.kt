@@ -6,6 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
+import uz.shoxrux.core.annotations.ApplicationScope
+import uz.shoxrux.core.providers.LocalCacheProvider
 import uz.shoxrux.core.providers.LocaleProvider
 import uz.shoxrux.tmdb.data.LocaleProviderImpl
 import javax.inject.Singleton
@@ -16,8 +19,12 @@ object ProvidersModule {
 
     @Provides
     @Singleton
-    fun provideLocaleProvider(@ApplicationContext context: Context): LocaleProvider {
-        return LocaleProviderImpl(context)
+    fun provideLocaleProvider(
+        @ApplicationContext context: Context,
+        @ApplicationScope scope: CoroutineScope,
+        localCacheProvider: LocalCacheProvider
+    ): LocaleProvider {
+        return LocaleProviderImpl(scope, context, localCacheProvider)
     }
 
 }
