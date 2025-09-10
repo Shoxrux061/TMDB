@@ -1,6 +1,6 @@
 package uz.shoxrux.feature_media.domain.models.media_types.movies
 
-data class MovieResultModel(
+data class MovieModel(
     val adult: Boolean,
     val backdropPath: String,
     val genreIds: List<Int>,

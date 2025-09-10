@@ -5,31 +5,31 @@ import com.squareup.moshi.Json
 
 data class SeriesResultDTO(
     @field: Json(name = "adult")
-    val adult: Boolean,
+    val adult: Boolean?,
     @field: Json(name = "backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
     @field: Json(name = "first_air_date")
-    val firstAirDate: String,
+    val firstAirDate: String?,
     @field: Json(name = "genre_ids")
-    val genreIds: List<Int>,
+    val genreIds: List<Int>?,
     @field: Json(name = "id")
-    val id: Int,
+    val id: Int?,
     @field: Json(name = "name")
-    val name: String,
+    val name: String?,
     @field: Json(name = "origin_country")
-    val originCountry: List<String>,
+    val originCountry: List<String>?,
     @field: Json(name = "original_language")
-    val originalLanguage: String,
+    val originalLanguage: String?,
     @field: Json(name = "original_name")
-    val originalName: String,
+    val originalName: String?,
     @field: Json(name = "overview")
-    val overview: String,
+    val overview: String?,
     @field: Json(name = "popularity")
-    val popularity: Double,
+    val popularity: Double?,
     @field: Json(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @field: Json(name = "vote_average")
-    val voteAverage: Double,
+    val voteAverage: Double?,
     @field: Json(name = "vote_count")
-    val voteCount: Int
+    val voteCount: Int?
 )

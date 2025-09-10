@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 
 data class MovieDatesDTO(
     @field: Json(name = "maximum")
-    val maximum: String,
+    val maximum: String?,
     @field: Json(name = "minimum")
-    val minimum: String
+    val minimum: String?
 )

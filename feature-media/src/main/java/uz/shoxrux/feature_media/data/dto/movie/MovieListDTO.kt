@@ -5,13 +5,13 @@ import com.squareup.moshi.Json
 
 data class MovieListDTO(
     @field: Json(name = "dates")
-    val dates: MovieDatesDTO,
+    val dates: MovieDatesDTO?,
     @field: Json(name = "page")
-    val page: Int,
+    val page: Int?,
     @field: Json(name = "results")
     val results: List<MovieResultDTO>,
     @field: Json(name = "total_pages")
-    val totalPages: Int,
+    val totalPages: Int?,
     @field: Json(name = "total_results")
-    val totalResults: Int
+    val totalResults: Int?
 )

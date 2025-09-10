@@ -3,11 +3,11 @@ package uz.shoxrux.feature_media.data.repository
 import kotlinx.coroutines.flow.Flow
 import uz.shoxrux.core.handler.NetworkResult
 import uz.shoxrux.core.handler.safeApiCall
-import uz.shoxrux.feature_media.data.mapper.toUIModel
+import uz.shoxrux.feature_media.data.mapper.toDomain
 import uz.shoxrux.feature_media.data.services.media_servcie.MediaService
 import uz.shoxrux.feature_media.domain.models.media_types.MovieType
 import uz.shoxrux.feature_media.domain.models.media_types.SeriesType
-import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieResultModel
+import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieModel
 import uz.shoxrux.feature_media.domain.models.media_types.series.SeriesResultModel
 import uz.shoxrux.feature_media.domain.repository.MediaRepository
 import javax.inject.Inject
@@ -19,7 +19,7 @@ class MediaRepositoryImpl @Inject constructor(
     override suspend fun getMovies(
         type: MovieType,
         page: Int
-    ): Flow<NetworkResult<List<MovieResultModel>>> =
+    ): Flow<NetworkResult<List<MovieModel>>> =
         safeApiCall(
             apiCall = {
                 when (type) {
@@ -35,7 +35,7 @@ class MediaRepositoryImpl @Inject constructor(
                     }
                 }
             },
-            mapper = { dto -> dto.results.map { it.toUIModel() } }
+            mapper = { dto -> dto.results.map { it.toDomain() } }
         )
 
     override suspend fun getSeries(
@@ -57,6 +57,6 @@ class MediaRepositoryImpl @Inject constructor(
                     }
                 }
             },
-            mapper = { dto -> dto.results.map { it.toUIModel() } }
+            mapper = { dto -> dto.results.map { it.toDomain() } }
         )
 }
