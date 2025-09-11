@@ -14,9 +14,10 @@ object InterceptorModule {
 
     @[Provides Singleton]
     suspend fun provideMovieInterceptor(
-        localeProvider: LocaleProvider,
+        localeProvider: LocaleProvider
     ): MovieInterceptor {
         return MovieInterceptor(localeProvider)
     }
+
 
 }
