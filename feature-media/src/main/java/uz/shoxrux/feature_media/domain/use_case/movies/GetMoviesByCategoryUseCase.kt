@@ -11,7 +11,7 @@ import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieModel
 import uz.shoxrux.feature_media.domain.repository.MediaRepository
 import javax.inject.Inject
 
-class GetMoviesUseCase @Inject constructor(
+class GetMoviesByCategoryUseCase @Inject constructor(
     private val mediaRepository: MediaRepository
 ) {
 
@@ -19,7 +19,7 @@ class GetMoviesUseCase @Inject constructor(
 
         if (page <= 0) {
             return flowOf(
-                NetworkResult.Error(AppError.Server("Page must be > 0"))
+                NetworkResult.Error(AppError.Validation)
             )
         }
 
@@ -30,7 +30,7 @@ class GetMoviesUseCase @Inject constructor(
 
                         val cleanData = result.data
                         if (cleanData.isEmpty()) {
-                            NetworkResult.Error(AppError.Server("No valid movies found"))
+                            NetworkResult.Error(AppError.Validation)
                         } else {
                             NetworkResult.Success(cleanData)
                         }
