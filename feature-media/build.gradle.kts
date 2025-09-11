@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
 }
 
@@ -31,6 +32,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
@@ -38,9 +43,16 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":di"))
 
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+
+    implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -55,4 +67,6 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
+    //Coil
+    implementation(libs.coil)
 }

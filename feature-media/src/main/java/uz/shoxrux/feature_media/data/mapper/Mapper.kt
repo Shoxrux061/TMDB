@@ -1,5 +1,6 @@
 package uz.shoxrux.feature_media.data.mapper
 
+import uz.shoxrux.core.utils.Constants
 import uz.shoxrux.feature_media.data.dto.movie.MovieResultDTO
 import uz.shoxrux.feature_media.data.dto.series.SeriesResultDTO
 import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieModel
@@ -9,7 +10,7 @@ fun MovieResultDTO.toDomain(): MovieModel {
 
     return MovieModel(
         adult = adult ?: false,
-        backdropPath = backdropPath ?: "",
+        backdropPath = (Constants.IMAGE_URL + this.backdropPath),
         genreIds = genreIds.orEmpty(),
         id = id ?: -1,
         originalLanguage = originalLanguage ?: "unknown",
@@ -30,7 +31,7 @@ fun SeriesResultDTO.toDomain(): SeriesResultModel {
 
     return SeriesResultModel(
         adult = this.adult ?: false,
-        backdropPath = this.backdropPath ?: "",
+        backdropPath = (Constants.IMAGE_URL + this.backdropPath),
         firstAirDate = this.firstAirDate ?: "unknown",
         genreIds = this.genreIds.orEmpty(),
         id = this.id ?: -1,

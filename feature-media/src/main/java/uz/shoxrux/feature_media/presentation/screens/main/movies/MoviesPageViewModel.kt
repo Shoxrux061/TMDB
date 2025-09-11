@@ -1,5 +1,6 @@
 package uz.shoxrux.feature_media.presentation.screens.main.movies
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +19,8 @@ class MoviesPageViewModel @Inject constructor(
     val uiState = mutableStateOf(MoviePageUiState())
 
     fun getMovies() {
+
+        Log.d("TAGResponse", "getMovies: viewModel request called")
 
         uiState.value = uiState.value.copy(isLoading = true)
 

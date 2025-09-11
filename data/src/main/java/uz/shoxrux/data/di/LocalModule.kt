@@ -11,6 +11,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import uz.shoxrux.core.providers.LocalCacheProvider
+import uz.shoxrux.core.providers.LocaleProvider
 import uz.shoxrux.data.local.LocalCacheImpl
 import javax.inject.Singleton
 
@@ -31,9 +32,10 @@ object LocalModule {
     @Provides
     @Singleton
     fun provideLocalCache(
-        dataStore: DataStore<Preferences>
+        dataStore: DataStore<Preferences>,
+        localeProvider: LocaleProvider
     ): LocalCacheProvider {
-        return LocalCacheImpl(dataStore)
+        return LocalCacheImpl(dataStore, localeProvider)
     }
 
 }

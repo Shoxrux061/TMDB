@@ -1,5 +1,6 @@
 package uz.shoxrux.feature_media.domain.use_case.movies
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOf
@@ -16,6 +17,9 @@ class GetMoviesByCategoryUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(type: MovieType, page: Int): Flow<NetworkResult<List<MovieModel>>> {
+
+        Log.d("TAGResponse", "getMovies: inner useCase request called")
+
 
         if (page <= 0) {
             return flowOf(
