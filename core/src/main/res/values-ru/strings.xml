@@ -2,4 +2,5 @@
 <resources>
     <string name="no_internet_connection">Нет подключенния к интернету</string>
     <string name="error_not_valid_data">не действительные данные</string>
+    <string name="retry">Повторить</string>
 </resources>
