@@ -1,4 +1,4 @@
-package uz.shoxrux.feature_media.presentation.main.movies.state
+package uz.shoxrux.feature_media.presentation.screens.main.movies.state
 
 import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieModel
 

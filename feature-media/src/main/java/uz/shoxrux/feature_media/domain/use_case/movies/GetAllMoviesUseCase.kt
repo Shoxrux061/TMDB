@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 import uz.shoxrux.core.handler.AppError
 import uz.shoxrux.core.handler.NetworkResult
 import uz.shoxrux.feature_media.domain.models.media_types.MovieType
-import uz.shoxrux.feature_media.presentation.main.movies.state.MoviesBundle
+import uz.shoxrux.feature_media.presentation.screens.main.movies.state.MoviesBundle
 import javax.inject.Inject
 
 class GetAllMoviesUseCase @Inject constructor(

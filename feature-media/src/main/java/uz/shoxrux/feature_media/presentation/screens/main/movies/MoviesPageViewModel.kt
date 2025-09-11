@@ -1,4 +1,4 @@
-package uz.shoxrux.feature_media.presentation.main.movies
+package uz.shoxrux.feature_media.presentation.screens.main.movies
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import uz.shoxrux.core.handler.NetworkResult
 import uz.shoxrux.feature_media.domain.use_case.movies.GetAllMoviesUseCase
-import uz.shoxrux.feature_media.presentation.main.movies.state.MoviePageUiState
+import uz.shoxrux.feature_media.presentation.screens.main.movies.state.MoviePageUiState
 import javax.inject.Inject
 
 @HiltViewModel
