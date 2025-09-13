@@ -12,9 +12,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import uz.shoxrux.core.providers.LocaleProvider
 import javax.inject.Singleton
 
 @[Module InstallIn(SingletonComponent::class)]
@@ -70,18 +70,29 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
-    fun provideInterception(): Interceptor {
-        return Interceptor { chain: Interceptor.Chain ->
-            val request = chain.request()
-            val builder: Request.Builder = request.newBuilder()
-            builder
+    fun provideInterceptor(
+        localeProvider: LocaleProvider
+    ): Interceptor {
+        return Interceptor { chain ->
+            val original = chain.request()
+
+            // Добавляем query параметры
+            val newUrl = original.url.newBuilder()
+                .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
+                .addQueryParameter("language", localeProvider.getLanguage())
+                .build()
+
+            // Собираем новый запрос с заголовками
+            val newRequest = original.newBuilder()
+                .url(newUrl)
                 .addHeader("Accept", "application/json")
-                .addHeader("Content-type", "application/json")
-                .addHeader("api_key", BuildConfig.TMDB_API_KEY)
-            val response = chain.proceed(builder.build())
-            response
+                .addHeader("Content-Type", "application/json")
+                .build()
+
+            chain.proceed(newRequest)
         }
     }
+
 
 
 }
