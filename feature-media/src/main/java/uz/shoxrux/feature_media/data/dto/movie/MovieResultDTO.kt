@@ -1,7 +1,9 @@
 package uz.shoxrux.feature_media.data.dto.movie
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class MovieResultDTO(
     @field:Json(name = "adult")
     val adult: Boolean?,

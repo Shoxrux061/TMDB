@@ -66,5 +66,7 @@ dependencies {
     //Navigation
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(project(":core"))
+    implementation(project(":data"))
+    implementation(project(":di"))
     implementation(project(":feature-media"))
 }

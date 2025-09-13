@@ -1,6 +1,7 @@
 package uz.shoxrux.di
 
 import android.content.Context
+import android.util.Log
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
@@ -12,7 +13,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -26,7 +26,7 @@ object NetworkModule {
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl("https://api.themoviedb.org/")
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
@@ -34,16 +34,22 @@ object NetworkModule {
 
     @[Provides Singleton]
     fun provideMoshi(): Moshi {
-        return Moshi.Builder()
-            .build()
+        return Moshi.Builder().build()
     }
 
     @[Provides Singleton]
-    fun provideOkHttp(chuckerInterceptor: ChuckerInterceptor): OkHttpClient {
-        return OkHttpClient
-            .Builder()
+    fun provideOkHttp(
+        chuckerInterceptor: ChuckerInterceptor,
+        apiKeyInterceptor: Interceptor
+    ): OkHttpClient {
+        val client = OkHttpClient.Builder()
             .addInterceptor(chuckerInterceptor)
+            .addInterceptor(apiKeyInterceptor)
             .build()
+
+        Log.d("TAGResponse", "provideOkHttp: ${client.interceptors}")
+
+        return client
     }
 
     @[Provides Singleton]
@@ -51,17 +57,18 @@ object NetworkModule {
         collector: ChuckerCollector,
         @ApplicationContext context: Context
     ): ChuckerInterceptor {
-
         return ChuckerInterceptor.Builder(context)
             .collector(collector)
             .maxContentLength(250_000L)
-            .redactHeaders("Auth-Token", "Bearer")
+            .redactHeaders("Authorization", "Bearer")
             .alwaysReadResponseBody(true)
             .build()
     }
 
     @[Provides Singleton]
-    fun provideChuckerCollector(@ApplicationContext context: Context): ChuckerCollector {
+    fun provideChuckerCollector(
+        @ApplicationContext context: Context
+    ): ChuckerCollector {
         return ChuckerCollector(
             context = context,
             showNotification = true,
@@ -70,18 +77,14 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
-    fun provideInterception(): Interceptor {
-        return Interceptor { chain: Interceptor.Chain ->
+    fun provideApiKeyInterceptor(): Interceptor {
+        return Interceptor { chain ->
             val request = chain.request()
-            val builder: Request.Builder = request.newBuilder()
-            builder
+                .newBuilder()
                 .addHeader("Accept", "application/json")
-                .addHeader("Content-type", "application/json")
-                .addHeader("api_key", BuildConfig.TMDB_API_KEY)
-            val response = chain.proceed(builder.build())
-            response
+                .addHeader("Content-Type", "application/json")
+                .build()
+            chain.proceed(request)
         }
     }
-
-
 }

@@ -13,7 +13,7 @@ import javax.inject.Singleton
 object InterceptorModule {
 
     @[Provides Singleton]
-    suspend fun provideMovieInterceptor(
+    fun provideMovieInterceptor(
         localeProvider: LocaleProvider
     ): MovieInterceptor {
         return MovieInterceptor(localeProvider)

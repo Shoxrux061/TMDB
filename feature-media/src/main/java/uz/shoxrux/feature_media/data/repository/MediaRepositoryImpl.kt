@@ -35,7 +35,7 @@ class MediaRepositoryImpl @Inject constructor(
                     }
                 }
             },
-            mapper = { dto -> dto.results.orEmpty().mapNotNull { it?.toDomain() } }
+            mapper = { dto -> dto.body()?.results.orEmpty().mapNotNull { it?.toDomain() } }
         )
 
     override suspend fun getSeries(
@@ -57,6 +57,6 @@ class MediaRepositoryImpl @Inject constructor(
                     }
                 }
             },
-            mapper = { dto -> dto.results.orEmpty().mapNotNull { it?.toDomain() } }
+            mapper = { dto -> dto.body()?.results.orEmpty().mapNotNull { it?.toDomain() } }
         )
 }

@@ -50,7 +50,7 @@ fun MoviesPage(viewModel: MoviesPageViewModel) {
         LoadingScreen()
     } else if (uiState.error != null) {
         ErrorScreen(errorText = uiState.error) {
-            viewModel.getMovies()
+
         }
     } else {
         MoviesContent(uiState.movies)

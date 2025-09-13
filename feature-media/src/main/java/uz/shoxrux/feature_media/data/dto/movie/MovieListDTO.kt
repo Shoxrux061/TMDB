@@ -2,7 +2,9 @@ package uz.shoxrux.feature_media.data.dto.movie
 
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class MovieListDTO(
     @field: Json(name = "dates")
     val dates: MovieDatesDTO?,

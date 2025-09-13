@@ -3,8 +3,16 @@ package uz.shoxrux.tmdb.app
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import uz.shoxrux.core.ui.theme.AppTheme
+import uz.shoxrux.feature_media.presentation.screens.main.movies.MoviesPage
+import uz.shoxrux.feature_media.presentation.screens.main.movies.MoviesPageViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -14,6 +22,15 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
 
+                val viewModel = hiltViewModel<MoviesPageViewModel>()
+                LaunchedEffect(Unit) {
+                    viewModel.getMovies()
+                }
+                Scaffold { paddingValues ->
+                    Box(modifier = Modifier.padding(paddingValues)) {
+                        MoviesPage(viewModel)
+                    }
+                }
             }
         }
     }

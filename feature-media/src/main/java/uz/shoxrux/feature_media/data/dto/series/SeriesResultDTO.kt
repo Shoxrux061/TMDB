@@ -2,7 +2,9 @@ package uz.shoxrux.feature_media.data.dto.series
 
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class SeriesResultDTO(
     @field: Json(name = "adult")
     val adult: Boolean?,
