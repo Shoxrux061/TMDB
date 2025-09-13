@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "TMDB"
 include(":app")
 include(":di")
+include(":core")
+include(":data")
