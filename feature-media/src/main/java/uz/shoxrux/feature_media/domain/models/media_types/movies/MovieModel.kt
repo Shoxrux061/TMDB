@@ -8,11 +8,11 @@ data class MovieModel(
     val originalLanguage: String,
     val originalTitle: String,
     val overview: String,
-    val popularity: Double,
+    val popularity: String,
     val posterPath: String,
     val releaseDate: String,
     val title: String,
     val video: Boolean,
-    val voteAverage: Double,
+    val voteAverage: String,
     val voteCount: Int
 )

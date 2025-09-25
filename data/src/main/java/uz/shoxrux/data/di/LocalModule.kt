@@ -25,17 +25,16 @@ object LocalModule {
         @ApplicationContext context: Context
     ): DataStore<Preferences> {
         return PreferenceDataStoreFactory.create(
-            produceFile = { context.dataStoreFile("app_prefs") }
+            produceFile = { context.dataStoreFile("app_prefs.preferences_pb") }
         )
     }
 
     @Provides
     @Singleton
     fun provideLocalCache(
-        dataStore: DataStore<Preferences>,
-        localeProvider: LocaleProvider
+        dataStore: DataStore<Preferences>
     ): LocalCacheProvider {
-        return LocalCacheImpl(dataStore, localeProvider)
+        return LocalCacheImpl(dataStore)
     }
 
 }

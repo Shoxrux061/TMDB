@@ -2,6 +2,7 @@ package uz.shoxrux.feature_media.presentation.screens.main.movies
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
@@ -27,14 +29,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import uz.shoxrux.core.ui.components.ErrorScreen
 import uz.shoxrux.core.ui.components.LoadingScreen
 import uz.shoxrux.feature_media.R
@@ -53,7 +58,11 @@ fun MoviesPage(viewModel: MoviesPageViewModel) {
 
         }
     } else {
-        MoviesContent(uiState.movies)
+        LazyColumn {
+            item {
+                MoviesContent(uiState.movies)
+            }
+        }
     }
 
 }
@@ -88,14 +97,14 @@ fun MoviesContent(
                 Icon(
                     painter = painterResource(R.drawable.ic_search),
                     contentDescription = null,
-                    tint = colors.scrim
+                    tint = colors.onBackground
                 )
             }
 
             Spacer(Modifier.weight(1f))
 
             Icon(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size(60.dp),
                 painter = painterResource(R.drawable.ic_app_logo),
                 tint = colors.primary,
                 contentDescription = null
@@ -112,7 +121,7 @@ fun MoviesContent(
                 Icon(
                     painter = painterResource(R.drawable.ic_settings),
                     contentDescription = null,
-                    tint = colors.scrim
+                    tint = colors.onBackground
                 )
             }
 
@@ -134,7 +143,7 @@ fun MoviesContent(
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(220.dp),
+                        .height(240.dp),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
                     model = moviesBundle.trending[pagerState.currentPage].posterPath
@@ -146,9 +155,9 @@ fun MoviesContent(
                         .background(
                             Brush.verticalGradient(
                                 colors = listOf(
-                                    colors.primary.copy(alpha = 0.6f),
+                                    colors.background,
                                     colors.primary.copy(alpha = 0.2f),
-                                    colors.primary.copy(alpha = 0.6f)
+                                    colors.background
                                 )
                             )
                         )
@@ -163,7 +172,7 @@ fun MoviesContent(
 
                     Card {
                         AsyncImage(
-                            model = moviesBundle.trending[page].posterPath,
+                            model = moviesBundle.trending[page].backdropPath,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(170.dp),
@@ -190,8 +199,10 @@ fun MoviesContent(
                     style = typography.titleMedium
                 )
 
-                LazyRow {
-                    items(movies) { movie ->
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(15.dp)
+                ) {
+                    items(movies, key = { it.id }) { movie ->
                         MovieItem(
                             name = movie.title,
                             rating = movie.voteAverage,
@@ -202,16 +213,13 @@ fun MoviesContent(
                 }
             }
         }
-
-
     }
-
 }
 
 @Composable
 fun MovieItem(
     name: String,
-    rating: Double,
+    rating: String,
     imageUrl: String,
     onItemClicked: () -> Unit
 ) {
@@ -219,9 +227,11 @@ fun MovieItem(
     val typography = MaterialTheme.typography
 
     Column(
-        modifier = Modifier.clickable {
-            onItemClicked.invoke()
-        }
+        modifier = Modifier
+            .padding(horizontal = 10.dp)
+            .clickable {
+                onItemClicked.invoke()
+            }
     ) {
         Card(
             modifier = Modifier
@@ -233,18 +243,23 @@ fun MovieItem(
                 modifier = Modifier.fillMaxSize()
             ) {
 
+                AsyncImage(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(8.dp)),
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(imageUrl)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(uz.shoxrux.core.R.drawable.ic_error)
+                )
+
                 RatingComponent(rating = rating, modifier = Modifier.align(Alignment.TopEnd))
 
-                AsyncImage(
-                    modifier = Modifier.fillMaxSize(),
-                    model = imageUrl,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
             }
         }
-
-        Spacer(Modifier.height(15.dp))
 
         Text(
             maxLines = 2,
@@ -254,6 +269,7 @@ fun MovieItem(
             style = typography.bodySmall,
             modifier = Modifier
                 .padding(horizontal = 8.dp)
+                .width(110.dp)
                 .align(Alignment.CenterHorizontally),
             textAlign = TextAlign.Center
         )
@@ -262,7 +278,7 @@ fun MovieItem(
 }
 
 @Composable
-fun RatingComponent(modifier: Modifier = Modifier, rating: Double = 0.0) {
+fun RatingComponent(modifier: Modifier = Modifier, rating: String = "0.0") {
 
     Card(
         modifier = modifier.padding(vertical = 8.dp, horizontal = 10.dp),
@@ -278,10 +294,10 @@ fun RatingComponent(modifier: Modifier = Modifier, rating: Double = 0.0) {
                 contentDescription = null,
                 tint = ColorOrange
             )
-            Spacer(Modifier.width(4.dp))
+
             Text(
                 color = ColorOrange,
-                text = rating.toString(),
+                text = rating,
                 style = MaterialTheme.typography.bodySmall
             )
         }

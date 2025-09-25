@@ -5,6 +5,7 @@ import uz.shoxrux.feature_media.data.dto.movie.MovieResultDTO
 import uz.shoxrux.feature_media.data.dto.series.SeriesResultDTO
 import uz.shoxrux.feature_media.domain.models.media_types.movies.MovieModel
 import uz.shoxrux.feature_media.domain.models.media_types.series.SeriesResultModel
+import java.util.Locale
 
 fun MovieResultDTO.toDomain(): MovieModel {
 
@@ -16,12 +17,12 @@ fun MovieResultDTO.toDomain(): MovieModel {
         originalLanguage = originalLanguage ?: "unknown",
         originalTitle = originalTitle ?: "",
         overview = overview ?: "",
-        popularity = popularity ?: 0.0,
-        posterPath = posterPath ?: "",
+        popularity = String.format(Locale.US, "%.1f", popularity),
+        posterPath = (Constants.IMAGE_URL + this.posterPath),
         releaseDate = releaseDate ?: "",
         title = title ?: "Untitled",
         video = video ?: false,
-        voteAverage = voteAverage ?: 0.0,
+        voteAverage = String.format(Locale.US, "%.1f", voteAverage),
         voteCount = voteCount ?: 0
     )
 
@@ -41,7 +42,7 @@ fun SeriesResultDTO.toDomain(): SeriesResultModel {
         originalName = this.originalName ?: "",
         overview = this.overview ?: "",
         popularity = this.popularity ?: 0.0,
-        posterPath = this.posterPath ?: "",
+        posterPath = (Constants.IMAGE_URL + this.posterPath),
         voteAverage = this.voteAverage ?: 0.0,
         voteCount = this.voteCount ?: 0
     )

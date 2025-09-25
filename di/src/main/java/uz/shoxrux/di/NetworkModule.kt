@@ -15,6 +15,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import uz.shoxrux.core.providers.LocaleProvider
 import javax.inject.Singleton
 
 @[Module InstallIn(SingletonComponent::class)]
@@ -76,15 +77,36 @@ object NetworkModule {
         )
     }
 
-    @[Provides Singleton]
-    fun provideApiKeyInterceptor(): Interceptor {
+    @Provides
+    @Singleton
+    fun provideMovieInterceptor(
+        localeProvider: LocaleProvider
+    ): Interceptor {
+
+
         return Interceptor { chain ->
-            val request = chain.request()
-                .newBuilder()
+
+            val original = chain.request()
+
+            val newUrl = original.url.newBuilder()
+                .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
+                .addQueryParameter("language", localeProvider.getLanguage())
+                .build()
+
+            val newRequest = original.newBuilder()
+                .url(newUrl)
                 .addHeader("Accept", "application/json")
                 .addHeader("Content-Type", "application/json")
                 .build()
-            chain.proceed(request)
+
+            Log.d(
+                "MovieInterceptor",
+                "language=${localeProvider.getLanguage()} api_key=${BuildConfig.TMDB_API_KEY}"
+            )
+            Log.d("MovieInterceptor", "original=${original.url}")
+            Log.d("MovieInterceptor", "new=$newUrl")
+
+            chain.proceed(newRequest)
         }
     }
 }
