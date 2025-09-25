@@ -1,6 +1,5 @@
 package uz.shoxrux.feature_media.domain.use_case.movies
 
-import android.util.Log
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +16,6 @@ class GetAllMoviesUseCase @Inject constructor(
 ) {
     operator fun invoke(page: Int): Flow<NetworkResult<MoviesBundle>> = flow {
         try {
-
-            Log.d("TAGResponse", "getMovies: useCase request called")
 
             val results = coroutineScope {
                 listOf(
@@ -64,6 +61,8 @@ class GetAllMoviesUseCase @Inject constructor(
                 topRated = (results[MovieType.TopRated] as? NetworkResult.Success)?.data
                     ?: emptyList(),
                 upcoming = (results[MovieType.Upcoming] as? NetworkResult.Success)?.data
+                    ?: emptyList(),
+                nowPlaying = (results[MovieType.NowPlaying] as? NetworkResult.Success)?.data
                     ?: emptyList()
             )
 

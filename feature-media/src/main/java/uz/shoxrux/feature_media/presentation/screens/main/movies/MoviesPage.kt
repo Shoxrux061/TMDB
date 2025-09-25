@@ -27,6 +27,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -42,6 +43,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import uz.shoxrux.core.ui.components.ErrorScreen
 import uz.shoxrux.core.ui.components.LoadingScreen
+import uz.shoxrux.core.ui.components.SmallAppButton
 import uz.shoxrux.feature_media.R
 import uz.shoxrux.feature_media.presentation.screens.main.movies.state.MoviesBundle
 import uz.shoxrux.feature_media.presentation.screens.main.ui.ColorOrange
@@ -49,7 +51,7 @@ import uz.shoxrux.feature_media.presentation.screens.main.ui.ColorOrange
 @Composable
 fun MoviesPage(viewModel: MoviesPageViewModel) {
 
-    val uiState = viewModel.uiState.value
+    val uiState = viewModel.uiState.collectAsState().value
 
     if (uiState.isLoading) {
         LoadingScreen()
@@ -58,11 +60,93 @@ fun MoviesPage(viewModel: MoviesPageViewModel) {
 
         }
     } else {
-        LazyColumn {
-            item {
-                MoviesContent(uiState.movies)
+        Column {
+            LazyColumn {
+                item {
+                    MoviesContent(uiState.movies)
+                }
             }
+
         }
+    }
+}
+
+@Composable
+fun TopBar() {
+    val colors = MaterialTheme.colorScheme
+
+    Row(
+        modifier = Modifier.padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        IconButton(
+            modifier = Modifier.size(40.dp),
+            onClick = {
+
+            }
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_search),
+                contentDescription = null,
+                tint = colors.onBackground
+            )
+        }
+
+        Spacer(Modifier.weight(1f))
+
+        Icon(
+            modifier = Modifier.size(60.dp),
+            painter = painterResource(R.drawable.ic_app_logo),
+            tint = colors.primary,
+            contentDescription = null
+        )
+
+        Spacer(Modifier.weight(1f))
+
+        IconButton(
+            modifier = Modifier.size(40.dp),
+            onClick = {
+
+            }
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_settings),
+                contentDescription = null,
+                tint = colors.onBackground
+            )
+        }
+
+    }
+}
+
+@Composable
+fun MovieDivider(
+    onAllSeeClicked: () -> Unit,
+    title: String
+) {
+
+    val typography = MaterialTheme.typography
+
+    Row(
+        modifier = Modifier.padding(16.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = title,
+            style = typography.titleMedium
+        )
+
+        Spacer(Modifier.weight(1f))
+
+        SmallAppButton(
+            text = "See All",
+            onClick = {
+                onAllSeeClicked.invoke()
+            },
+            modifier = Modifier.height(35.dp)
+        )
+
     }
 
 }
@@ -73,7 +157,6 @@ fun MoviesContent(
 ) {
 
     val colors = MaterialTheme.colorScheme
-    val typography = MaterialTheme.typography
 
     val pagerState = rememberPagerState { moviesBundle.trending.size }
 
@@ -83,55 +166,9 @@ fun MoviesContent(
             .background(colors.background)
     ) {
 
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            IconButton(
-                modifier = Modifier.size(40.dp),
-                onClick = {
-
-                }
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_search),
-                    contentDescription = null,
-                    tint = colors.onBackground
-                )
-            }
-
-            Spacer(Modifier.weight(1f))
-
-            Icon(
-                modifier = Modifier.size(60.dp),
-                painter = painterResource(R.drawable.ic_app_logo),
-                tint = colors.primary,
-                contentDescription = null
-            )
-
-            Spacer(Modifier.weight(1f))
-
-            IconButton(
-                modifier = Modifier.size(40.dp),
-                onClick = {
-
-                }
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_settings),
-                    contentDescription = null,
-                    tint = colors.onBackground
-                )
-            }
-
-        }
-
-        Text(
-            modifier = Modifier
-                .padding(start = 16.dp, top = 20.dp, bottom = 10.dp),
-            text = "Trending Movies",
-            style = typography.titleMedium
+        MovieDivider(
+            onAllSeeClicked = {},
+            title = "Trending"
         )
 
         Box(
@@ -193,14 +230,13 @@ fun MoviesContent(
             }
             if (movies.isNotEmpty()) {
 
-                Text(
-                    modifier = Modifier.padding(top = 20.dp, start = 16.dp, bottom = 16.dp),
-                    text = title,
-                    style = typography.titleMedium
+                MovieDivider(
+                    onAllSeeClicked = {},
+                    title = title
                 )
 
                 LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(15.dp)
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
                     items(movies, key = { it.id }) { movie ->
                         MovieItem(

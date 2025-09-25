@@ -1,38 +1,33 @@
-package uz.shoxrux.feature_media.presentation.screens.main.movies
+package uz.shoxrux.feature_media.presentation.screens.main.series
 
-import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import uz.shoxrux.core.handler.NetworkResult
-import uz.shoxrux.feature_media.domain.use_case.movies.GetAllMoviesUseCase
-import uz.shoxrux.feature_media.presentation.screens.main.movies.state.MoviePageUiState
-import javax.inject.Inject
+import uz.shoxrux.feature_media.domain.use_case.series.GetAllSeriesUseCase
+import uz.shoxrux.feature_media.presentation.screens.main.series.state.SeriesPageState
 
 @HiltViewModel
-class MoviesPageViewModel @Inject constructor(
-    private val moviesUseCase: GetAllMoviesUseCase
+class SeriesPageViewModel @Inject constructor(
+    private val seriesUseCase: GetAllSeriesUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(MoviePageUiState())
-    val uiState: StateFlow<MoviePageUiState> = _uiState
+    private val _uiState = MutableStateFlow(SeriesPageState())
+    val uiState: StateFlow<SeriesPageState> = _uiState
 
-    fun getMovies() {
-
-        Log.d("TAGResponse", "getMovies: viewModel request called")
-
+    fun getSeries() {
         _uiState.value = uiState.value.copy(isLoading = true)
 
         viewModelScope.launch {
-            moviesUseCase(page = 1).collect { result ->
+            seriesUseCase(page = 1).collect { result ->
                 when (result) {
                     is NetworkResult.Success -> {
                         _uiState.value = uiState.value.copy(
-                            movies = result.data,
+                            series = result.data,
                             isLoading = false,
                             error = null
                         )
@@ -47,5 +42,6 @@ class MoviesPageViewModel @Inject constructor(
                 }
             }
         }
+
     }
 }

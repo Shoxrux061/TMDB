@@ -13,6 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import uz.shoxrux.core.ui.theme.AppTheme
 import uz.shoxrux.feature_media.presentation.screens.main.movies.MoviesPage
 import uz.shoxrux.feature_media.presentation.screens.main.movies.MoviesPageViewModel
+import uz.shoxrux.feature_media.presentation.screens.main.series.SeriesPage
+import uz.shoxrux.feature_media.presentation.screens.main.series.SeriesPageViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -22,13 +24,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             AppTheme {
 
-                val viewModel = hiltViewModel<MoviesPageViewModel>()
-                LaunchedEffect(Unit) {
-                    viewModel.getMovies()
-                }
                 Scaffold { paddingValues ->
                     Box(modifier = Modifier.padding(paddingValues)) {
-                        MoviesPage(viewModel)
+
                     }
                 }
             }

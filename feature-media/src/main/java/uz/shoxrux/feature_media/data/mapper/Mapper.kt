@@ -17,12 +17,12 @@ fun MovieResultDTO.toDomain(): MovieModel {
         originalLanguage = originalLanguage ?: "unknown",
         originalTitle = originalTitle ?: "",
         overview = overview ?: "",
-        popularity = String.format(Locale.US, "%.1f", popularity),
+        popularity = String.format(Locale.US, "%.1f", this.popularity),
         posterPath = (Constants.IMAGE_URL + this.posterPath),
         releaseDate = releaseDate ?: "",
         title = title ?: "Untitled",
         video = video ?: false,
-        voteAverage = String.format(Locale.US, "%.1f", voteAverage),
+        voteAverage = String.format(Locale.US, "%.1f", this.voteAverage),
         voteCount = voteCount ?: 0
     )
 
@@ -41,9 +41,9 @@ fun SeriesResultDTO.toDomain(): SeriesResultModel {
         originalLanguage = this.originalLanguage ?: "",
         originalName = this.originalName ?: "",
         overview = this.overview ?: "",
-        popularity = this.popularity ?: 0.0,
+        popularity = String.format(Locale.US, "%.1f", this.popularity),
         posterPath = (Constants.IMAGE_URL + this.posterPath),
-        voteAverage = this.voteAverage ?: 0.0,
+        voteAverage = String.format(Locale.US, "%.1f", this.voteAverage),
         voteCount = this.voteCount ?: 0
     )
 
