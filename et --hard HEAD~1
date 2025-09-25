@@ -1,0 +1,152 @@
+[33mcommit befb7a1a72a094f40e06c9f486c88851a74cf376[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mshared-core[m[33m, [m[1;31morigin/shared-core[m[33m)[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Sat Sep 13 16:46:15 2025 +0500
+
+    chore: remove shared-data module
+
+[33mcommit 720f2f4086a0d142ffc6f08a38b7a711b4a8f676[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 8 17:58:02 2025 +0500
+
+    refactor: SharedPreferences to DataStore
+
+[33mcommit d55c4f38c9cdbad03be78c70fd08b2d1aa3fabb0[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Tue Sep 2 15:19:30 2025 +0500
+
+    feat: MovieInterceptor.kt
+
+[33mcommit eca214ce8b3bbe07a9dc7c7d2282f9e05f40e9fb[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Tue Sep 23 16:05:48 2025 +0500
+
+    refactor safeApiCall
+
+[33mcommit c494e09ee13658628ca092e6ecdf88c8ddab1f7b[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Sat Sep 13 16:46:15 2025 +0500
+
+    chore: remove shared-data module
+
+[33mcommit f2821d417d4b41920d5f66d42d390a2b81e2234e[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Thu Sep 11 14:59:14 2025 +0500
+
+    feat: loading and error screens
+
+[33mcommit 09d9c939fffbbbde55c66e969ca571c5fda306f1[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Wed Sep 10 16:39:07 2025 +0500
+
+    refactor: validation error
+
+[33mcommit a1d809c9160e5d3479cb6f623513ae81602b076d[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Wed Sep 10 16:31:09 2025 +0500
+
+    feat: add error strings
+
+[33mcommit 8d6229ffd1f9908baf87f05a67863767b4099cb4[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Wed Sep 10 16:24:49 2025 +0500
+
+    feat: add validation error Validation
+
+[33mcommit c14e95044eaf1a0e3780988c2ceeef26183feb42[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 8 19:47:43 2025 +0500
+
+    feat: ApplicationScope provider
+
+[33mcommit 3661dbbae20af18dd185a75f6edc5b697f447d60[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 8 19:23:09 2025 +0500
+
+    feat: ApplicationScope.kt
+
+[33mcommit f7720347a51e189642e8e158736a01f6c83bd199[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 8 18:34:10 2025 +0500
+
+    refactor: add default lang
+
+[33mcommit 5fd19f0357eac1e53e0e2fa6b2538d4d58c27260[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 8 17:58:02 2025 +0500
+
+    refactor: SharedPreferences to DataStore
+
+[33mcommit a55905f34d1d1546d37cf9699f5a6e272b49f6e6[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Tue Sep 2 15:19:30 2025 +0500
+
+    feat: MovieInterceptor.kt
+
+[33mcommit 32c209be054e35c917c4ea41c8a87556790a9cf3[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 1 19:16:33 2025 +0500
+
+    feat: LocalCacheImpl
+
+[33mcommit ac4b88b3de85ca491c03f926f4d70e10e6556c1c[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 1 18:49:11 2025 +0500
+
+    feat: LocalCacheProvider
+
+[33mcommit 039e87eda8a87904635c133c901d07836aa6e937[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 1 12:22:47 2025 +0500
+
+    feat: LocaleProvider.kt,
+    refactor docs
+
+[33mcommit d48982ead9c1a7146c0341a4cc6e4efae47f0a46[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Sep 1 11:54:33 2025 +0500
+
+    feat: safe API call
+
+[33mcommit d59c8ab78065d711d652896f335d97bc541f2df4[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Sun Aug 31 16:20:47 2025 +0500
+
+    refactor: clean AppError and NetworkResult
+
+[33mcommit 00c0106791bfa216af5634f92d42eca9c82495fe[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Thu Aug 28 15:25:30 2025 +0500
+
+    refactor: refactor handlers
+
+[33mcommit cbfd992f54af511137c41f1d70b964727928980f[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Mon Aug 25 12:51:21 2025 +0500
+
+    refactor: update error handler
+
+[33mcommit 8fe1adbd04340755d30672c51c47d796270f6424[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Fri Aug 22 22:01:26 2025 +0500
+
+    feat: handlers
+    -NetworkResult
+    -ErrorHandler
+
+[33mcommit cdb2f247f2e04cf6428f7bc597602af3f358da57[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Fri Aug 22 19:03:36 2025 +0500
+
+    feat: appComponents
+
+[33mcommit 00a3a9b9070d3622cccc75062324734c204c82f0[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Fri Aug 22 17:53:49 2025 +0500
+
+    feat: add app theme, colors and typography
+
+[33mcommit ef5df92180a3869db450c29849c00e0e242fd205[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Shoxrux061 <shoxruxurmanov2@gmail.com>
+Date:   Fri Aug 22 16:42:48 2025 +0500
+
+    Initial commit
