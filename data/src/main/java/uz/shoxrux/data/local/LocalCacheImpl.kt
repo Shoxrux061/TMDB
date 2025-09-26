@@ -12,8 +12,7 @@ import uz.shoxrux.core.providers.LocaleProvider
 import javax.inject.Inject
 
 class LocalCacheImpl @Inject constructor(
-    private val dataStore: DataStore<Preferences>,
-    private val localeProvider: LocaleProvider
+    private val dataStore: DataStore<Preferences>
 ) : LocalCacheProvider {
 
     private object Keys {
@@ -24,7 +23,7 @@ class LocalCacheImpl @Inject constructor(
     }
 
     override fun getLanguage(): Flow<String> =
-        dataStore.data.map { it[Keys.LANGUAGE] ?: localeProvider.getLanguage() }
+        dataStore.data.map { it[Keys.LANGUAGE] ?: "en" }
 
     override fun isDark(): Flow<Boolean> =
         dataStore.data.map { it[Keys.IS_DARK] ?: false }

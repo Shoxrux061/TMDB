@@ -1,6 +1,7 @@
 package uz.shoxrux.di
 
 import android.content.Context
+import android.util.Log
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
@@ -39,13 +40,19 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
-    fun provideOkHttp(chuckerInterceptor: ChuckerInterceptor): OkHttpClient {
-        return OkHttpClient
-            .Builder()
+    fun provideOkHttp(
+        chuckerInterceptor: ChuckerInterceptor,
+        apiKeyInterceptor: Interceptor
+    ): OkHttpClient {
+        val client = OkHttpClient.Builder()
             .addInterceptor(chuckerInterceptor)
+            .addInterceptor(apiKeyInterceptor)
             .build()
-    }
 
+        Log.d("TAGResponse", "provideOkHttp: ${client.interceptors}")
+
+        return client
+    }
     @[Provides Singleton]
     fun provideChuckerInterceptor(
         collector: ChuckerCollector,
@@ -70,29 +77,33 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
-    fun provideInterceptor(
+    fun provideMovieInterceptor(
         localeProvider: LocaleProvider
     ): Interceptor {
         return Interceptor { chain ->
+
             val original = chain.request()
 
-            // Добавляем query параметры
             val newUrl = original.url.newBuilder()
                 .addQueryParameter("api_key", BuildConfig.TMDB_API_KEY)
                 .addQueryParameter("language", localeProvider.getLanguage())
                 .build()
 
-            // Собираем новый запрос с заголовками
             val newRequest = original.newBuilder()
                 .url(newUrl)
                 .addHeader("Accept", "application/json")
                 .addHeader("Content-Type", "application/json")
                 .build()
 
+            Log.d(
+                "MovieInterceptor",
+                "language=${localeProvider.getLanguage()} api_key=${BuildConfig.TMDB_API_KEY}"
+            )
+            Log.d("MovieInterceptor", "original=${original.url}")
+            Log.d("MovieInterceptor", "new=$newUrl")
+
             chain.proceed(newRequest)
         }
     }
-
-
 
 }
