@@ -1,4 +1,4 @@
-package uz.shoxrux.feature_media_details.data.dto.movie_details
+package uz.shoxrux.feature_media_details.data.dto.movies.details
 
 
 import com.squareup.moshi.Json

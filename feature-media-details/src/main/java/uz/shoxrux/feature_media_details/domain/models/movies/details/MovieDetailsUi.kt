@@ -1,4 +1,4 @@
-package uz.shoxrux.feature_media_details.domain.models.movies
+package uz.shoxrux.feature_media_details.domain.models.movies.details
 
 data class MovieDetailsUi(
     val id: Int,
@@ -11,8 +11,9 @@ data class MovieDetailsUi(
     val runtimeMinutes: Int?,
     val genres: List<GenreUi>,
     val productionCountries: List<CountryUi>,
-    val spokenLanguages: List<LanguageUi>,
-    val rating: Double,
+    val spokenLanguage: String,
+    val rating: String,
     val voteCount: Int,
-    val tagline: String?
+    val tagline: String?,
+    val isRealised: Boolean
 )
