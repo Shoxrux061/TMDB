@@ -1,18 +1,22 @@
 package uz.shoxrux.feature_media_details.presentation.screens.details
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
@@ -34,16 +38,26 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import uz.shoxrux.core.R
 import uz.shoxrux.core.ui.components.ErrorScreen
 import uz.shoxrux.core.ui.components.LoadingScreen
+import uz.shoxrux.core.ui.components.SmallAppButton
 import uz.shoxrux.core.ui.components.rememberScreenWidthDp
+import uz.shoxrux.feature_media_details.domain.models.movies.MovieUi
 import uz.shoxrux.feature_media_details.domain.models.movies.content.MovieContentUi
+import uz.shoxrux.feature_media_details.domain.models.movies.content.video.MovieVideoUi
 import uz.shoxrux.feature_media_details.domain.models.movies.details.MovieDetailsUi
+import uz.shoxrux.feature_media_details.domain.models.movies.person.PersonUi
+import uz.shoxrux.feature_media_details.presentation.ui.ColorOrange
 
 @Composable
 fun DetailsScreen(viewModel: DetailsScreenViewModel) {
@@ -53,27 +67,123 @@ fun DetailsScreen(viewModel: DetailsScreenViewModel) {
     if (uiState.isLoading) {
         LoadingScreen()
     } else if (uiState.error != null) {
-        ErrorScreen(uiState.error.toString()) {
-
-        }
+        ErrorScreen(uiState.error.toString()) {}
     } else {
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background),
+            verticalArrangement = Arrangement.spacedBy(30.dp)
         ) {
-            item {
-                if (uiState.movieDetails != null) {
+
+            if (uiState.movieDetails != null) {
+                item {
                     MovieDetailsContent(movieUiState = uiState.movieDetails)
-                    Spacer(Modifier.height(20.dp))
-                }
-                if (uiState.contentUi != null) {
-                    Log.d("TAGContent", "DetailsScreen:${uiState.contentUi.posters} ")
-                    ContentTabs(contentUi = uiState.contentUi)
-                    Spacer(Modifier.height(20.dp))
                 }
             }
+            if (uiState.contentUi != null) {
+                item {
+                    ContentTabs(contentUi = uiState.contentUi)
+                }
+            }
+            if (uiState.movieCredits != null) {
+                item {
+                    CreditsContent(uiState.movieCredits.cast.orEmpty())
+                }
+            }
+
+            if (uiState.similarMovies.isNotEmpty() || uiState.recommendedMovies.isNotEmpty()) {
+                item {
+                    OtherMoviesTabs(
+                        similar = uiState.similarMovies,
+                        recommendation = uiState.recommendedMovies
+                    )
+                }
+            }
+
+            if (uiState.reviews.isNotEmpty()) {
+                item {
+                    Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+                        ReviewsButton()
+                    }
+                }
+            }
+
+            item {
+                Spacer(Modifier.height(20.dp))
+            }
         }
+    }
+}
+
+@Composable
+fun CreditsContent(cast: List<PersonUi>) {
+    Column(
+        modifier = Modifier.padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(10.dp)
+    ) {
+
+        Text(
+            text = "Cast",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(cast.size) {
+                PersonItem(profilePath = cast[it].profilePath ?: "", name = cast[it].name)
+            }
+        }
+
+        SmallAppButton(
+            onClick = {},
+            text = "Full Cast & Crew"
+        )
+
+    }
+
+}
+
+@Composable
+fun PersonItem(
+    profilePath: String,
+    name: String
+) {
+    Column {
+        Card(
+            modifier = Modifier
+                .height(120.dp)
+                .width(80.dp),
+            border = BorderStroke(
+                color = Color.White,
+                width = 1.dp
+            ),
+            shape = RoundedCornerShape(0.dp)
+        ) {
+            AsyncImage(
+                modifier = Modifier.fillMaxSize(),
+                model = profilePath,
+                contentScale = ContentScale.Crop,
+                contentDescription = null,
+                placeholder = painterResource(R.drawable.ic_person),
+                error = painterResource(R.drawable.ic_person)
+            )
+        }
+
+        Spacer(Modifier.height(10.dp))
+
+        Text(
+            modifier = Modifier
+                .widthIn(max = 70.dp)
+                .heightIn(min = 30.dp),
+            overflow = TextOverflow.Ellipsis,
+            text = name,
+            style = MaterialTheme.typography.bodySmall,
+            maxLines = 2,
+            textAlign = TextAlign.Center
+        )
+
     }
 }
 
@@ -131,7 +241,7 @@ fun MovieDetailsContent(movieUiState: MovieDetailsUi) {
                     shape = RoundedCornerShape(8.dp)
                 ) {
                     AsyncImage(
-                        placeholder = painterResource(R.drawable.ic_error),
+                        placeholder = painterResource(R.drawable.ic_no_image),
                         modifier = Modifier.fillMaxSize(),
                         model = movieUiState.posterUrl,
                         contentDescription = null,
@@ -289,6 +399,175 @@ fun MovieDetailsContent(movieUiState: MovieDetailsUi) {
     }
 }
 
+@Composable
+fun OtherMoviesTabs(similar: List<MovieUi>, recommendation: List<MovieUi>) {
+
+    val colors = MaterialTheme.colorScheme
+
+    val tabs = buildList {
+        if (similar.isNotEmpty()) add("Similar")
+        if (recommendation.isNotEmpty()) add("Recommendation")
+    }
+
+    val tabState = remember { mutableIntStateOf(0) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
+    ) {
+
+        TabRow(
+            modifier = Modifier
+                .fillMaxWidth(),
+            selectedTabIndex = tabState.intValue,
+            containerColor = colors.background,
+            contentColor = colors.onBackground,
+        ) {
+            tabs.forEachIndexed { index, title ->
+                Tab(
+                    selected = tabState.intValue == index,
+                    selectedContentColor = colors.onBackground,
+                    unselectedContentColor = colors.onBackground,
+                    onClick = { tabState.intValue = index },
+                    text = {
+                        Text(title)
+                    }
+                )
+
+            }
+        }
+
+        when (tabState.intValue) {
+
+            0 -> {
+                MovieList(similar)
+            }
+
+            1 -> {
+                MovieList(recommendation)
+            }
+
+        }
+
+        SmallAppButton(
+            onClick = {
+
+            },
+            text = "See all"
+        )
+    }
+}
+
+@Composable
+fun MovieList(movies: List<MovieUi>) {
+
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(movies.size) {
+
+            MovieItem(
+                name = movies[it].title,
+                rating = movies[it].popularity,
+                imageUrl = movies[it].posterPath,
+                onItemClicked = {
+
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun MovieItem(
+    name: String,
+    rating: String,
+    imageUrl: String,
+    onItemClicked: () -> Unit
+) {
+
+    val typography = MaterialTheme.typography
+
+    Column(
+        modifier = Modifier
+            .padding(horizontal = 10.dp)
+            .clickable {
+                onItemClicked.invoke()
+            }
+    ) {
+        Card(
+            modifier = Modifier
+                .width(120.dp)
+                .height(180.dp),
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Box(
+                modifier = Modifier.fillMaxSize()
+            ) {
+
+                AsyncImage(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(8.dp)),
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(imageUrl)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(R.drawable.ic_no_image),
+                    error = painterResource(R.drawable.ic_no_image)
+                )
+
+                RatingComponent(rating = rating, modifier = Modifier.align(Alignment.TopEnd))
+
+            }
+        }
+
+        Text(
+            maxLines = 2,
+            minLines = 2,
+            overflow = TextOverflow.Ellipsis,
+            text = name,
+            style = typography.bodySmall,
+            modifier = Modifier
+                .padding(horizontal = 8.dp)
+                .width(110.dp)
+                .align(Alignment.CenterHorizontally),
+            textAlign = TextAlign.Center
+        )
+
+    }
+}
+
+@Composable
+fun RatingComponent(modifier: Modifier = Modifier, rating: String = "0.0") {
+
+    Card(
+        modifier = modifier.padding(vertical = 8.dp, horizontal = 10.dp),
+        shape = RoundedCornerShape(4.dp),
+        colors = CardDefaults.cardColors(containerColor = Color.Gray.copy(alpha = 0.5f)),
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Icon(
+                modifier = Modifier.size(16.dp),
+                painter = painterResource(R.drawable.ic_star),
+                contentDescription = null,
+                tint = ColorOrange
+            )
+
+            Text(
+                color = ColorOrange,
+                text = rating,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
+    }
+}
 
 @Composable
 fun GenreItem(name: String) {
@@ -312,21 +591,21 @@ fun GenreItem(name: String) {
 fun ContentTabs(contentUi: MovieContentUi) {
 
     val colors = MaterialTheme.colorScheme
-    val typography = MaterialTheme.typography
 
-    val tabs = listOf("Posters", "Backdrops", "Videos")
+    val tabs = listOf("Videos", "Posters", "Backdrops")
 
     val tabState = remember { mutableIntStateOf(0) }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
 
         TabRow(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
+                .fillMaxWidth(),
             selectedTabIndex = tabState.intValue,
             containerColor = colors.background,
             contentColor = colors.onBackground,
@@ -344,23 +623,27 @@ fun ContentTabs(contentUi: MovieContentUi) {
 
             }
         }
-        Spacer(Modifier.height(20.dp))
 
         when (tabState.intValue) {
 
             0 -> {
-                PostersRow(contentUi.posters)
+                VideosRow(contentUi.videos)
             }
 
             1 -> {
-
+                PostersRow(contentUi.posters)
             }
 
             2 -> {
-
+                BackdropsRow(contentUi.backdrops)
             }
 
         }
+
+        SmallAppButton(
+            onClick = {},
+            text = "See all content"
+        )
 
     }
 }
@@ -371,7 +654,6 @@ fun PostersRow(
 ) {
 
     LazyRow(
-        modifier = Modifier.padding(horizontal = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
 
@@ -390,11 +672,136 @@ fun PostersRow(
                     model = posters[index],
                     contentDescription = null
                 )
-
             }
+        }
+    }
+}
 
+@Composable
+fun BackdropsRow(backdrops: List<String?>) {
+
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+
+        items(backdrops.size) { index ->
+
+            Card(
+                modifier = Modifier
+                    .height(180.dp)
+                    .aspectRatio(2f),
+                shape = RoundedCornerShape(8.dp)
+            ) {
+
+                AsyncImage(
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop,
+                    model = backdrops[index],
+                    contentDescription = null,
+                    placeholder = painterResource(R.drawable.ic_no_image),
+                    error = painterResource(R.drawable.ic_no_image)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun VideosRow(videos: List<MovieVideoUi>) {
+
+    LazyRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+
+        items(videos.size) {
+            VideoItem(
+                imageUrl = videos[it].imageUrl
+            )
         }
 
     }
 
+}
+
+@Composable
+fun VideoItem(imageUrl: String) {
+
+    Card(
+        modifier = Modifier
+            .height(180.dp)
+            .aspectRatio(2f),
+        shape = RoundedCornerShape(8.dp),
+        border = BorderStroke(
+            color = Color.Red,
+            width = 1.dp
+        )
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            AsyncImage(
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                model = imageUrl,
+                contentDescription = null,
+                placeholder = painterResource(R.drawable.ic_no_image),
+                error = painterResource(R.drawable.ic_no_image)
+            )
+
+            Icon(
+                modifier = Modifier.align(Alignment.Center),
+                painter = painterResource(R.drawable.ic_youtube_play),
+                contentDescription = null,
+                tint = Color.Red
+            )
+
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ReviewsButton(
+) {
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(55.dp)
+            .clickable {
+
+            },
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primary)
+    ) {
+
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+
+
+            Row(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .align(Alignment.Center),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+
+                Text(
+                    text = "Reviews",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+
+                Spacer(Modifier.weight(1f))
+
+                Icon(
+                    painter = painterResource(R.drawable.ic_comment),
+                    tint = MaterialTheme.colorScheme.onPrimary,
+                    contentDescription = null
+                )
+
+            }
+        }
+    }
 }

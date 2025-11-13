@@ -36,7 +36,7 @@ fun MovieDetailsResponseDTO.toDomain(): MovieDetailsUi {
         posterUrl = Constants.IMAGE_URL.plus(posterPath),
         backdropUrl = Constants.IMAGE_URL.plus(backdropPath),
         releaseDate = releaseDate.orEmpty(),
-        runtimeMinutes = runtime,
+        runtimeMinutes = "${runtime?.div(60)} h ${runtime?.rem(60)} m",
         genres = genres.orEmpty().filterNotNull().map { it.toDomain() },
         productionCountries = productionCountries.orEmpty().filterNotNull().map { it.toDomain() },
         spokenLanguage = spokenLanguages.orEmpty().filterNotNull()
@@ -73,23 +73,23 @@ fun SpokenLanguageDTO.toDomain(): LanguageUi {
     )
 }
 
-fun CastDTO.toDomain(): PersonUi? {
-    val safeId = id ?: return null
+fun CastDTO.toDomain(): PersonUi {
+    val safeId = id ?: return PersonUi()
     return PersonUi(
         id = safeId,
         name = name.orEmpty(),
         role = character.orEmpty(),
-        profilePath = profilePath
+        profilePath = Constants.IMAGE_URL.plus(profilePath)
     )
 }
 
-fun CrewDTO.toDomain(): PersonUi? {
-    val safeId = id ?: return null
+fun CrewDTO.toDomain(): PersonUi {
+    val safeId = id ?: return PersonUi()
     return PersonUi(
         id = safeId,
         name = name.orEmpty(),
         role = job.orEmpty(),
-        profilePath = profilePath
+        profilePath = Constants.IMAGE_URL.plus(profilePath)
     )
 }
 
@@ -144,14 +144,9 @@ fun MovieVideosResponseDTO.toDomain(): List<MovieVideoUi> {
 
 fun MovieVideosResultDTO.toDomain(): MovieVideoUi? {
     val videoKey = key ?: return null
-    val videoName = name ?: return null
-    val videoId = id ?: return null
     return MovieVideoUi(
-        id = videoId,
-        name = videoName,
         key = videoKey,
-        site = site ?: "Unknown",
-        type = type ?: "Unknown"
+        imageUrl = "https://img.youtube.com/vi/$videoKey/hqdefault.jpg"
     )
 }
 

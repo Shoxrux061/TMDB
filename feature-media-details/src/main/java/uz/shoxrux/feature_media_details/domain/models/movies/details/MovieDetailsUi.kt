@@ -8,7 +8,7 @@ data class MovieDetailsUi(
     val posterUrl: String?,
     val backdropUrl: String?,
     val releaseDate: String,
-    val runtimeMinutes: Int?,
+    val runtimeMinutes: String?,
     val genres: List<GenreUi>,
     val productionCountries: List<CountryUi>,
     val spokenLanguage: String,
