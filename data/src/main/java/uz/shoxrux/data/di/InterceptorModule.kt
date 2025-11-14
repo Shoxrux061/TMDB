@@ -8,16 +8,3 @@ import uz.shoxrux.core.providers.LocaleProvider
 import uz.shoxrux.data.interceptors.MovieInterceptor
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
-object InterceptorModule {
-
-    @[Provides Singleton]
-    suspend fun provideMovieInterceptor(
-        localeProvider: LocaleProvider
-    ): MovieInterceptor {
-        return MovieInterceptor(localeProvider)
-    }
-
-
-}
