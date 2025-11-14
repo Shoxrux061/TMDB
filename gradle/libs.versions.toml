@@ -22,6 +22,7 @@ androidxHilt = "1.2.0"
 # Networking / JSON
 retrofit = "3.0.0"
 moshi = "1.15.2"
+chucker = "4.2.0"
 
 # Database / Storage
 room = "2.7.2"
@@ -68,6 +69,8 @@ converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", 
 moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
 moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
 moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
+chuckerNoOp = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
 
 # Database / Storage
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
