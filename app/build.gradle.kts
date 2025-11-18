@@ -65,5 +65,8 @@ dependencies {
 
     //Navigation
     implementation(libs.androidx.hilt.navigation.compose)
+
+
     implementation(project(":core"))
+    implementation(project(":feature-people"))
 }

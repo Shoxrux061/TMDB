@@ -34,6 +34,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -294,4 +295,10 @@ fun LoadingScreen() {
             color = MaterialTheme.colorScheme.primary
         )
     }
+}
+
+@Composable
+fun rememberScreenWidthDp(): Int {
+    val configuration = LocalConfiguration.current
+    return configuration.screenWidthDp
 }

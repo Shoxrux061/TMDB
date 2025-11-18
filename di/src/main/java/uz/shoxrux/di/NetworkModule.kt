@@ -39,10 +39,14 @@ object NetworkModule {
     }
 
     @[Provides Singleton]
-    fun provideOkHttp(chuckerInterceptor: ChuckerInterceptor): OkHttpClient {
+    fun provideOkHttp(
+        chuckerInterceptor: ChuckerInterceptor,
+        interceptor: Interceptor
+    ): OkHttpClient {
         return OkHttpClient
             .Builder()
             .addInterceptor(chuckerInterceptor)
+            .addInterceptor(interceptor)
             .build()
     }
 
@@ -92,7 +96,5 @@ object NetworkModule {
             chain.proceed(newRequest)
         }
     }
-
-
 
 }
