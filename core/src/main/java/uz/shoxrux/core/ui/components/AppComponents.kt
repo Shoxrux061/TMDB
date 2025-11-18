@@ -1,10 +1,13 @@
 package uz.shoxrux.core.ui.components
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,6 +19,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -31,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -211,4 +216,82 @@ fun LargeAppButton(onClick: () -> Unit, text: String, modifier: Modifier = Modif
         )
     }
 
+}
+
+@Composable
+fun SmallAppButton(onClick: () -> Unit, text: String, modifier: Modifier = Modifier) {
+
+    val colors = MaterialTheme.colorScheme
+    val typography = MaterialTheme.typography
+
+    Button(
+        modifier = modifier
+            .height(40.dp),
+        onClick = {
+            onClick.invoke()
+        },
+        shape = RoundedCornerShape(10.dp),
+        colors = ButtonDefaults.buttonColors(colors.primary),
+        content = {
+            Text(
+                text = text,
+                style = typography.titleSmall
+            )
+        }
+    )
+
+}
+
+@Composable
+fun ErrorScreen(errorText: String, onRetryClick: () -> Unit) {
+
+    val colors = MaterialTheme.colorScheme
+    val typography = MaterialTheme.typography
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(colors.background)
+    ) {
+
+        Column(
+            modifier = Modifier.align(Alignment.Center),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Image(
+                painter = painterResource(R.drawable.ic_error),
+                contentDescription = null
+            )
+
+            Text(
+                modifier = Modifier.padding(vertical = 20.dp),
+                text = errorText,
+                style = typography.titleMedium,
+                color = colors.outline
+            )
+
+            SmallAppButton(
+                onClick = onRetryClick,
+                text = stringResource(R.string.retry)
+            )
+
+        }
+
+    }
+
+}
+
+@Composable
+fun LoadingScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator(
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
 }

@@ -1,6 +1,7 @@
 package uz.shoxrux.core.handler
 
 import android.util.Log
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -19,6 +20,9 @@ inline fun <T, R> safeApiCall(
     } catch (e: IOException) {
         Log.e("safeApiCall", "Network error: ${e.message}")
         emit(NetworkResult.Error(AppError.Server(e.message)))
+    } catch (e: Throwable) {
+        if (e is CancellationException) throw e
+        emit(NetworkResult.Error(AppError.Unknown(e)))
     } catch (e: Exception) {
         Log.e("safeApiCall", "Unknown error: ${e.message}", e)
         emit(NetworkResult.Error(AppError.Unknown()))

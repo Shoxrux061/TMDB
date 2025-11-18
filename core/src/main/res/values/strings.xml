@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_internet_connection">No interner connection</string>
+    <string name="error_not_valid_data">Not valid data</string>
+    <string name="retry">Retry</string>
 </resources>
